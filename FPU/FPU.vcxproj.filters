@@ -35,5 +35,8 @@
     <MASM Include="FtoC.asm">
       <Filter>asm</Filter>
     </MASM>
+    <MASM Include="CalcSphereAreaVolume.asm">
+      <Filter>asm</Filter>
+    </MASM>
   </ItemGroup>
 </Project>

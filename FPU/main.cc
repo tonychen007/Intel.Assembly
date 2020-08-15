@@ -1,7 +1,9 @@
 extern void FtoCTest();
+extern void CalcSphereAreaVolumeTest();
 
 int main() {
-	FtoCTest();
+	//FtoCTest();
+	CalcSphereAreaVolumeTest();
 
 	return 0;
 }

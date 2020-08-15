@@ -23,6 +23,7 @@
     <ClCompile Include="main.cc" />
   </ItemGroup>
   <ItemGroup>
+    <MASM Include="CalcSphereAreaVolume.asm" />
     <MASM Include="FtoC.asm" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
