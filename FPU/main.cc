@@ -1,9 +1,11 @@
 extern void FtoCTest();
 extern void CalcSphereAreaVolumeTest();
+extern void CalcMeanStdevTest();
 
 int main() {
 	//FtoCTest();
-	CalcSphereAreaVolumeTest();
+	//CalcSphereAreaVolumeTest();
+	CalcMeanStdevTest();
 
 	return 0;
 }
