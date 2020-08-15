@@ -1,11 +1,13 @@
 extern void FtoCTest();
 extern void CalcSphereAreaVolumeTest();
 extern void CalcMeanStdevTest();
+extern void MinAndMaxTest();
 
 int main() {
 	//FtoCTest();
 	//CalcSphereAreaVolumeTest();
-	CalcMeanStdevTest();
+	//CalcMeanStdevTest();
+	MinAndMaxTest();
 
 	return 0;
 }

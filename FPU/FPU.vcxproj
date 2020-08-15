@@ -26,6 +26,7 @@
     <MASM Include="CalcMeanStdev.asm" />
     <MASM Include="CalcSphereAreaVolume.asm" />
     <MASM Include="FtoC.asm" />
+    <MASM Include="MinAndMax.asm" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <VCProjectVersion>16.0</VCProjectVersion>

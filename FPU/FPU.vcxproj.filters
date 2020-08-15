@@ -41,5 +41,8 @@
     <MASM Include="CalcMeanStdev.asm">
       <Filter>asm</Filter>
     </MASM>
+    <MASM Include="MinAndMax.asm">
+      <Filter>asm</Filter>
+    </MASM>
   </ItemGroup>
 </Project>

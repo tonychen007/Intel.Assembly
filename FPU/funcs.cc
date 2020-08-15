@@ -1,10 +1,12 @@
 #include <stdio.h>
 #include <math.h>
+#include <float.h>
 
 extern "C" double CtoF(double deg);
 extern "C" double FtoC(double deg);
 extern "C" int CalcSphereAreaVolume(double r, double* sa, double* v);
 extern "C" int CalcMeanStdev(double* arr, int n, double* mean, double* stdev);
+extern "C" int MinAndMax(float* src, int sz, float* fmin, float* max);
 
 #define ARRSIZE(x) sizeof(x)/sizeof(x[0])
 
@@ -71,4 +73,24 @@ void CalcMeanStdevTest() {
 
 	CalcMeanStdev(arr, sz, &mean2, &stdev2);
 	printf("mean1 is %g, stddev1 is %g\n", mean2, stdev2);
+}
+
+void MinAndMaxTest() {
+	const float FMIN = FLT_MIN;
+	const float FMAX = FLT_MAX;
+	// FF7FFFFF MIN
+	// 7F7FFFFF	MAX
+
+	float fs[] = { 20,-12,42};
+	int sz = ARRSIZE(fs);
+	float fmin = 0.0f;
+	float fmax = 0.0f;
+
+	for (int i = 0; i < sz; i++) {
+		printf("a[%2d] = %8.2f\n", i, fs[i]);
+	}
+
+	MinAndMax(fs, sz, &fmin, &fmax);
+	printf("min is: %8.2f\n", fmin);
+	printf("max is: %8.2f\n", fmax);
 }
