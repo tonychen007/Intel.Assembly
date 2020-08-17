@@ -44,5 +44,8 @@
     <MASM Include="MinAndMax.asm">
       <Filter>asm</Filter>
     </MASM>
+    <MASM Include="SinCos.asm">
+      <Filter>asm</Filter>
+    </MASM>
   </ItemGroup>
 </Project>

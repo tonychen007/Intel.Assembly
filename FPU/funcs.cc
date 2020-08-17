@@ -7,6 +7,7 @@ extern "C" double FtoC(double deg);
 extern "C" int CalcSphereAreaVolume(double r, double* sa, double* v);
 extern "C" int CalcMeanStdev(double* arr, int n, double* mean, double* stdev);
 extern "C" int MinAndMax(float* src, int sz, float* fmin, float* max);
+extern "C" float SinCos(float f, float* x, float* y);
 
 #define ARRSIZE(x) sizeof(x)/sizeof(x[0])
 
@@ -81,7 +82,7 @@ void MinAndMaxTest() {
 	// FF7FFFFF MIN
 	// 7F7FFFFF	MAX
 
-	float fs[] = { 20,-12,42};
+	float fs[] = { 20,-12,42, 99.5, -15.435};
 	int sz = ARRSIZE(fs);
 	float fmin = 0.0f;
 	float fmax = 0.0f;
@@ -93,4 +94,21 @@ void MinAndMaxTest() {
 	MinAndMax(fs, sz, &fmin, &fmax);
 	printf("min is: %8.2f\n", fmin);
 	printf("max is: %8.2f\n", fmax);
+}
+
+void SinCosTest() {
+	float r, cosx, siny;
+
+	r = SinCos(0.0f, &cosx, &siny);
+	printf("cos of %.2f : %.3f, sin : %.3f\n", 0.0f, cosx, siny);
+	r = SinCos(30.0f, &cosx, &siny);
+	printf("cos of %.2f : %.3f, sin : %.3f\n", 30.0f, cosx, siny);
+	r = SinCos(45.0f, &cosx, &siny);
+	printf("cos of %.2f : %.3f, sin : %.3f\n", 45.0f, cosx, siny);
+	r = SinCos(60.f, &cosx, &siny);
+	printf("cos of %.2f : %.3f, sin : %.3f\n", 60.0f, cosx, siny);
+	r = SinCos(90.0f, &cosx, &siny);
+	printf("cos of %.2f : %.3f, sin : %.3f\n", 90.0f, cosx, siny);
+
+	int asm3;
 }
