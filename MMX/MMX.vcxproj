@@ -150,6 +150,7 @@
   </ItemGroup>
   <ItemGroup>
     <MASM Include="asm\MmxValAdd.asm" />
+    <MASM Include="asm\MmxValMulSigned.asm" />
     <MASM Include="asm\MmxValShift.asm" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
