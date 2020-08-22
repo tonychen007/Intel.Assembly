@@ -16,17 +16,27 @@ enum MmxAddOps : unsigned int{
 	EMAX_ADDOPS
 };
 
+enum MmxShiftOps : unsigned int {
+	EPSLLW,		// shift left logical word
+	EPSRLW,		// shift right logical word
+	EPSRAW,		// shift right arithmetic word
+	EPSLLD,		// shift left logical dword
+	EPSRLD,		// shift right logical dword
+	EPSRAD,		// shift right arithmetic dword
+
+	EMAX_SHIFTOPS
+};
+
 extern "C" MmxVal MmxValAdd(MmxVal a, MmxVal b, MmxAddOps ops);
+extern "C" int MmxValShift(MmxVal a, MmxShiftOps ops, int count, MmxVal * b);
 
 void MmxValAddByteTest() {
 	MmxVal a, b, c;
 	char buf[256] = { '\0' };
 
 	// Signed
-	a.i8[0] = 50; a.i8[1] = 80; a.i8[2] = -27; a.i8[3] = -70;
-	a.i8[4] = -42; a.i8[5] = 60; a.i8[6] = 64; a.i8[7] = 100;
-	b.i8[0] = 30; b.i8[1] = 64; b.i8[2] = -32; b.i8[3] = -80;
-	b.i8[4] = 90; b.i8[5] = -85; b.i8[6] = 90; b.i8[7] = -30;
+	FILL_MMXVAL_8(a.i8, 50, 80, -27, -70, -42, 60, 64, 100);
+	FILL_MMXVAL_8(b.i8, 30, 64, -32, -80, 90, -85, 90, -30);
 
 	printf("packed byte addition - singed integer:\n");
 	printf("a: %s\n", a.ToString_i8(buf, sizeof(buf)));
@@ -41,11 +51,8 @@ void MmxValAddByteTest() {
 
 	// Unsigned
 	printf("\n");
-	memset(buf, 0, sizeof buf);
-	a.u8[0] = 50; a.u8[1] = 80; a.u8[2] = 132; a.u8[3] = 200;
-	a.u8[4] = 42; a.u8[5] = 60; a.u8[6] = 140; a.u8[7] = 10;
-	b.u8[0] = 30; b.u8[1] = 64; b.u8[2] = 130; b.u8[3] = 180;
-	b.u8[4] = 90; b.u8[5] = 85; b.u8[6] = 160; b.u8[7] = 14;
+	FILL_MMXVAL_8(a.u8, 50, 80, 132, 200, 42, 60, 140, 10);
+	FILL_MMXVAL_8(b.u8, 30, 64, 130, 180, 90, 85, 160, 14);
 
 	printf("packed byte addition - unsinged integer:\n");
 	printf("a: %s\n", a.ToString_u8(buf, sizeof(buf)));
@@ -65,8 +72,8 @@ void MmxValAddWordTest() {
 	char buf[256] = { '\0' };
 
 	// Signed
-	a.i16[0] = 550; a.i16[1] = 30000; a.i16[2] = -270; a.i16[3] = -7000;
-	b.i16[0] = 830; b.i16[1] = 5000; b.i16[2] = -320; b.i16[3] = -32000;
+	FILL_MMXVAL_16(a.i16, 550, 30000, -270, -7000);
+	FILL_MMXVAL_16(b.i16, 830, 5000, -320, -32000);
 
 	printf("packed word addition - singed integer:\n");
 	printf("a: %s\n", a.ToString_i16(buf, sizeof(buf)));
@@ -81,9 +88,8 @@ void MmxValAddWordTest() {
 
 	// Unsigned
 	printf("\n");
-	memset(buf, 0, sizeof buf);
-	a.u16[0] = 50; a.u16[1] = 48000; a.u16[2] = 132; a.u16[3] = 10000;
-	b.u16[0] = 30; b.u16[1] = 20000; b.u16[2] = 130; b.u16[3] = 60000;
+	FILL_MMXVAL_16(a.u16, 50, 48000, 132, 10000);
+	FILL_MMXVAL_16(b.u16, 30, 20000, 130, 60000);
 
 	printf("packed word addition - unsinged integer:\n");
 	printf("a: %s\n", a.ToString_u16(buf, sizeof(buf)));
@@ -96,4 +102,72 @@ void MmxValAddWordTest() {
 	printf("PADDUSW saturated reuslt:\n");
 	printf("c: %s\n", c.ToString_u16(buf, sizeof(buf)));
 	printf("*******************************************\n");
+}
+
+
+void MmxShiftWord() {
+	MmxVal a, b;
+	int count;
+	char buf[256] = { '\0' };
+
+	FILL_MMXVAL_16(a.u16, 0x1234, 0xFF00, 0x00CC, 0x8080);
+	count = 2;
+
+	MmxValShift(a, MmxShiftOps::EPSLLW, count, &b);
+	printf("shift left logical word - count %d\n", count);
+	printf("a: %s\n", a.ToString_x16(buf, sizeof(buf)));
+	printf("b: %s\n", b.ToString_x16(buf, sizeof(buf)));
+
+	printf("\n");
+
+	MmxValShift(a, MmxShiftOps::EPSRLW, count, &b);
+	printf("shift right logical word - count %d\n", count);
+	printf("a: %s\n", a.ToString_x16(buf, sizeof(buf)));
+	printf("b: %s\n", b.ToString_x16(buf, sizeof(buf)));
+
+	printf("\n");
+
+	MmxValShift(a, MmxShiftOps::EPSRAW, count, &b);
+	printf("shift right arithmetic word - count %d\n", count);
+	printf("a: %s\n", a.ToString_x16(buf, sizeof(buf)));
+	printf("b: %s\n", b.ToString_x16(buf, sizeof(buf)));
+	printf("*******************************************\n");
+}
+
+void MmxShiftDword() {
+	MmxVal a, b;
+	int count;
+	char buf[256] = { '\0' };
+
+	FILL_MMXVAL_32(a.u32, 0x00010001,0x80008000);
+	count = 2;
+
+	MmxValShift(a, MmxShiftOps::EPSLLD, count, &b);
+	printf("shift left logical dword - count %d\n", count);
+	printf("a: %s\n", a.ToString_x32(buf, sizeof(buf)));
+	printf("b: %s\n", b.ToString_x32(buf, sizeof(buf)));
+
+	printf("\n");
+
+	MmxValShift(a, MmxShiftOps::EPSRLD, count, &b);
+	printf("shift right logical dword - count %d\n", count);
+	printf("a: %s\n", a.ToString_x32(buf, sizeof(buf)));
+	printf("b: %s\n", b.ToString_x32(buf, sizeof(buf)));
+
+	printf("\n");
+
+	MmxValShift(a, MmxShiftOps::EPSRAD, count, &b);
+	printf("shift right arithmetic dword - count %d\n", count);
+	printf("a: %s\n", a.ToString_x32(buf, sizeof(buf)));
+	printf("b: %s\n", b.ToString_x32(buf, sizeof(buf)));
+}
+
+void MmxValAddTest() {
+	MmxValAddByteTest();
+	MmxValAddWordTest();
+}
+
+void MmxShiftTest() {
+	MmxShiftWord();
+	MmxShiftDword();
 }

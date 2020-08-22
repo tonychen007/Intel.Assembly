@@ -1,9 +1,9 @@
-extern void MmxValAddByteTest();
-extern void MmxValAddWordTest();
+extern void MmxValAddTest();
+extern void MmxShiftTest();
 
 int main() {
-	MmxValAddByteTest();
-	MmxValAddWordTest();
+	//MmxValAddTest();
+	MmxShiftTest();
 
 	return 0;
 }

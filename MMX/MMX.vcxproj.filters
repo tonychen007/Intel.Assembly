@@ -18,7 +18,7 @@
     <ClCompile Include="src\main.cc">
       <Filter>src</Filter>
     </ClCompile>
-    <ClCompile Include="header\MmxVal.cc">
+    <ClCompile Include="src\MmxVal.cc">
       <Filter>src</Filter>
     </ClCompile>
   </ItemGroup>
@@ -31,7 +31,10 @@
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
-    <MASM Include="header\MmxValAdd.asm">
+    <MASM Include="asm\MmxValShift.asm">
+      <Filter>asm</Filter>
+    </MASM>
+    <MASM Include="asm\MmxValAdd.asm">
       <Filter>asm</Filter>
     </MASM>
   </ItemGroup>

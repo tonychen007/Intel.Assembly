@@ -46,7 +46,7 @@ Done:
   pop ebp
   ret
 
-  align 4
+  align 16
   AddOpTable:
     dword EPADDB, EPADDSB, EPADDUSB
     dword EPADDW, EPADDSW, EPADDUSW

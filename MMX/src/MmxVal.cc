@@ -2,7 +2,8 @@
 
 #include <stdio.h>
 #include <string.h>
-#include "MmxVal.h"
+#include "../header/MiscDef.h"
+#include "../header/MmxVal.h"
 
 #define IMPLE_CHAR_FUN(x) T##x(char* buf, size_t sz)
 
@@ -57,6 +58,34 @@ char* MmxVal::IMPLE_CHAR_FUN(oString_u32) {
 
 char* MmxVal::IMPLE_CHAR_FUN(oString_u64) {
 	snprintf(buf, sz, "%llu", u64);
+	buf[strlen(buf)] = '\0';
+
+	return buf;
+}
+
+char* MmxVal::IMPLE_CHAR_FUN(oString_x8) {
+	snprintf(buf, sz, "%02x %02x %02x %02x %02x %02x %02x %02x", u8[0], u8[1], u8[2], u8[3], u8[4], u8[5], u8[6], u8[7]);
+	buf[strlen(buf)] = '\0';
+
+	return buf;
+}
+
+char* MmxVal::IMPLE_CHAR_FUN(oString_x16) {
+	snprintf(buf, sz, "%04x %04x %04x %04x", u16[0], u16[1], u16[2], u16[3]);
+	buf[strlen(buf)] = '\0';
+
+	return buf;
+}
+
+char* MmxVal::IMPLE_CHAR_FUN(oString_x32) {
+	snprintf(buf, sz, "%08x %08x", u32[0], u32[1]);
+	buf[strlen(buf)] = '\0';
+
+	return buf;
+}
+
+char* MmxVal::IMPLE_CHAR_FUN(oString_x64) {
+	snprintf(buf, sz, "%16llx", u64);
 	buf[strlen(buf)] = '\0';
 
 	return buf;

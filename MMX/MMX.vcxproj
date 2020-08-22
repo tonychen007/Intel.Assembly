@@ -140,16 +140,17 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="header\MmxVal.cc" />
     <ClCompile Include="src\funcs.cc" />
     <ClCompile Include="src\main.cc" />
+    <ClCompile Include="src\MmxVal.cc" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="header\MiscDef.h" />
     <ClInclude Include="header\MmxVal.h" />
   </ItemGroup>
   <ItemGroup>
-    <MASM Include="header\MmxValAdd.asm" />
+    <MASM Include="asm\MmxValAdd.asm" />
+    <MASM Include="asm\MmxValShift.asm" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
