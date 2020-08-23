@@ -31,8 +31,12 @@ enum MmxMulOps : unsigned int {
 	EPMADDUBSW,	//	Multiply signed(2nd operand) and unsigned(1st operand) bytes, 
 				//  add horizontal pair of signed words, pack saturated signed-words to mm1.
 
-	EPMADDWD		//	Multiply the packed words in mm by the packed words in mm/m64, 
+	EPMADDWD,	//	Multiply the packed words in mm by the packed words in mm/m64, 
 				//  add adjacent doubleword results, and store in mm.
+
+	EPMUL,		//  Normal signed word mul
+	
+	EMAX_MULOPS
 };
 
 extern "C" MmxVal MmxValAdd(MmxVal a, MmxVal b, MmxAddOps ops);
@@ -184,7 +188,7 @@ void MmxValMulTest1() {
 	FILL_MMXVAL_8(a.u8, 1, 2, 3, 4, 5, 6, 7, 200);
 	FILL_MMXVAL_8(b.i8, -100, 2, 2, 2, 2, 2, 2, -2);
 	MmxValMulSigned(a, b, MmxMulOps::EPMADDUBSW, &lo, &hi);
-	printf("mul signed byte by unsigned byte: EPMADDUBSW\n");
+	printf("mul signed byte by unsigned byte, and add: EPMADDUBSW\n");
 	printf("a: %s\n", a.ToString_u8(buf, sizeof(buf)));
 	printf("b: %s\n", b.ToString_i8(buf, sizeof(buf)));
 	printf("prod_lo: %s\n", lo.ToString_i16(buf, sizeof(buf)));
@@ -194,7 +198,7 @@ void MmxValMulTest1() {
 	FILL_MMXVAL_8(a.u8, 1, 2, 3, 4, 5, 6, 7, 200);
 	FILL_MMXVAL_8(b.i8, 5, 2, 2, 2, 2, 2, 2, 5);
 	MmxValMulSigned(a, b, MmxMulOps::EPMADDUBSW, &lo, &hi);
-	printf("mul signed byte by unsigned byte: EPMADDUBSW\n");
+	printf("mul signed byte by unsigned byte, and add: EPMADDUBSW\n");
 	printf("a: %s\n", a.ToString_u8(buf, sizeof(buf)));
 	printf("b: %s\n", b.ToString_i8(buf, sizeof(buf)));
 	printf("prod_lo: %s\n", lo.ToString_i16(buf, sizeof(buf)));
@@ -204,7 +208,7 @@ void MmxValMulTest1() {
 	FILL_MMXVAL_16(a.i16, -2, 32000, 3000, 4000);
 	FILL_MMXVAL_16(b.i16, -2000, -20, 2, -2);
 	MmxValMulSigned(a, b, MmxMulOps::EPMADDWD, &lo, &hi);
-	printf("mul signed word by signed word: EPMADDWD\n");
+	printf("mul signed word by signed word, and add: EPMADDWD\n");
 	printf("a: %s\n", a.ToString_i16(buf, sizeof(buf)));
 	printf("b: %s\n", b.ToString_i16(buf, sizeof(buf)));
 	printf("prod_lo: %s\n", lo.ToString_i32(buf, sizeof(buf)));
@@ -214,7 +218,7 @@ void MmxValMulTest1() {
 	FILL_MMXVAL_16(a.i16, 2, 200, 3, 40);
 	FILL_MMXVAL_16(b.i16, 20, 10, 2, 8);
 	MmxValMulSigned(a, b, MmxMulOps::EPMADDWD, &lo, &hi);
-	printf("mul signed word by signed word: EPMADDWD\n");
+	printf("mul signed word by signed word, and add: EPMADDWD\n");
 	printf("a: %s\n", a.ToString_i16(buf, sizeof(buf)));
 	printf("b: %s\n", b.ToString_i16(buf, sizeof(buf)));
 	printf("prod_lo: %s\n", lo.ToString_i32(buf, sizeof(buf)));
@@ -224,7 +228,7 @@ void MmxValMulTest1() {
 	FILL_MMXVAL_16(a.i16, 0, 0, 32769, 1);
 	FILL_MMXVAL_16(b.i16, 1, 1, 1, 1);
 	MmxValMulSigned(a, b, MmxMulOps::EPMADDWD, &lo, &hi);
-	printf("mul signed word by signed word: EPMADDWD\n");
+	printf("mul signed word by signed word, and add: EPMADDWD\n");
 	printf("a: %s\n", a.ToString_i16(buf, sizeof(buf)));
 	printf("b: %s\n", b.ToString_i16(buf, sizeof(buf)));
 	printf("prod_lo: %s\n", lo.ToString_i32(buf, sizeof(buf)));
@@ -235,4 +239,34 @@ void MmxValMulTest1() {
 void MmxValMulTest2() {
 	MmxVal a, b, lo, hi;
 	char buf[256] = { '\0' };
+
+	FILL_MMXVAL_16(a.i16, 1, 2, 3, 4);
+	FILL_MMXVAL_16(b.i16, 2, 2, 2, 2);
+	MmxValMulSigned(a, b, MmxMulOps::EPMUL, &lo, &hi);
+	printf("mul signed word by signed word: EPMUL\n");
+	printf("a: %s\n", a.ToString_i16(buf, sizeof(buf)));
+	printf("b: %s\n", b.ToString_i16(buf, sizeof(buf)));
+	printf("prod_lo: %s\n", lo.ToString_i32(buf, sizeof(buf)));
+	printf("prod_hi: %s\n", hi.ToString_i32(buf, sizeof(buf)));
+	printf("\n");
+
+	FILL_MMXVAL_16(a.i16, 1, 2, 3, 4);
+	FILL_MMXVAL_16(b.i16, -2, -2, -2, -2);
+	MmxValMulSigned(a, b, MmxMulOps::EPMUL, &lo, &hi);
+	printf("mul signed word by signed word: EPMUL\n");
+	printf("a: %s\n", a.ToString_i16(buf, sizeof(buf)));
+	printf("b: %s\n", b.ToString_i16(buf, sizeof(buf)));
+	printf("prod_lo: %s\n", lo.ToString_i32(buf, sizeof(buf)));
+	printf("prod_hi: %s\n", hi.ToString_i32(buf, sizeof(buf)));
+	printf("\n");
+
+	FILL_MMXVAL_16(a.i16, 10, 30, -50, -70);
+	FILL_MMXVAL_16(b.i16, 2000, -4000, 6000, -8000);
+	MmxValMulSigned(a, b, MmxMulOps::EPMUL, &lo, &hi);
+	printf("mul signed word by signed word: EPMUL\n");
+	printf("a: %s\n", a.ToString_i16(buf, sizeof(buf)));
+	printf("b: %s\n", b.ToString_i16(buf, sizeof(buf)));
+	printf("prod_lo: %s\n", lo.ToString_i32(buf, sizeof(buf)));
+	printf("prod_hi: %s\n", hi.ToString_i32(buf, sizeof(buf)));
+	printf("\n");
 }

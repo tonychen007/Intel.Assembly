@@ -35,6 +35,14 @@ EPMADDWD:
   punpckhdq mm2, mm1
   jmp Done
 
+EPMUL:
+  movq mm2, mm0
+  pmullw mm0, mm1       ; low result
+  pmulhw mm1, mm2       ; high result
+  movq mm2, mm0
+  punpcklwd mm0, mm1
+  punpckhwd mm2, mm1
+  jmp Done
 Error:
   pxor mm0, mm0
 Done:
@@ -51,7 +59,7 @@ Done:
 
   align 16
   MulOpTable:
-    dword EPMADDUBSW, EPMADDWD
+    dword EPMADDUBSW, EPMADDWD, EPMUL
   MulOpCount equ dword ($ - MulOpTable) / sizeof dword
 MmxValMulSigned endp
   end
