@@ -28,14 +28,17 @@ enum MmxShiftOps : unsigned int {
 };
 
 enum MmxMulOps : unsigned int {
-	EPMADDUBSW,	//	Multiply signed(2nd operand) and unsigned(1st operand) bytes, 
-				//  add horizontal pair of signed words, pack saturated signed-words to mm1.
+	// Multiply signed(2nd operand) and unsigned(1st operand) bytes, 
+	// add horizontal pair of signed words, pack saturated signed-words to mm1.
+	EPMADDUBSW,
 
-	EPMADDWD,	//	Multiply the packed words in mm by the packed words in mm/m64, 
-				//  add adjacent doubleword results, and store in mm.
+	//	Multiply the packed words in mm by the packed words in mm/m64, 
+	//  add adjacent doubleword results, and store in mm.
+	EPMADDWD,
 
-	EPMUL,		//  Normal signed word mul
-	
+	//  Normal signed word mul
+	EPMUL,
+
 	EMAX_MULOPS
 };
 
@@ -239,11 +242,13 @@ void MmxValMulTest1() {
 void MmxValMulTest2() {
 	MmxVal a, b, lo, hi;
 	char buf[256] = { '\0' };
+	char xbuf[256] = { '\0' };
+	int tmp, low, hiw;
 
 	FILL_MMXVAL_16(a.i16, 1, 2, 3, 4);
 	FILL_MMXVAL_16(b.i16, 2, 2, 2, 2);
 	MmxValMulSigned(a, b, MmxMulOps::EPMUL, &lo, &hi);
-	printf("mul signed word by signed word: EPMUL\n");
+	printf("mul signed word by signed word: EPMUL(pmullw, pmulhw)\n");
 	printf("a: %s\n", a.ToString_i16(buf, sizeof(buf)));
 	printf("b: %s\n", b.ToString_i16(buf, sizeof(buf)));
 	printf("prod_lo: %s\n", lo.ToString_i32(buf, sizeof(buf)));
@@ -253,7 +258,7 @@ void MmxValMulTest2() {
 	FILL_MMXVAL_16(a.i16, 1, 2, 3, 4);
 	FILL_MMXVAL_16(b.i16, -2, -2, -2, -2);
 	MmxValMulSigned(a, b, MmxMulOps::EPMUL, &lo, &hi);
-	printf("mul signed word by signed word: EPMUL\n");
+	printf("mul signed word by signed word: EPMUL(pmullw, pmulhw)\n");
 	printf("a: %s\n", a.ToString_i16(buf, sizeof(buf)));
 	printf("b: %s\n", b.ToString_i16(buf, sizeof(buf)));
 	printf("prod_lo: %s\n", lo.ToString_i32(buf, sizeof(buf)));
@@ -262,11 +267,39 @@ void MmxValMulTest2() {
 
 	FILL_MMXVAL_16(a.i16, 10, 30, -50, -70);
 	FILL_MMXVAL_16(b.i16, 2000, -4000, 6000, -8000);
+	// 0x000A * 0x007D = 0x00004E20, so low bit is 4E20, high bit is 0000
+	// 0x001E * 0xF060 = 0xFFFE2B40, so low bit is 2B40, high bit is FFFE
+	// 0xFFCE * 0x1770 = 0xFFFB6C20, so low bit is 6C20, high bit is FFFB
+	// 0xFFBA * 0xE0C0 = 0x00088B80, so low bit is 8B80, high bit is 0008
+
 	MmxValMulSigned(a, b, MmxMulOps::EPMUL, &lo, &hi);
-	printf("mul signed word by signed word: EPMUL\n");
+	printf("mul signed word by signed word: EPMUL(pmullw, pmulhw)\n");
 	printf("a: %s\n", a.ToString_i16(buf, sizeof(buf)));
 	printf("b: %s\n", b.ToString_i16(buf, sizeof(buf)));
-	printf("prod_lo: %s\n", lo.ToString_i32(buf, sizeof(buf)));
-	printf("prod_hi: %s\n", hi.ToString_i32(buf, sizeof(buf)));
+	printf("\n");
+
+	tmp = a.i16[0] * b.i16[0];
+	low = tmp & 0x0000FFFF;
+	hiw = (tmp & 0xFFFF0000) >> 16;
+	printf("%08x * %08x, low bit word is: %04x, high bit word is %04x\n", a.i16[0], b.i16[0], low, hiw);
+	
+	tmp = a.i16[1] * b.i16[1];
+	low = tmp & 0x0000FFFF;
+	hiw = (tmp & 0xFFFF0000) >> 16;
+	printf("%08x * %08x, low bit word is: %04x, high bit word is %04x\n", a.i16[1], b.i16[1], low, hiw);
+	
+	tmp = a.i16[2] * b.i16[2];
+	low = tmp & 0x0000FFFF;
+	hiw = (tmp & 0xFFFF0000) >> 16;
+	printf("%08x * %08x, low bit word is: %04x, high bit word is %04x\n", a.i16[2], b.i16[2], low, hiw);
+	
+	tmp = a.i16[3] * b.i16[3];
+	low = tmp & 0x0000FFFF;
+	hiw = (tmp & 0xFFFF0000) >> 16;
+	printf("%08x * %08x, low bit word is: %04x, high bit word is %04x\n", a.i16[3], b.i16[3], low, hiw);
+	printf("\n");
+
+	printf("prod_lo: %s\t(%s)\n", lo.ToString_i32(buf, sizeof(buf)), lo.ToString_x32(xbuf, sizeof(xbuf)));
+	printf("prod_hi: %s\t(%s)\n", hi.ToString_i32(buf, sizeof(buf)), hi.ToString_x32(xbuf, sizeof(xbuf)));
 	printf("\n");
 }
