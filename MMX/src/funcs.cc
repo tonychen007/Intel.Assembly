@@ -7,6 +7,7 @@
 using namespace std;
 
 extern "C" int NMIN = 16;
+extern "C" unsigned int NMAX = 0xFFFFFFFF - 1;
 
 void MmxValAddByteTest() {
 	MmxVal a, b, c;
@@ -287,7 +288,7 @@ int MmxCalcMinMaxCppTest(Uint8* x, int n, Uint8* umin, Uint8* umax) {
 	return 0;
 }
 
-int MmxCalcMinMaxTest() {
+void MmxCalcMinMaxTest() {
 	int num = ELEMENT_NUM;
 	int it = 100;
 	bool ret;
@@ -298,7 +299,6 @@ int MmxCalcMinMaxTest() {
 	for (int i = 0; i < num; i++) {
 		arr[i] = (Uint8)(rand() % 240 + 10);
 	}
-
 	arr[num / 4] = 4;
 	arr[num / 2] = 252;
 
@@ -308,10 +308,12 @@ int MmxCalcMinMaxTest() {
 		for (int i = 0; i < it; i++) {
 			ret = MmxCalcMinMaxCppTest(arr, num, &umin, &umax);
 		}
-		auto ed = chrono::system_clock::now();
-		chrono::duration<double, std::milli> ep = ed - st;
-		printf("time for cpp version 100 itr: %g ms\n", ep.count());
-		printf("min is :%u, max is: %u\n", umin, umax);
+		if (ret) {
+			auto ed = chrono::system_clock::now();
+			chrono::duration<double, std::milli> ep = ed - st;
+			printf("time for cpp version 100 itr: %g ms\n", ep.count());
+			printf("min is :%u, max is: %u\n", umin, umax);
+		}
 	}
 
 	// asm version
@@ -327,6 +329,26 @@ int MmxCalcMinMaxTest() {
 	}
 
 	delete[] arr;
-	return 0;
 }
 
+void MmxCalcMeanTest() {
+	unsigned int num = ELEMENT_NUM;
+	bool ret;
+	Uint8* arr = new Uint8[num];
+	int sum = 0;
+	double mean = 0.0;
+
+	srand(SRAND);
+	for (int i = 0; i < num; i++) {
+		arr[i] = (Uint8)(rand() % 240 + 10);
+	}
+	auto st = chrono::system_clock::now();
+	ret = MmxCalcMean(arr, num, &sum, &mean);
+	auto ed = chrono::system_clock::now();
+	chrono::duration<double, std::milli> ep = ed - st;
+	if (ret == 0) {
+		printf("Result for MmxCalcMean, sum is %d, mean is %g, time is %g ms\n", sum, mean, ep.count());
+	}
+	
+	delete[] arr;
+}

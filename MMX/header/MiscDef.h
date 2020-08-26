@@ -3,15 +3,16 @@
 #include "MmxVal.h"
 
 const int SRAND = 14;
-const int ELEMENT_NUM = 0x800000;
+const unsigned int ELEMENT_NUM = 0x8000000;
 
 // for main cc
 extern void MmxValAddTest();
 extern void MmxValShiftTest();
 extern void MmxValMulTest1();
 extern void MmxValMulTest2();
-extern int MmxCalcMinMaxCppTest();
-extern int MmxCalcMinMaxTest();
+extern int MmxCalcMinMaxCppTest(Uint8* x, int n, Uint8* umin, Uint8* umax);
+extern void MmxCalcMinMaxTest();
+extern void MmxCalcMeanTest();
 
 enum MmxAddOps : unsigned int {
 	EPADDB,		// wraparound
@@ -55,4 +56,5 @@ enum MmxMulOps : unsigned int {
 extern "C" MmxVal MmxValAdd(MmxVal a, MmxVal b, MmxAddOps ops);
 extern "C" int MmxValShift(MmxVal a, MmxShiftOps ops, int count, MmxVal * b);
 extern "C" int MmxValMulSigned(MmxVal a, MmxVal b, MmxMulOps ops, MmxVal * lo, MmxVal * hi);
-extern "C" int MmxCalcMinMax(Uint8 * x, int n, Uint8 * umin, Uint8 * umax);
+extern "C" int MmxCalcMinMax(const Uint8 * x, int n, Uint8 * umin, Uint8 * umax);
+extern "C" int MmxCalcMean(const Uint8 * x, int n, int* sum, double* mean);

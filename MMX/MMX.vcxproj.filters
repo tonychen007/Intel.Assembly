@@ -43,5 +43,8 @@
     <MASM Include="asm\MmxCalcMinMax.asm">
       <Filter>asm</Filter>
     </MASM>
+    <MASM Include="asm\MmxCalcMean.asm">
+      <Filter>asm</Filter>
+    </MASM>
   </ItemGroup>
 </Project>

@@ -150,6 +150,7 @@
     <ClInclude Include="header\MmxVal.h" />
   </ItemGroup>
   <ItemGroup>
+    <MASM Include="asm\MmxCalcMean.asm" />
     <MASM Include="asm\MmxCalcMinMax.asm">
       <UseSafeExceptionHandlers Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</UseSafeExceptionHandlers>
     </MASM>

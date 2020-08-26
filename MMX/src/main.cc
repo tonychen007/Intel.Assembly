@@ -33,7 +33,8 @@ int main() {
 	// MmxShiftTest();
 	// MmxValMulTest1();
 	// MmxValMulTest2();
-	MmxCalcMinMaxTest();
+	// MmxCalcMinMaxTest();
+	MmxCalcMeanTest();
 
 #if defined TEST_ON
 	testCode();
