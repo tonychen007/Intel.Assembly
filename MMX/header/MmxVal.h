@@ -1,11 +1,19 @@
 #pragma once
 
-#include "MiscDef.h"
-
 #define CHAR_FUN(x) char*##x (char* buf, size_t sz)
 
+typedef __int8  Int8;
+typedef __int16 Int16;
+typedef __int32 Int32;
+typedef __int64 Int64;
+
+typedef unsigned __int8  Uint8;
+typedef unsigned __int16 Uint16;
+typedef unsigned __int32 Uint32;
+typedef unsigned __int64 Uint64;
+
 union MmxVal {
-	Int8		i8[8];
+	Int8	i8[8];
 	Int16	i16[4];
 	Int32	i32[2];
 	Int64	i64;

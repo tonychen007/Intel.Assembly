@@ -1,11 +1,58 @@
 #pragma once
 
-typedef __int8  Int8;
-typedef __int16 Int16;
-typedef __int32 Int32;
-typedef __int64 Int64;
+#include "MmxVal.h"
 
-typedef unsigned __int8  Uint8;
-typedef unsigned __int16 Uint16;
-typedef unsigned __int32 Uint32;
-typedef unsigned __int64 Uint64;
+const int SRAND = 14;
+const int ELEMENT_NUM = 0x800000;
+
+// for main cc
+extern void MmxValAddTest();
+extern void MmxValShiftTest();
+extern void MmxValMulTest1();
+extern void MmxValMulTest2();
+extern int MmxCalcMinMaxCppTest();
+extern int MmxCalcMinMaxTest();
+
+enum MmxAddOps : unsigned int {
+	EPADDB,		// wraparound
+	EPADDSB,		// saturated
+	EPADDUSB,	// unsigned-saturated
+	EPADDW,		// wraparound WORD
+	EPADDSW,		// saturated WORD
+	EPADDUSW,	// unsigned-saturated WORD
+	EPADDD,		// DWORD
+
+	EMAX_ADDOPS
+};
+
+enum MmxShiftOps : unsigned int {
+	EPSLLW,		// shift left logical word
+	EPSRLW,		// shift right logical word
+	EPSRAW,		// shift right arithmetic word
+	EPSLLD,		// shift left logical dword
+	EPSRLD,		// shift right logical dword
+	EPSRAD,		// shift right arithmetic dword
+
+	EMAX_SHIFTOPS
+};
+
+enum MmxMulOps : unsigned int {
+	// Multiply signed(2nd operand) and unsigned(1st operand) bytes, 
+	// add horizontal pair of signed words, pack saturated signed-words to mm1.
+	EPMADDUBSW,
+
+	//	Multiply the packed words in mm by the packed words in mm/m64, 
+	//  add adjacent doubleword results, and store in mm.
+	EPMADDWD,
+
+	//  Normal signed word mul
+	EPMUL,
+
+	EMAX_MULOPS
+};
+
+// defined in asm
+extern "C" MmxVal MmxValAdd(MmxVal a, MmxVal b, MmxAddOps ops);
+extern "C" int MmxValShift(MmxVal a, MmxShiftOps ops, int count, MmxVal * b);
+extern "C" int MmxValMulSigned(MmxVal a, MmxVal b, MmxMulOps ops, MmxVal * lo, MmxVal * hi);
+extern "C" int MmxCalcMinMax(Uint8 * x, int n, Uint8 * umin, Uint8 * umax);

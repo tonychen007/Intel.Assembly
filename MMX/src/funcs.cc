@@ -1,50 +1,12 @@
 #include <stdio.h>
 #include <string.h>
+#include <chrono>
 
 #include "../header/MiscDef.h"
 #include "../header/MmxVal.h"
+using namespace std;
 
-enum MmxAddOps : unsigned int {
-	EPADDB,		// wraparound
-	EPADDSB,		// saturated
-	EPADDUSB,	// unsigned-saturated
-	EPADDW,		// wraparound WORD
-	EPADDSW,		// saturated WORD
-	EPADDUSW,	// unsigned-saturated WORD
-	EPADDD,		// DWORD
-
-	EMAX_ADDOPS
-};
-
-enum MmxShiftOps : unsigned int {
-	EPSLLW,		// shift left logical word
-	EPSRLW,		// shift right logical word
-	EPSRAW,		// shift right arithmetic word
-	EPSLLD,		// shift left logical dword
-	EPSRLD,		// shift right logical dword
-	EPSRAD,		// shift right arithmetic dword
-
-	EMAX_SHIFTOPS
-};
-
-enum MmxMulOps : unsigned int {
-	// Multiply signed(2nd operand) and unsigned(1st operand) bytes, 
-	// add horizontal pair of signed words, pack saturated signed-words to mm1.
-	EPMADDUBSW,
-
-	//	Multiply the packed words in mm by the packed words in mm/m64, 
-	//  add adjacent doubleword results, and store in mm.
-	EPMADDWD,
-
-	//  Normal signed word mul
-	EPMUL,
-
-	EMAX_MULOPS
-};
-
-extern "C" MmxVal MmxValAdd(MmxVal a, MmxVal b, MmxAddOps ops);
-extern "C" int MmxValShift(MmxVal a, MmxShiftOps ops, int count, MmxVal * b);
-extern "C" int MmxValMulSigned(MmxVal a, MmxVal b, MmxMulOps ops, MmxVal * lo, MmxVal * hi);
+extern "C" int NMIN = 16;
 
 void MmxValAddByteTest() {
 	MmxVal a, b, c;
@@ -282,17 +244,17 @@ void MmxValMulTest2() {
 	low = tmp & 0x0000FFFF;
 	hiw = (tmp & 0xFFFF0000) >> 16;
 	printf("%08x * %08x, low bit word is: %04x, high bit word is %04x\n", a.i16[0], b.i16[0], low, hiw);
-	
+
 	tmp = a.i16[1] * b.i16[1];
 	low = tmp & 0x0000FFFF;
 	hiw = (tmp & 0xFFFF0000) >> 16;
 	printf("%08x * %08x, low bit word is: %04x, high bit word is %04x\n", a.i16[1], b.i16[1], low, hiw);
-	
+
 	tmp = a.i16[2] * b.i16[2];
 	low = tmp & 0x0000FFFF;
 	hiw = (tmp & 0xFFFF0000) >> 16;
 	printf("%08x * %08x, low bit word is: %04x, high bit word is %04x\n", a.i16[2], b.i16[2], low, hiw);
-	
+
 	tmp = a.i16[3] * b.i16[3];
 	low = tmp & 0x0000FFFF;
 	hiw = (tmp & 0xFFFF0000) >> 16;
@@ -303,3 +265,68 @@ void MmxValMulTest2() {
 	printf("prod_hi: %s\t(%s)\n", hi.ToString_i32(buf, sizeof(buf)), hi.ToString_x32(xbuf, sizeof(xbuf)));
 	printf("\n");
 }
+
+int MmxCalcMinMaxCppTest(Uint8* x, int n, Uint8* umin, Uint8* umax) {
+	Uint8 x_min = 0xff;
+	Uint8 x_max = 0;
+
+	if (n < NMIN || (n & 0xf) != 0) return -1;
+
+	for (int i = 0; i < n; i++) {
+		if (x[i] < x_min) {
+			x_min = x[i];
+		}
+		else if (x[i] > x_max) {
+			x_max = x[i];
+		}
+	}
+
+	*umin = x_min;
+	*umax = x_max;
+
+	return 0;
+}
+
+int MmxCalcMinMaxTest() {
+	int num = ELEMENT_NUM;
+	int it = 100;
+	bool ret;
+	Uint8* arr = new Uint8[num];
+	Uint8 umin = 0, umax = 0;
+
+	srand(SRAND);
+	for (int i = 0; i < num; i++) {
+		arr[i] = (Uint8)(rand() % 240 + 10);
+	}
+
+	arr[num / 4] = 4;
+	arr[num / 2] = 252;
+
+	// cpp version
+	{
+		auto st = chrono::system_clock::now();
+		for (int i = 0; i < it; i++) {
+			ret = MmxCalcMinMaxCppTest(arr, num, &umin, &umax);
+		}
+		auto ed = chrono::system_clock::now();
+		chrono::duration<double, std::milli> ep = ed - st;
+		printf("time for cpp version 100 itr: %g ms\n", ep.count());
+		printf("min is :%u, max is: %u\n", umin, umax);
+	}
+
+	// asm version
+	{
+		auto st = chrono::system_clock::now();
+		for (int i = 0; i < it; i++) {
+			ret = MmxCalcMinMax(arr, num, &umin, &umax);
+		}
+		auto ed = chrono::system_clock::now();
+		chrono::duration<double, std::milli> ep = ed - st;
+		printf("time for asm version 100 itr: %g ms\n", ep.count());
+		printf("min is :%u, max is: %u\n", umin, umax);
+	}
+
+	delete[] arr;
+	return 0;
+}
+

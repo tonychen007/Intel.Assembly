@@ -1,9 +1,4 @@
-extern void MmxValAddTest();
-extern void MmxValShiftTest();
-extern void MmxValMulTest1();
-extern void MmxValMulTest2();
-
-#include "../header/MmxVal.h"
+#include "../header/MiscDef.h"
 
 //#define TEST_ON
 
@@ -37,7 +32,8 @@ int main() {
 	// MmxValAddTest();
 	// MmxShiftTest();
 	// MmxValMulTest1();
-	MmxValMulTest2();
+	// MmxValMulTest2();
+	MmxCalcMinMaxTest();
 
 #if defined TEST_ON
 	testCode();

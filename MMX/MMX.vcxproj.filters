@@ -40,5 +40,8 @@
     <MASM Include="asm\MmxValMulSigned.asm">
       <Filter>asm</Filter>
     </MASM>
+    <MASM Include="asm\MmxCalcMinMax.asm">
+      <Filter>asm</Filter>
+    </MASM>
   </ItemGroup>
 </Project>
