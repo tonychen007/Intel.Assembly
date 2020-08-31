@@ -5,11 +5,11 @@ extern void MinAndMaxTest();
 extern void SinCosTest();
 
 int main() {
-	//FtoCTest();
+	FtoCTest();
 	//CalcSphereAreaVolumeTest();
 	//CalcMeanStdevTest();
 	//MinAndMaxTest();
-	SinCosTest();
+	//SinCosTest();
 
 	return 0;
 }

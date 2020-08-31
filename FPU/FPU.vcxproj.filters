@@ -24,27 +24,27 @@
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="funcs.cc">
+    <ClCompile Include="src\funcs.cc">
       <Filter>src</Filter>
     </ClCompile>
-    <ClCompile Include="main.cc">
+    <ClCompile Include="src\main.cc">
       <Filter>src</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <MASM Include="FtoC.asm">
+    <MASM Include="asm\CalcMeanStdev.asm">
       <Filter>asm</Filter>
     </MASM>
-    <MASM Include="CalcSphereAreaVolume.asm">
+    <MASM Include="asm\CalcSphereAreaVolume.asm">
       <Filter>asm</Filter>
     </MASM>
-    <MASM Include="CalcMeanStdev.asm">
+    <MASM Include="asm\FtoC.asm">
       <Filter>asm</Filter>
     </MASM>
-    <MASM Include="MinAndMax.asm">
+    <MASM Include="asm\MinAndMax.asm">
       <Filter>asm</Filter>
     </MASM>
-    <MASM Include="SinCos.asm">
+    <MASM Include="asm\SinCos.asm">
       <Filter>asm</Filter>
     </MASM>
   </ItemGroup>

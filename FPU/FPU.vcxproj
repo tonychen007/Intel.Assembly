@@ -19,15 +19,15 @@
     </ProjectConfiguration>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="funcs.cc" />
-    <ClCompile Include="main.cc" />
+    <ClCompile Include="src\funcs.cc" />
+    <ClCompile Include="src\main.cc" />
   </ItemGroup>
   <ItemGroup>
-    <MASM Include="CalcMeanStdev.asm" />
-    <MASM Include="CalcSphereAreaVolume.asm" />
-    <MASM Include="FtoC.asm" />
-    <MASM Include="MinAndMax.asm" />
-    <MASM Include="SinCos.asm" />
+    <MASM Include="asm\CalcMeanStdev.asm" />
+    <MASM Include="asm\CalcSphereAreaVolume.asm" />
+    <MASM Include="asm\FtoC.asm" />
+    <MASM Include="asm\MinAndMax.asm" />
+    <MASM Include="asm\SinCos.asm" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <VCProjectVersion>16.0</VCProjectVersion>
