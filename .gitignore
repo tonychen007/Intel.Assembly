@@ -1,4 +1,6 @@
 .git
+Intel.Asm/Debug
+Intel.Asm/Release
 */Debug
 */Release
 */.vs

@@ -1,7 +1,8 @@
 #include "../header/MiscDef.h"
 
 int main() {
-	sseFloatPointArithemticTest();
+	// sseFloatPointArithemticTest();
+	sseFloatPointCompareTest();
 
 	return 0;
 }

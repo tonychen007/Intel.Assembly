@@ -28,5 +28,8 @@
     <MASM Include="asm\sseMathFloatDouble.asm">
       <Filter>asm</Filter>
     </MASM>
+    <MASM Include="asm\sseCompareFloatDouble.asm">
+      <Filter>asm</Filter>
+    </MASM>
   </ItemGroup>
 </Project>
