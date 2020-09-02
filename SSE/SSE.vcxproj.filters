@@ -31,5 +31,8 @@
     <MASM Include="asm\sseCompareFloatDouble.asm">
       <Filter>asm</Filter>
     </MASM>
+    <MASM Include="asm\sseConvert.asm">
+      <Filter>asm</Filter>
+    </MASM>
   </ItemGroup>
 </Project>

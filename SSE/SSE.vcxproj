@@ -149,6 +149,7 @@
   </ItemGroup>
   <ItemGroup>
     <MASM Include="asm\sseCompareFloatDouble.asm" />
+    <MASM Include="asm\sseConvert.asm" />
     <MASM Include="asm\sseMathFloatDouble.asm">
       <FileType>Document</FileType>
     </MASM>

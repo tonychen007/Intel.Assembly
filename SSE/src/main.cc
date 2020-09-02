@@ -2,7 +2,8 @@
 
 int main() {
 	// sseFloatPointArithemticTest();
-	sseFloatPointCompareTest();
-
+	// sseFloatPointCompareTest();
+	sseConvertTest();
+	
 	return 0;
 }
