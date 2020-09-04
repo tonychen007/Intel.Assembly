@@ -205,6 +205,7 @@ void ssePackedFloatPointArithemtic() {
 	printf("result for ssePackedMathFloat()\n");
 	printf("a:\t\t\t%s\n", a.ToString_r32(buf, sizeof(buf)));
 	printf("b:\t\t\t%s\n", b.ToString_r32(buf, sizeof(buf)));
+	printf("\n");
 	printf("addps:\t\t\t%s\n", c[0].ToString_r32(buf, sizeof(buf)));
 	printf("subps:\t\t\t%s\n", c[1].ToString_r32(buf, sizeof(buf)));
 	printf("mulps:\t\t\t%s\n", c[2].ToString_r32(buf, sizeof(buf)));
@@ -232,6 +233,7 @@ void ssePackedDoublePointArithemtic() {
 	printf("result for ssePackedMathDouble()\n");
 	printf("a:\t\t\t%s\n", a.ToString_r64(buf, sizeof(buf)));
 	printf("b:\t\t\t%s\n", b.ToString_r64(buf, sizeof(buf)));
+	printf("\n");
 	printf("addpd:\t\t\t%s\n", c[0].ToString_r64(buf, sizeof(buf)));
 	printf("subpd:\t\t\t%s\n", c[1].ToString_r64(buf, sizeof(buf)));
 	printf("mulpd:\t\t\t%s\n", c[2].ToString_r64(buf, sizeof(buf)));
