@@ -13,6 +13,8 @@ extern void MmxValMulTest2();
 extern int MmxCalcMinMaxCppTest(Uint8* x, int n, Uint8* umin, Uint8* umax);
 extern void MmxCalcMinMaxTest();
 extern void MmxCalcMeanTest();
+extern void MmxCompareTest();
+extern void MmxConvertTest();
 
 enum MmxAddOps : unsigned int {
 	EPADDB,		// wraparound
@@ -54,7 +56,9 @@ enum MmxMulOps : unsigned int {
 
 // defined in asm
 extern "C" MmxVal MmxValAdd(MmxVal a, MmxVal b, MmxAddOps ops);
-extern "C" int MmxValShift(MmxVal a, MmxShiftOps ops, int count, MmxVal * b);
-extern "C" int MmxValMulSigned(MmxVal a, MmxVal b, MmxMulOps ops, MmxVal * lo, MmxVal * hi);
-extern "C" int MmxCalcMinMax(const Uint8 * x, int n, Uint8 * umin, Uint8 * umax);
-extern "C" int MmxCalcMean(const Uint8 * x, int n, int* sum, double* mean);
+extern "C" int MmxValShift(MmxVal a, MmxShiftOps ops, int count, MmxVal* b);
+extern "C" int MmxValMulSigned(MmxVal a, MmxVal b, MmxMulOps ops, MmxVal* lo, MmxVal* hi);
+extern "C" int MmxCalcMinMax(const Uint8* x, int n, Uint8* umin, Uint8* umax);
+extern "C" int MmxCalcMean(const Uint8* x, int n, int* sum, double* mean);
+extern "C" int MmxCompare(MmxVal a, MmxVal b, MmxVal c[8]);
+extern "C" int MmxConvert(MmxVal* dst, MmxVal* src, MmxVal* res);

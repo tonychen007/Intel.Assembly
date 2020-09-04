@@ -352,3 +352,47 @@ void MmxCalcMeanTest() {
 	
 	delete[] arr;
 }
+
+void MmxCompareTest() {
+	MmxVal a, b, c[2];
+	char buf[256] = { '\0' };
+	memset(&c, 0, sizeof(c));
+
+	FILL_MMXVAL_16(a.u16, 10, 100, 1, 5);
+	FILL_MMXVAL_16(b.u16, 11, 100, 1, 9);
+
+	// simply test for word compare, MMX Compare only has two instructions
+	// EQ and GT
+	MmxCompare(a, b, c);
+	printf("Result for MMX compare word:\n");
+	printf("a: %s\n", a.ToString_u16(buf, sizeof(buf)));
+	printf("b: %s\n", b.ToString_u16(buf, sizeof(buf)));
+
+	char* s1 = c[0].ToString_x16(buf, sizeof(buf));
+	printf("%10s:%s\n", "EQ", s1);
+	char* s2 = c[1].ToString_x16(buf, sizeof(buf));
+	printf("%10s:%s\n", "GT", s2);
+}
+
+void MmxConvertTest() {
+	MmxVal src;
+	MmxVal dst;
+	MmxVal res[2];
+	char buf[256] = { '\0' };
+
+	FILL_MMXVAL_16(src.i16, 30000, 500, 0, 5);
+	FILL_MMXVAL_16(dst.i16, -10000, 300, 10, 99);
+	// compress two words into eight bytes, signed
+	MmxConvert(&dst, &src, res);
+	printf("Result for PACKSSWB, SINGED pack word to byte\n");
+	printf("src: %s\n", src.ToString_x16(buf, sizeof(buf)));
+	printf("dst: %s\n", dst.ToString_x16(buf, sizeof(buf)));
+	printf("res: %s\n", res[0].ToString_x8(buf, sizeof(buf)));
+	printf("\n");
+
+	// compress two words into eight bytes, saturated
+	printf("Result for PACKUSWB, SATURATED pack word to byte\n");
+	printf("src: %s\n", src.ToString_x16(buf, sizeof(buf)));
+	printf("dst: %s\n", dst.ToString_x16(buf, sizeof(buf)));
+	printf("res: %s\n", res[1].ToString_x8(buf, sizeof(buf)));
+}

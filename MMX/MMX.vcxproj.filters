@@ -46,5 +46,11 @@
     <MASM Include="asm\MmxCalcMean.asm">
       <Filter>asm</Filter>
     </MASM>
+    <MASM Include="asm\MmxCompare.asm">
+      <Filter>asm</Filter>
+    </MASM>
+    <MASM Include="asm\MmxConvert.asm">
+      <Filter>asm</Filter>
+    </MASM>
   </ItemGroup>
 </Project>

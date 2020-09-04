@@ -45,7 +45,6 @@ extern void sseFloatPointPackedCompareTest();
 // defined in asm
 extern "C" void sseMathFloat(float a, float b, float c[8]);
 extern "C" void sseMathDouble(double a, double b, double c[8]);
-
 extern "C" void sseCompareFloat(float a, float b, bool* result);
 extern "C" void sseCompareDouble(double a, double b, bool* result);
 
@@ -60,6 +59,5 @@ extern "C" void sseCalcSphereVolume(double r, double* sa, double* v);
 /* packed float-point*/
 extern "C" void ssePackedMathFloat32(const XmmVal * a, const XmmVal * b, XmmVal c[8]);
 extern "C" void ssePackedMathDouble64(const XmmVal * a, const XmmVal * b, XmmVal c[8]);
-
 extern "C" void sseComparePackedFloat32(const XmmVal * a, const XmmVal * b, XmmVal c[8]);
 extern "C" void sseComparePackedDouble64(const XmmVal * a, const XmmVal * b, XmmVal c[8]);

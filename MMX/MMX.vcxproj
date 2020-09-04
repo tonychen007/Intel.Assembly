@@ -154,6 +154,8 @@
     <MASM Include="asm\MmxCalcMinMax.asm">
       <UseSafeExceptionHandlers Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</UseSafeExceptionHandlers>
     </MASM>
+    <MASM Include="asm\MmxCompare.asm" />
+    <MASM Include="asm\MmxConvert.asm" />
     <MASM Include="asm\MmxValAdd.asm" />
     <MASM Include="asm\MmxValMulSigned.asm" />
     <MASM Include="asm\MmxValShift.asm" />
