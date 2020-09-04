@@ -3,7 +3,8 @@
 int main() {
 	// sseFloatPointArithemticTest();
 	// sseFloatPointCompareTest();
-	sseConvertTest();
-	
+	// sseConvertTest();
+	sseCalcSphereVolumeTest();
+
 	return 0;
 }

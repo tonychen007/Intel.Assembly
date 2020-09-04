@@ -175,3 +175,13 @@ void sseConvertTest() {
 
 	sseSetMxcsr(old_mxcsr);
 }
+
+void sseCalcSphereVolumeTest() {
+	double r[] = { -1.0, 0.0, 3.0, 5.0 };
+	double sa, v;
+
+	for (int i = 0; i < sizeof(r) / sizeof(double); i++) {
+		sseCalcSphereVolume(r[i], &sa, &v);
+		printf("Radius : %lf, Surface Area : %lf, Volume : %lf\n", r[i], sa, v);
+	}
+}

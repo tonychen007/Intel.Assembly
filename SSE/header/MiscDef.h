@@ -35,6 +35,7 @@ enum SseRoundMode : unsigned int {
 extern void sseFloatPointArithemticTest();
 extern void sseFloatPointCompareTest();
 extern void sseConvertTest();
+extern void sseCalcSphereVolumeTest();
 
 // defined in asm
 extern "C" void sseMathFloat(float a, float b, float c[8]);
@@ -48,3 +49,5 @@ extern "C" int sseSetMxcsr(int v);
 extern "C" SseRoundMode sseGetMxcsrRM();
 extern "C" void sseSetMxcsrRM(SseRoundMode rm);
 extern "C" void sseScalarConvert(XmmScalar * dst, XmmScalar * src, CvtOps ops);
+
+extern "C" void sseCalcSphereVolume(double r, double* sa, double* v);
