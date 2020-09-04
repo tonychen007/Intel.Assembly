@@ -1,10 +1,12 @@
 #pragma once
 
+#include "xmmVal.h"
+
 union XmmScalar {
 	float				f32;
 	double				d64;
-	unsigned __int32	i32;
-	unsigned __int64	i64;
+	unsigned __int32		i32;
+	unsigned __int64		i64;
 };
 
 enum CvtOps : unsigned int {
@@ -36,6 +38,8 @@ extern void sseFloatPointArithemticTest();
 extern void sseFloatPointCompareTest();
 extern void sseConvertTest();
 extern void sseCalcSphereVolumeTest();
+extern void sseFloatPointPackedArithemticTest();
+
 
 // defined in asm
 extern "C" void sseMathFloat(float a, float b, float c[8]);
@@ -51,3 +55,7 @@ extern "C" void sseSetMxcsrRM(SseRoundMode rm);
 extern "C" void sseScalarConvert(XmmScalar * dst, XmmScalar * src, CvtOps ops);
 
 extern "C" void sseCalcSphereVolume(double r, double* sa, double* v);
+
+/* packed float-point*/
+extern "C" void ssePackedMathFloat32(const XmmVal * a, const XmmVal * b, XmmVal c[8]);
+extern "C" void ssePackedMathDouble64(const XmmVal * a, const XmmVal * b, XmmVal c[8]);

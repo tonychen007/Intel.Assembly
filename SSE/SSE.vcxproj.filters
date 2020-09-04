@@ -18,9 +18,15 @@
     <ClCompile Include="src\main.cc">
       <Filter>src</Filter>
     </ClCompile>
+    <ClCompile Include="src\xmmVal.cc">
+      <Filter>src</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="header\MiscDef.h">
+      <Filter>header</Filter>
+    </ClInclude>
+    <ClInclude Include="header\xmmVal.h">
       <Filter>header</Filter>
     </ClInclude>
   </ItemGroup>
@@ -35,6 +41,9 @@
       <Filter>asm</Filter>
     </MASM>
     <MASM Include="asm\sseCalcSphereVolume.asm">
+      <Filter>asm</Filter>
+    </MASM>
+    <MASM Include="asm\ssePackedMathFloatDouble.asm">
       <Filter>asm</Filter>
     </MASM>
   </ItemGroup>

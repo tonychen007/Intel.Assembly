@@ -143,9 +143,11 @@
   <ItemGroup>
     <ClCompile Include="src\funcs.cc" />
     <ClCompile Include="src\main.cc" />
+    <ClCompile Include="src\xmmVal.cc" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="header\MiscDef.h" />
+    <ClInclude Include="header\xmmVal.h" />
   </ItemGroup>
   <ItemGroup>
     <MASM Include="asm\sseCalcSphereVolume.asm" />
@@ -154,6 +156,7 @@
     <MASM Include="asm\sseMathFloatDouble.asm">
       <FileType>Document</FileType>
     </MASM>
+    <MASM Include="asm\ssePackedMathFloatDouble.asm" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

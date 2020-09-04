@@ -6,6 +6,7 @@
 #include <math.h>
 
 #include "../header/MiscDef.h"
+#include "../header/xmmVal.h"
 using namespace std;
 
 const int cmp_ops = 7;
@@ -26,14 +27,14 @@ void sseFloatPointArithemtic() {
 	printf("result for sseMathFloat()\n");
 	printf("a:\t\t%.6f\n", a);
 	printf("b:\t\t%.6f\n", b);
-	printf("add:\t\t%.6f\n", c[0]);
-	printf("sub:\t\t%.6f\n", c[1]);
-	printf("mul:\t\t%.6f\n", c[2]);
-	printf("div:\t\t%.6f\n", c[3]);
-	printf("min:\t\t%.6f\n", c[4]);
-	printf("max:\t\t%.6f\n", c[5]);
-	printf("fabs(b):\t%.6f\n", c[6]);
-	printf("sqrt(fabs(b)):\t%.6f\n", c[7]);
+	printf("addss:\t\t%.6f\n", c[0]);
+	printf("subss:\t\t%.6f\n", c[1]);
+	printf("mulss:\t\t%.6f\n", c[2]);
+	printf("divss:\t\t%.6f\n", c[3]);
+	printf("minss:\t\t%.6f\n", c[4]);
+	printf("maxss:\t\t%.6f\n", c[5]);
+	printf("fabss(b):\t%.6f\n", c[6]);
+	printf("sqrtss(fabs(b)):\t%.6f\n", c[7]);
 }
 
 void sseDoublePointArithemtic() {
@@ -46,14 +47,14 @@ void sseDoublePointArithemtic() {
 	printf("result for sseMathDouble()\n");
 	printf("a:\t\t%.14f\n", a);
 	printf("b:\t\t%.14f\n", b);
-	printf("add:\t\t%.14f\n", c[0]);
-	printf("sub:\t\t%.14f\n", c[1]);
-	printf("mul:\t\t%.14f\n", c[2]);
-	printf("div:\t\t%.14f\n", c[3]);
-	printf("min:\t\t%.14f\n", c[4]);
-	printf("max:\t\t%.14f\n", c[5]);
-	printf("fabs(b):\t%.14f\n", c[6]);
-	printf("sqrt(fabs(b)):\t%.14f\n", c[7]);
+	printf("addsd:\t\t%.14f\n", c[0]);
+	printf("subsd:\t\t%.14f\n", c[1]);
+	printf("mulsd:\t\t%.14f\n", c[2]);
+	printf("divsd:\t\t%.14f\n", c[3]);
+	printf("minsd:\t\t%.14f\n", c[4]);
+	printf("maxsd:\t\t%.14f\n", c[5]);
+	printf("fabsd(b):\t%.14f\n", c[6]);
+	printf("sqrtsd(fabsd(b)):\t%.14f\n", c[7]);
 }
 
 void sseFloatPointArithemticTest() {
@@ -184,4 +185,65 @@ void sseCalcSphereVolumeTest() {
 		sseCalcSphereVolume(r[i], &sa, &v);
 		printf("Radius : %lf, Surface Area : %lf, Volume : %lf\n", r[i], sa, v);
 	}
+}
+
+
+void ssePackedFloatPointArithemtic() {
+	// xmmVal must be 16 byte align
+	__declspec(align(16)) XmmVal a;
+	__declspec(align(16)) XmmVal b;
+	__declspec(align(16)) XmmVal c[8];
+	char buf[256] = { '\0' };
+	memset(&a, 0, sizeof(a));
+	memset(&b, 0, sizeof(b));
+	memset(&c, 0, sizeof(c));
+
+	FILL_XMMVAL_32(a.r32, 36.0f, 1.0f / 32.0f, 2.0f, 42.0f);
+	FILL_XMMVAL_32(b.r32, -1.0f / 9.0f, 64.0f, -0.0625f, 8.66667f);
+	ssePackedMathFloat32(&a, &b, c);
+
+	printf("result for ssePackedMathFloat()\n");
+	printf("a:\t\t\t%s\n", a.ToString_r32(buf, sizeof(buf)));
+	printf("b:\t\t\t%s\n", b.ToString_r32(buf, sizeof(buf)));
+	printf("addps:\t\t\t%s\n", c[0].ToString_r32(buf, sizeof(buf)));
+	printf("subps:\t\t\t%s\n", c[1].ToString_r32(buf, sizeof(buf)));
+	printf("mulps:\t\t\t%s\n", c[2].ToString_r32(buf, sizeof(buf)));
+	printf("divps:\t\t\t%s\n", c[3].ToString_r32(buf, sizeof(buf)));
+	printf("minps:\t\t\t%s\n", c[4].ToString_r32(buf, sizeof(buf)));
+	printf("maxps:\t\t\t%s\n", c[5].ToString_r32(buf, sizeof(buf)));
+	printf("fabps(b):\t\t%s\n", c[6].ToString_r32(buf, sizeof(buf)));
+	printf("sqrtps(fabps(b)):\t%s\n", c[7].ToString_r32(buf, sizeof(buf)));
+}
+
+void ssePackedDoublePointArithemtic() {
+	// xmmVal must be 16 byte align
+	__declspec(align(16)) XmmVal a;
+	__declspec(align(16)) XmmVal b;
+	__declspec(align(16)) XmmVal c[8];
+	char buf[256] = { '\0' };
+	memset(&a, 0, sizeof(a));
+	memset(&b, 0, sizeof(b));
+	memset(&c, 0, sizeof(c));
+
+	FILL_XMMVAL_64(a.r64, M_PI, -M_E);
+	FILL_XMMVAL_64(b.r64, 2.0, M_1_PI);
+	ssePackedMathDouble64(&a, &b, c);
+
+	printf("result for ssePackedMathDouble()\n");
+	printf("a:\t\t\t%s\n", a.ToString_r64(buf, sizeof(buf)));
+	printf("b:\t\t\t%s\n", b.ToString_r64(buf, sizeof(buf)));
+	printf("addpd:\t\t\t%s\n", c[0].ToString_r64(buf, sizeof(buf)));
+	printf("subpd:\t\t\t%s\n", c[1].ToString_r64(buf, sizeof(buf)));
+	printf("mulpd:\t\t\t%s\n", c[2].ToString_r64(buf, sizeof(buf)));
+	printf("divpd:\t\t\t%s\n", c[3].ToString_r64(buf, sizeof(buf)));
+	printf("minpd:\t\t\t%s\n", c[4].ToString_r64(buf, sizeof(buf)));
+	printf("maxpd:\t\t\t%s\n", c[5].ToString_r64(buf, sizeof(buf)));
+	printf("fabpd(b):\t\t%s\n", c[6].ToString_r64(buf, sizeof(buf)));
+	printf("sqrtpd(fabpd(b)):\t%s\n", c[7].ToString_r64(buf, sizeof(buf)));
+}
+
+void sseFloatPointPackedArithemticTest() {
+	ssePackedFloatPointArithemtic();
+	printf("\n");
+	ssePackedDoublePointArithemtic();
 }
