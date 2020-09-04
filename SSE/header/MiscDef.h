@@ -39,6 +39,7 @@ extern void sseFloatPointCompareTest();
 extern void sseConvertTest();
 extern void sseCalcSphereVolumeTest();
 extern void sseFloatPointPackedArithemticTest();
+extern void sseFloatPointPackedCompareTest();
 
 
 // defined in asm
@@ -59,3 +60,6 @@ extern "C" void sseCalcSphereVolume(double r, double* sa, double* v);
 /* packed float-point*/
 extern "C" void ssePackedMathFloat32(const XmmVal * a, const XmmVal * b, XmmVal c[8]);
 extern "C" void ssePackedMathDouble64(const XmmVal * a, const XmmVal * b, XmmVal c[8]);
+
+extern "C" void sseComparePackedFloat32(const XmmVal * a, const XmmVal * b, XmmVal c[8]);
+extern "C" void sseComparePackedDouble64(const XmmVal * a, const XmmVal * b, XmmVal c[8]);

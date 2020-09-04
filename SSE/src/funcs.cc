@@ -17,6 +17,14 @@ const char* cmp_ops_Str[cmp_ops] = {
 	"UO(unordered compare","Less than", "Less than or equal", "Equal",
 	"Not Equal", "Greater than", "Greater than or equal" };
 
+const int cmp_packed_ops = 8;
+// pseudo Ops
+// https://www.felixcloutier.com/x86/cmpps
+const char* cmp_packed_ops_Str[cmp_packed_ops]{
+	"EQ", "LT", "LE", "UNORD",
+	"NEQ", "GE", "GT", "ORD" };
+
+
 void sseFloatPointArithemtic() {
 	float a = 1.4f;
 	float b = -1.384732f;
@@ -248,4 +256,82 @@ void sseFloatPointPackedArithemticTest() {
 	ssePackedFloatPointArithemtic();
 	printf("\n");
 	ssePackedDoublePointArithemtic();
+}
+
+void ssePackedFloatPointCompare() {
+	// xmmVal must be 16 byte align
+	__declspec(align(16)) XmmVal a;
+	__declspec(align(16)) XmmVal b;
+	__declspec(align(16)) XmmVal c[8];
+	char buf[256] = { '\0' };
+	memset(&a, 0, sizeof(a));
+	memset(&b, 0, sizeof(b));
+	memset(&c, 0, sizeof(c));
+
+	FILL_XMMVAL_32(a.r32, 2.0f, 7.0f, -6.0f, 3.0f);
+	FILL_XMMVAL_32(b.r32, 1.0f, 12.0f, -6.0f, 8.0f);
+
+	for (int k = 0; k < 2; k++) {
+		if (k == 1)
+			a.r32[0] = numeric_limits<float>::quiet_NaN();
+
+		sseComparePackedFloat32(&a, &b, c);
+		if ( k != 1)
+			printf("Result for ssePackedFloatPointCompare()\n");
+		else
+			printf("Result for ssePackedFloatPointCompare() - NaN\n");
+
+		printf("0 for False, 0xFFFFFFFF for True. \n");
+		printf("a: %s\n", a.ToString_r32(buf, sizeof(buf)));
+		printf("b: %s\n", b.ToString_r32(buf, sizeof(buf)));
+		printf("\n");
+
+		for (int i = 0; i < cmp_packed_ops; i++) {
+			char* s = c[i].ToString_x32(buf, sizeof(buf));
+			printf("%10s:%s\n", cmp_packed_ops_Str[i], s);
+		}
+		printf("\n");
+	}
+}
+
+void ssePackedDoublePointCompare() {
+	// xmmVal must be 16 byte align
+	__declspec(align(16)) XmmVal a;
+	__declspec(align(16)) XmmVal b;
+	__declspec(align(16)) XmmVal c[8];
+	char buf[256] = { '\0' };
+	memset(&a, 0, sizeof(a));
+	memset(&b, 0, sizeof(b));
+	memset(&c, 0, sizeof(c));
+
+	FILL_XMMVAL_64(a.r64, M_PI, M_E);
+	FILL_XMMVAL_64(b.r64, -M_PI, M_LN10);
+
+	for (int k = 0; k < 2; k++) {
+		if (k == 1)
+			a.r64[0] = numeric_limits<double>::quiet_NaN();
+
+		sseComparePackedDouble64(&a, &b, c);
+		if (k != 1)
+			printf("Result for ssePackedDoublePointCompare()\n");
+		else
+			printf("Result for ssePackedDoublePointCompare() - NaN\n");
+
+		printf("0 for False, 0xFFFFFFFF for True. \n");
+		printf("a: %s\n", a.ToString_r64(buf, sizeof(buf)));
+		printf("b: %s\n", b.ToString_r64(buf, sizeof(buf)));
+		printf("\n");
+
+		for (int i = 0; i < cmp_packed_ops; i++) {
+			char* s = c[i].ToString_x64(buf, sizeof(buf));
+			printf("%10s:%s\n", cmp_packed_ops_Str[i], s);
+		}
+		printf("\n");
+	}
+}
+
+void sseFloatPointPackedCompareTest() {
+	ssePackedFloatPointCompare();
+	printf("\n");
+	ssePackedDoublePointCompare();
 }

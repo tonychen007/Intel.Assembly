@@ -13,7 +13,7 @@ typedef unsigned __int32 Uint32;
 typedef unsigned __int64 Uint64;
 
 union MmxVal {
-	Int8	i8[8];
+	Int8  	i8[8];
 	Int16	i16[4];
 	Int32	i32[2];
 	Int64	i64;

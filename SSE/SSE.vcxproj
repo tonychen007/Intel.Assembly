@@ -152,6 +152,7 @@
   <ItemGroup>
     <MASM Include="asm\sseCalcSphereVolume.asm" />
     <MASM Include="asm\sseCompareFloatDouble.asm" />
+    <MASM Include="asm\sseComparePackedFloatDouble.asm" />
     <MASM Include="asm\sseConvert.asm" />
     <MASM Include="asm\sseMathFloatDouble.asm">
       <FileType>Document</FileType>
