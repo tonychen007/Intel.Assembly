@@ -52,5 +52,8 @@
     <MASM Include="asm\ssePackedConvert.asm">
       <Filter>asm</Filter>
     </MASM>
+    <MASM Include="asm\sseDotUnpackMvInst.asm">
+      <Filter>asm</Filter>
+    </MASM>
   </ItemGroup>
 </Project>

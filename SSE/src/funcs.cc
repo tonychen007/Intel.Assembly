@@ -393,3 +393,76 @@ void ssePackedConvertTest() {
 	printf("\n");
 	ssepackedConvertDouble64();
 }
+
+void sseDotUnPackInstrTest() {
+	__declspec(align(16)) XmmVal a;
+	__declspec(align(16)) XmmVal b;
+	char buf[256] = { '\0' };
+
+	// packed float-point
+	FILL_XMMVAL_32(a.r32, 1.0f, 3.1f, 10.0f, 100.0f);
+	FILL_XMMVAL_32(b.r32, 2.0f, 5.2f, 201.f, 64.0f);
+	
+	printf("Result for unpcklps - unpack low bit float-point: a -> b\n");
+	printf("a: %s\n", a.ToString_r32(buf, sizeof(buf)));
+	printf("b: %s\n", b.ToString_r32(buf, sizeof(buf)));
+	sseDotUnpack(&b, &a, DotUnpackMov::EUNPACKFP);
+	printf("c: %s\n", b.ToString_r32(buf, sizeof(buf)));
+	printf("\n");
+
+	printf("Result for movlhps - move packed low bit to high bit float-point: b -> a\n");
+	printf("a: %s\n", a.ToString_r32(buf, sizeof(buf)));
+	printf("b: %s\n", b.ToString_r32(buf, sizeof(buf)));
+	sseDotUnpack(&b, &a, DotUnpackMov::EMOVLHPS);
+	printf("c: %s\n", b.ToString_r32(buf, sizeof(buf)));
+	printf("\n");
+
+	FILL_XMMVAL_32(a.r32, 1.0f, 2.0f, 3.0f, 4.0f);
+	FILL_XMMVAL_32(b.r32, 1.0f, 2.0f, 1.0f, 1.0f);
+	printf("Result for dpps - dot product and store in b: b = a * b, 10110011b\n");
+	printf("Multiply all the elements with bit 1[4:7] and store in pos [0:3]\n");
+	printf("a: %s\n", a.ToString_r32(buf, sizeof(buf)));
+	printf("b: %s\n", b.ToString_r32(buf, sizeof(buf)));
+	sseDotUnpack(&b, &a, DotUnpackMov::EDOTFP);
+	printf("c: %s\n", b.ToString_r32(buf, sizeof(buf)));
+	printf("\n");
+
+	FILL_XMMVAL_32(a.r32, 5.0f, 6.0f, 7.0f, 8.0f);
+	FILL_XMMVAL_32(b.r32, 1.0f, 2.0f, 3.0f, 4.0f);
+	printf("Result for insertps - insert b to a at specific pos 10110101b: a -> b\n");
+	printf("src to copy[6:7], dst to be overwritten[4:5], zero-mask[0:3] specifies which dst to zero.\n");
+	printf("dst[96:127] = src[64:95] with dst[0:31] and dst[64:95] = 0\n");
+	printf("a: %s\n", a.ToString_r32(buf, sizeof(buf)));
+	printf("b: %s\n", b.ToString_r32(buf, sizeof(buf)));
+	sseDotUnpack(&b, &a, DotUnpackMov::EINSERTFP);
+	printf("c: %s\n", b.ToString_r32(buf, sizeof(buf)));
+	printf("\n");
+
+	// packed double-point
+	FILL_XMMVAL_64(a.r64, M_PI, M_E);
+	FILL_XMMVAL_64(b.r64, M_1_PI, M_SQRT2);
+
+	printf("Result for unpckhpd - unpack high bit of double-point: a -> b\n");
+	printf("a: %s\n", a.ToString_r64(buf, sizeof(buf)));
+	printf("b: %s\n", b.ToString_r64(buf, sizeof(buf)));
+	sseDotUnpack(&b, &a, DotUnpackMov::EUNPACKDP);
+	printf("c: %s\n", b.ToString_r64(buf, sizeof(buf)));
+	printf("\n");
+
+	printf("Result for movhpd - move mm64(high part of b) to high bit of double-point: b -> a\n");
+	printf("a: %s\n", a.ToString_r64(buf, sizeof(buf)));
+	printf("b: %s\n", b.ToString_r64(buf, sizeof(buf)));
+	sseDotUnpack(&b, &a, DotUnpackMov::EMOVHPD);
+	printf("c: %s\n", b.ToString_r64(buf, sizeof(buf)));
+	printf("\n");
+
+	FILL_XMMVAL_64(a.r64, M_PI, M_E);
+	FILL_XMMVAL_64(b.r64, 2.0, 1.0);
+	printf("Result for dppd - dot product and store in b: b = a * b, 00110001b\n");
+	printf("Multiply all the elements with bit 1[4:5] and store in pos [0:1]\n");
+	printf("a: %s\n", a.ToString_r64(buf, sizeof(buf)));
+	printf("b: %s\n", b.ToString_r64(buf, sizeof(buf)));
+	sseDotUnpack(&b, &a, DotUnpackMov::EDOTDP);
+	printf("c: %s\n", b.ToString_r64(buf, sizeof(buf)));
+	printf("\n");
+}

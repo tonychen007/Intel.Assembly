@@ -8,7 +8,8 @@ int main() {
 	// sseCalcSphereVolumeTest();
 	// ssePackedFloatPointArithemticTest();
 	// ssePackedFloatPointCompareTest();
-	ssePackedConvertTest();
+	// ssePackedConvertTest();
+	sseDotUnPackInstrTest();
 
 	return 0;
 }

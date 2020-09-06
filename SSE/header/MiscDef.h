@@ -48,6 +48,19 @@ enum SseRoundMode : unsigned int {
 	EMAX_ROUNDMODE
 };
 
+enum DotUnpackMov : unsigned int {
+	EDOTFP,		// ddps - dot product
+	EUNPACKFP,	// unpcklps
+	EMOVLHPS,	// movlhps
+	EINSERTFP,	// insertps
+
+	EDOTDP,		// ddpd - dot product
+	EUNPACKDP,	// unpckhpd
+	EMOVHPD,	// movhpd
+
+	EMAX_DOTUNPACK
+};
+
 // for main cc
 extern void sseFloatPointArithemticTest();
 extern void sseFloatPointCompareTest();
@@ -56,6 +69,7 @@ extern void sseCalcSphereVolumeTest();
 extern void ssePackedFloatPointArithemticTest();
 extern void ssePackedFloatPointCompareTest();
 extern void ssePackedConvertTest();
+extern void sseDotUnPackInstrTest();
 
 
 // defined in asm
@@ -78,3 +92,5 @@ extern "C" void ssePackedMathDouble64(const XmmVal * a, const XmmVal * b, XmmVal
 extern "C" void ssePackedCompareFloat32(const XmmVal * a, const XmmVal * b, XmmVal c[8]);
 extern "C" void ssePackedCompareDouble64(const XmmVal * a, const XmmVal * b, XmmVal c[8]);
 extern "C" void ssePackedConvert(XmmVal * dst, XmmVal * src, CvtPackedOps ops);
+
+extern "C" void sseDotUnpack(XmmVal * dst, XmmVal * src, DotUnpackMov ops);
