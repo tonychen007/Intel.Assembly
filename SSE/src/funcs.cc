@@ -10,7 +10,6 @@
 using namespace std;
 
 const int cmp_ops = 7;
-
 // Unordered comapre : https://stackoverflow.com/questions/8627331/what-does-ordered-unordered-comparison-mean
 // an unordered comparison checks if either operand is a NaN
 const char* cmp_ops_Str[cmp_ops] = {
@@ -252,7 +251,7 @@ void ssePackedDoublePointArithemtic() {
 	printf("sqrtpd(fabpd(b)):\t%s\n", c[7].ToString_r64(buf, sizeof(buf)));
 }
 
-void sseFloatPointPackedArithemticTest() {
+void ssePackedFloatPointArithemticTest() {
 	ssePackedFloatPointArithemtic();
 	printf("\n");
 	ssePackedDoublePointArithemtic();
@@ -275,7 +274,7 @@ void ssePackedFloatPointCompare() {
 		if (k == 1)
 			a.r32[0] = numeric_limits<float>::quiet_NaN();
 
-		sseComparePackedFloat32(&a, &b, c);
+		ssePackedCompareFloat32(&a, &b, c);
 		if ( k != 1)
 			printf("Result for ssePackedFloatPointCompare()\n");
 		else
@@ -311,7 +310,7 @@ void ssePackedDoublePointCompare() {
 		if (k == 1)
 			a.r64[0] = numeric_limits<double>::quiet_NaN();
 
-		sseComparePackedDouble64(&a, &b, c);
+		ssePackedCompareDouble64(&a, &b, c);
 		if (k != 1)
 			printf("Result for ssePackedDoublePointCompare()\n");
 		else
@@ -330,8 +329,67 @@ void ssePackedDoublePointCompare() {
 	}
 }
 
-void sseFloatPointPackedCompareTest() {
+void ssePackedFloatPointCompareTest() {
 	ssePackedFloatPointCompare();
 	printf("\n");
 	ssePackedDoublePointCompare();
+}
+
+void seePackedConvertFloat32() {
+	__declspec(align(16)) XmmVal a;
+	__declspec(align(16)) XmmVal b;
+	char buf[256] = { '\0' };
+
+	FILL_XMMVAL_32(a.i32, 10, -500, 600, -1024);
+	ssePackedConvert(&b, &a, CvtPackedOps::ECVTDQ2PS);
+	printf("Result for converting four doublrword to float-point.\n");
+	printf("a: %s\n", a.ToString_i32(buf, sizeof(buf)));
+	printf("b: %s\n", b.ToString_r32(buf, sizeof(buf)));
+	printf("\n");
+
+	FILL_XMMVAL_32(a.r32, 1.0f / 3.0f, 2.0f / 3.0f, -a.r32[0] * 2.0f, -a.r32[1] * 2.0f);
+	ssePackedConvert(&b, &a, CvtPackedOps::ECVTPS2DQ);
+	printf("Result for converting float-point to four doubleword.\n");
+	printf("a: %s\n", a.ToString_r32(buf, sizeof(buf)));
+	printf("b: %s\n", b.ToString_i32(buf, sizeof(buf)));
+	printf("\n");
+
+	FILL_XMMVAL_32(a.r32, 1.0f / 3.0f, 2.0f / 3.0f, 0.0, 0.0);
+	ssePackedConvert(&b, &a, CvtPackedOps::ECVTPS2PD);
+	printf("Result for converting float-point to double-point.\n");
+	printf("a: %s\n", a.ToString_r32(buf, sizeof(buf)));
+	printf("b: %s\n", b.ToString_r64(buf, sizeof(buf)));
+}
+
+void ssepackedConvertDouble64() {
+	__declspec(align(16)) XmmVal a;
+	__declspec(align(16)) XmmVal b;
+	char buf[256] = { '\0' };
+
+
+	FILL_XMMVAL_32(a.i32, 10, -500, 0, 0);
+	ssePackedConvert(&b, &a, CvtPackedOps::ECVTDQ2PD);
+	printf("Result for converting two doublrword to double-point.\n");
+	printf("a: %s\n", a.ToString_i32(buf, sizeof(buf)));
+	printf("b: %s\n", b.ToString_r64(buf, sizeof(buf)));
+	printf("\n");
+
+	FILL_XMMVAL_64(a.r64, M_PI, M_E);
+	ssePackedConvert(&b, &a, CvtPackedOps::ECVTPD2DQ);
+	printf("Result for converting double-point to two doubleword.\n");
+	printf("a: %s\n", a.ToString_r64(buf, sizeof(buf)));
+	printf("b: %s\n", b.ToString_i32(buf, sizeof(buf)));
+	printf("\n");
+
+	FILL_XMMVAL_64(a.r64, M_SQRT2, M_SQRT1_2);
+	ssePackedConvert(&b, &a, CvtPackedOps::ECVTPD2PS);
+	printf("Result for converting double-point to float-point.\n");
+	printf("a: %s\n", a.ToString_r64(buf, sizeof(buf)));
+	printf("b: %s\n", b.ToString_r32(buf, sizeof(buf)));
+}
+
+void ssePackedConvertTest() {
+	seePackedConvertFloat32();
+	printf("\n");
+	ssepackedConvertDouble64();
 }

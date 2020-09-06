@@ -1,9 +1,9 @@
 .model flat, c
 
-; extern "C" void sseComparePackedFloat32(const XmmVal * a, const XmmVal * b, XmmVal c[8]);
-; extern "C" void sseComparePackedDouble64(const XmmVal * a, const XmmVal * b, XmmVal c[8]);
+; extern "C" void ssePackedCompareFloat32(const XmmVal * a, const XmmVal * b, XmmVal c[8]);
+; extern "C" void ssePackedCompareDouble64(const XmmVal * a, const XmmVal * b, XmmVal c[8]);
 .code
-sseComparePackedFloat32 proc
+ssePackedCompareFloat32 proc
   push ebp
   mov ebp, esp
 
@@ -60,9 +60,9 @@ sseComparePackedFloat32 proc
 
   pop ebp
   ret
-sseComparePackedFloat32 endp
+ssePackedCompareFloat32 endp
 
-sseComparePackedDouble64 proc
+ssePackedCompareDouble64 proc
   push ebp
   mov ebp, esp
 
@@ -119,6 +119,6 @@ sseComparePackedDouble64 proc
 
   pop ebp
   ret
-sseComparePackedDouble64 endp
+ssePackedCompareDouble64 endp
 
 end

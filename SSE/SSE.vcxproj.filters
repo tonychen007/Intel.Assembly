@@ -46,7 +46,10 @@
     <MASM Include="asm\ssePackedMathFloatDouble.asm">
       <Filter>asm</Filter>
     </MASM>
-    <MASM Include="asm\sseComparePackedFloatDouble.asm">
+    <MASM Include="asm\ssePackedCompareFloatDouble.asm">
+      <Filter>asm</Filter>
+    </MASM>
+    <MASM Include="asm\ssePackedConvert.asm">
       <Filter>asm</Filter>
     </MASM>
   </ItemGroup>

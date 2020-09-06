@@ -5,8 +5,8 @@
 union XmmScalar {
 	float				f32;
 	double				d64;
-	unsigned __int32		i32;
-	unsigned __int64		i64;
+	unsigned __int32	i32;
+	unsigned __int64	i64;
 };
 
 enum CvtOps : unsigned int {
@@ -24,6 +24,21 @@ enum CvtOps : unsigned int {
 	EMAX_CVT
 };
 
+enum CvtPackedOps : unsigned int {
+	// DQ = doubleword quad, XMM is 128 bit, doubleword is 32 bit, so four doublrword, that is quad.
+	// PS = packed single-precision
+	// PD = packed double-precision
+
+	ECVTDQ2PS,
+	ECVTDQ2PD,
+	ECVTPS2DQ,
+	ECVTPD2DQ,
+	ECVTPS2PD,
+	ECVTPD2PS,	
+
+	EMAX_CVTPACKED
+};
+
 enum SseRoundMode : unsigned int {
 	EROUND,
 	EFLOOR,
@@ -38,8 +53,9 @@ extern void sseFloatPointArithemticTest();
 extern void sseFloatPointCompareTest();
 extern void sseConvertTest();
 extern void sseCalcSphereVolumeTest();
-extern void sseFloatPointPackedArithemticTest();
-extern void sseFloatPointPackedCompareTest();
+extern void ssePackedFloatPointArithemticTest();
+extern void ssePackedFloatPointCompareTest();
+extern void ssePackedConvertTest();
 
 
 // defined in asm
@@ -59,5 +75,6 @@ extern "C" void sseCalcSphereVolume(double r, double* sa, double* v);
 /* packed float-point*/
 extern "C" void ssePackedMathFloat32(const XmmVal * a, const XmmVal * b, XmmVal c[8]);
 extern "C" void ssePackedMathDouble64(const XmmVal * a, const XmmVal * b, XmmVal c[8]);
-extern "C" void sseComparePackedFloat32(const XmmVal * a, const XmmVal * b, XmmVal c[8]);
-extern "C" void sseComparePackedDouble64(const XmmVal * a, const XmmVal * b, XmmVal c[8]);
+extern "C" void ssePackedCompareFloat32(const XmmVal * a, const XmmVal * b, XmmVal c[8]);
+extern "C" void ssePackedCompareDouble64(const XmmVal * a, const XmmVal * b, XmmVal c[8]);
+extern "C" void ssePackedConvert(XmmVal * dst, XmmVal * src, CvtPackedOps ops);

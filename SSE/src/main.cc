@@ -6,8 +6,9 @@ int main() {
 	// sseFloatPointCompareTest();
 	// sseConvertTest();
 	// sseCalcSphereVolumeTest();
-	// sseFloatPointPackedArithemticTest();
-	sseFloatPointPackedCompareTest();
+	// ssePackedFloatPointArithemticTest();
+	// ssePackedFloatPointCompareTest();
+	ssePackedConvertTest();
 
 	return 0;
 }
