@@ -55,5 +55,8 @@
     <MASM Include="asm\sseDotUnpackMvInst.asm">
       <Filter>asm</Filter>
     </MASM>
+    <MASM Include="asm\sseMatrixTrans.asm">
+      <Filter>asm</Filter>
+    </MASM>
   </ItemGroup>
 </Project>

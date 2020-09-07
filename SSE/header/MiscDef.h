@@ -9,6 +9,14 @@ union XmmScalar {
 	unsigned __int64	i64;
 };
 
+__declspec(align(16))
+struct Mat4x4 {
+	XmmVal row1;
+	XmmVal row2;
+	XmmVal row3;
+	XmmVal row4;
+};
+
 enum CvtOps : unsigned int {
 	// si = scalar integer
 	// ss = scalar single float-point
@@ -70,6 +78,7 @@ extern void ssePackedFloatPointArithemticTest();
 extern void ssePackedFloatPointCompareTest();
 extern void ssePackedConvertTest();
 extern void sseDotUnPackInstrTest();
+extern void sseMatrixTransTest();
 
 
 // defined in asm
@@ -94,3 +103,5 @@ extern "C" void ssePackedCompareDouble64(const XmmVal * a, const XmmVal * b, Xmm
 extern "C" void ssePackedConvert(XmmVal * dst, XmmVal * src, CvtPackedOps ops);
 
 extern "C" void sseDotUnpack(XmmVal * dst, XmmVal * src, DotUnpackMov ops);
+
+extern "C" void sseMatrixTrans(Mat4x4 * dst, Mat4x4 * src);

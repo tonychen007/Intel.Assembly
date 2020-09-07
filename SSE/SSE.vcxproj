@@ -156,6 +156,7 @@
     <MASM Include="asm\sseMathFloatDouble.asm">
       <FileType>Document</FileType>
     </MASM>
+    <MASM Include="asm\sseMatrixTrans.asm" />
     <MASM Include="asm\ssePackedCompareFloatDouble.asm" />
     <MASM Include="asm\ssePackedConvert.asm" />
     <MASM Include="asm\ssePackedMathFloatDouble.asm" />

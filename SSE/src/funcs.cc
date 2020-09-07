@@ -466,3 +466,31 @@ void sseDotUnPackInstrTest() {
 	printf("c: %s\n", b.ToString_r64(buf, sizeof(buf)));
 	printf("\n");
 }
+
+void sseMatrixTransTest() {
+	Mat4x4 src;
+	Mat4x4 dst;
+	char buf[256] = {'\0'};
+	memset(&dst, 0, sizeof(dst));
+
+	FILL_XMMVAL_32(src.row1.r32, 1.0, 2.0, 3.0, 4.0);
+	FILL_XMMVAL_32(src.row2.r32, 5.0, 6.0, 7.0, 8.0);
+	FILL_XMMVAL_32(src.row3.r32, 9.0, 10.0, 11.0, 12.0);
+	FILL_XMMVAL_32(src.row4.r32, 13.0, 14.0, 15.0, 16.0);
+
+	printf("Result for matrix transpose:\n");
+	printf("src matrix is:\n");
+	printf("%s\n", src.row1.ToString_r32(buf,sizeof(buf)));
+	printf("%s\n", src.row2.ToString_r32(buf, sizeof(buf)));
+	printf("%s\n", src.row3.ToString_r32(buf, sizeof(buf)));
+	printf("%s\n", src.row4.ToString_r32(buf, sizeof(buf)));
+	printf("\n");
+
+	sseMatrixTrans(&dst, &src);
+
+	printf("dst matrix is:\n");
+	printf("%s\n", dst.row1.ToString_r32(buf, sizeof(buf)));
+	printf("%s\n", dst.row2.ToString_r32(buf, sizeof(buf)));
+	printf("%s\n", dst.row3.ToString_r32(buf, sizeof(buf)));
+	printf("%s\n", dst.row4.ToString_r32(buf, sizeof(buf)));
+}

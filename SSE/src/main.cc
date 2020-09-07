@@ -9,7 +9,8 @@ int main() {
 	// ssePackedFloatPointArithemticTest();
 	// ssePackedFloatPointCompareTest();
 	// ssePackedConvertTest();
-	sseDotUnPackInstrTest();
+	// sseDotUnPackInstrTest();
+	sseMatrixTransTest();
 
 	return 0;
 }
