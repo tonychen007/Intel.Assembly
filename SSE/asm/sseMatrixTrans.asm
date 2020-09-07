@@ -56,12 +56,12 @@ sseMatrixTrans proc
 
   ; unmove xmm1, xmm3
   movaps xmm1, xmm4		; b2 a2 b1 a1	; xmm1	
-  movlhps xmm4, xmm5	; d1 c1 b1 a1	; xmm4  ok
-  movhlps xmm5, xmm1	; d2 c2 b2 a2	; xmm5  ok
+  movlhps xmm4, xmm5 	; d1 c1 b1 a1	; xmm4  ok
+  movhlps xmm5, xmm1	    ; d2 c2 b2 a2	; xmm5  ok
   movaps xmm6, xmm0		; b4 a4 b3 a3	; xmm6
-  movlhps xmm6, xmm2	; d3 c3 b3 a3	; xmm6  ok
+  movlhps xmm6, xmm2   	; d3 c3 b3 a3	; xmm6  ok
   movaps xmm7, xmm2		; d4 c4 d3 c3	; xmm7
-  movhlps xmm7, xmm0	; d4 c4 b4 a4	; xmm7  ok
+  movhlps xmm7, xmm0  	; d4 c4 b4 a4	; xmm7  ok
 
   ; mov back
   movaps [edi], xmm4
