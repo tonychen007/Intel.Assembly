@@ -493,4 +493,26 @@ void sseMatrixTransTest() {
 	printf("%s\n", dst.row2.ToString_r32(buf, sizeof(buf)));
 	printf("%s\n", dst.row3.ToString_r32(buf, sizeof(buf)));
 	printf("%s\n", dst.row4.ToString_r32(buf, sizeof(buf)));
+
+	printf("\n");
+	FILL_XMMVAL_32(src.row1.r32, 1.0, 0.0, 0.0, 0.0);
+	FILL_XMMVAL_32(src.row2.r32, 0.0, 1.0, 0.0, 0.0);
+	FILL_XMMVAL_32(src.row3.r32, 0.0, 0.0, 1.0, 0.0);
+	FILL_XMMVAL_32(src.row4.r32, 0.0, 0.0, 0.0, 1.0);
+
+	printf("Result for matrix transpose:\n");
+	printf("src matrix is:\n");
+	printf("%s\n", src.row1.ToString_r32(buf, sizeof(buf)));
+	printf("%s\n", src.row2.ToString_r32(buf, sizeof(buf)));
+	printf("%s\n", src.row3.ToString_r32(buf, sizeof(buf)));
+	printf("%s\n", src.row4.ToString_r32(buf, sizeof(buf)));
+	printf("\n");
+
+	sseMatrixTrans(&dst, &src);
+
+	printf("dst matrix is:\n");
+	printf("%s\n", dst.row1.ToString_r32(buf, sizeof(buf)));
+	printf("%s\n", dst.row2.ToString_r32(buf, sizeof(buf)));
+	printf("%s\n", dst.row3.ToString_r32(buf, sizeof(buf)));
+	printf("%s\n", dst.row4.ToString_r32(buf, sizeof(buf)));
 }
