@@ -30,4 +30,9 @@
       <Filter>src</Filter>
     </ClCompile>
   </ItemGroup>
+  <ItemGroup>
+    <MASM Include="asm\ssePackedFundamental.asm">
+      <Filter>asm</Filter>
+    </MASM>
+  </ItemGroup>
 </Project>

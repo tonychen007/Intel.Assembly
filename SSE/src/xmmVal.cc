@@ -8,7 +8,7 @@
 #define IMPLE_CHAR_FUN(x) T##x(char* buf, size_t sz)
 
 char* XmmVal::IMPLE_CHAR_FUN(oString_i8) {
-	snprintf(buf, sz, "%d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d", 
+	snprintf(buf, sz, "%8d %8d %8d %8d %8d %8d %8d %8d %8d %8d %8d %8d %8d %8d %8d %8d", 
 		i8[0], i8[1], i8[2], i8[3], i8[4], i8[5], i8[6], i8[7],
 		i8[8], i8[9], i8[10], i8[11], i8[12], i8[13], i8[14], i8[15]);
 	buf[strlen(buf)] = '\0';
@@ -17,7 +17,7 @@ char* XmmVal::IMPLE_CHAR_FUN(oString_i8) {
 }
 
 char* XmmVal::IMPLE_CHAR_FUN(oString_i16) {
-	snprintf(buf, sz, "%d %d %d %d %d %d %d %d", 
+	snprintf(buf, sz, "%8d %8d %8d %8d %8d %8d %8d %8d", 
 		i16[0], i16[1], i16[2], i16[3], i16[4], i16[5], i16[6], i16[7]);
 	buf[strlen(buf)] = '\0';
 
@@ -25,21 +25,21 @@ char* XmmVal::IMPLE_CHAR_FUN(oString_i16) {
 }
 
 char* XmmVal::IMPLE_CHAR_FUN(oString_i32) {
-	snprintf(buf, sz, "%d %d %d %d", i32[0], i32[1], i32[2], i32[3]);
+	snprintf(buf, sz, "%8d %8d %8d %8d", i32[0], i32[1], i32[2], i32[3]);
 	buf[strlen(buf)] = '\0';
 
 	return buf;
 }
 
 char* XmmVal::IMPLE_CHAR_FUN(oString_i64) {
-	snprintf(buf, sz, "%lld %lld", i64[0], i64[1]);
+	snprintf(buf, sz, "%8lld %8lld", i64[0], i64[1]);
 	buf[strlen(buf)] = '\0';
 
 	return buf;
 }
 
 char* XmmVal::IMPLE_CHAR_FUN(oString_u8) {
-	snprintf(buf, sz, "%u %u %u %u %u %u %u %u %u %u %u %u %u %u %u %u", 
+	snprintf(buf, sz, "%8u %8u %8u %8u %8u %8u %8u %8u %8u %8u %8u %8u %8u %8u %8u %8u", 
 		u8[0], u8[1], u8[2], u8[3], u8[4], u8[5], u8[6], u8[7],
 		u8[8], u8[9], u8[10], u8[11], u8[12], u8[13], u8[14], u8[15]);
 	buf[strlen(buf)] = '\0';
@@ -48,7 +48,7 @@ char* XmmVal::IMPLE_CHAR_FUN(oString_u8) {
 }
 
 char* XmmVal::IMPLE_CHAR_FUN(oString_u16) {
-	snprintf(buf, sz, "%u %u %u %u %u %u %u %u", 
+	snprintf(buf, sz, "%8u %8u %8u %8u %8u %8u %8u %8u", 
 		u16[0], u16[1], u16[2], u16[3], u16[4], u16[5], u16[6], u16[7]);
 	buf[strlen(buf)] = '\0';
 
@@ -56,14 +56,14 @@ char* XmmVal::IMPLE_CHAR_FUN(oString_u16) {
 }
 
 char* XmmVal::IMPLE_CHAR_FUN(oString_u32) {
-	snprintf(buf, sz, "%u %u %u %u", u32[0], u32[1], u32[2], u32[3]);
+	snprintf(buf, sz, "%8u %8u %8u %8u", u32[0], u32[1], u32[2], u32[3]);
 	buf[strlen(buf)] = '\0';
 
 	return buf;
 }
 
 char* XmmVal::IMPLE_CHAR_FUN(oString_u64) {
-	snprintf(buf, sz, "%llu %llu", u64[0], u64[1]);
+	snprintf(buf, sz, "%8llu %8llu", u64[0], u64[1]);
 	buf[strlen(buf)] = '\0';
 
 	return buf;
