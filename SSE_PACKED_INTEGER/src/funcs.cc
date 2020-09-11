@@ -111,3 +111,44 @@ void ssePackedFundamentalTest() {
 	printf("\n");
 	ssePackedMul();
 }
+
+void sseHistogramTest() {
+	const int buff_size = 1024 * 1024 * 16;
+	const int histo_size = 256;
+
+	Uint8* pixel = (Uint8*)_aligned_malloc(buff_size, 32);
+	Uint32* histo1 = (Uint32*)_aligned_malloc(histo_size * sizeof(Uint32), 16);
+	Uint32* histo2 = (Uint32*)_aligned_malloc(histo_size * sizeof(Uint32), 16);
+
+	if (pixel == nullptr || histo1 == nullptr || histo2 == nullptr) return;
+
+	srand(0);
+	auto st = chrono::system_clock::now();
+	for (int i = 0; i < buff_size; i++) {
+		pixel[i] = rand() % 255;
+	}
+	auto ed = chrono::system_clock::now();
+	chrono::duration<float, milli> ep = ed - st;
+	printf("fill data, time is: %f mills\n", ep.count());
+	memset(histo1, 0, histo_size);
+
+	{
+		auto st = chrono::system_clock::now();
+		for (Uint32 i = 0; i < buff_size; i++)
+			histo1[pixel[i]]++;
+		auto ed = chrono::system_clock::now();
+		chrono::duration<float, milli> ep = ed - st;
+		printf("cpp histo version, time is: %f mills\n", ep.count());
+	}
+
+	{
+		auto st = chrono::system_clock::now();
+		sseHistogram(histo2, pixel, buff_size);
+		auto ed = chrono::system_clock::now();
+		chrono::duration<float, milli> ep = ed - st;
+		printf("asm histo version, time is: %f mills\n", ep.count());
+	}
+
+	int cmp = memcmp(histo1, histo2, histo_size);
+	(cmp == 0) ? printf("two histos are the same\n") : printf("two histos are the diffs\n");
+}

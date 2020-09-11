@@ -144,6 +144,9 @@
     <ClInclude Include="header\xmmVal.h" />
   </ItemGroup>
   <ItemGroup>
+    <MASM Include="asm\sseHistogram.asm">
+      <FileType>Document</FileType>
+    </MASM>
     <ClCompile Include="src\funcs.cc" />
     <ClCompile Include="src\main.cc" />
     <ClCompile Include="src\xmmVal.cc" />

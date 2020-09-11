@@ -2,7 +2,8 @@
 #include "../header/xmmVal.h"
 
 int main() {
-	ssePackedFundamentalTest();
+	// ssePackedFundamentalTest();
+	sseHistogramTest();
 
 	return 0;
 }
