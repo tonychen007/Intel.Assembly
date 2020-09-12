@@ -11,6 +11,8 @@ Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "SSE", "..\SSE\SSE.vcxproj",
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "SSE_PACKED_INTEGER", "..\SSE_PACKED_INTEGER\SSE_PACKED_INTEGER.vcxproj", "{9180456D-1730-456A-814B-AC1CF104EF63}"
 EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "SSE_STRING", "..\SSE_STRING\SSE_STRING.vcxproj", "{A066966A-BED1-4D51-A31A-4F69ED8393B2}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|x64 = Debug|x64
@@ -51,6 +53,14 @@ Global
 		{9180456D-1730-456A-814B-AC1CF104EF63}.Release|x64.Build.0 = Release|x64
 		{9180456D-1730-456A-814B-AC1CF104EF63}.Release|x86.ActiveCfg = Release|Win32
 		{9180456D-1730-456A-814B-AC1CF104EF63}.Release|x86.Build.0 = Release|Win32
+		{A066966A-BED1-4D51-A31A-4F69ED8393B2}.Debug|x64.ActiveCfg = Debug|x64
+		{A066966A-BED1-4D51-A31A-4F69ED8393B2}.Debug|x64.Build.0 = Debug|x64
+		{A066966A-BED1-4D51-A31A-4F69ED8393B2}.Debug|x86.ActiveCfg = Debug|Win32
+		{A066966A-BED1-4D51-A31A-4F69ED8393B2}.Debug|x86.Build.0 = Debug|Win32
+		{A066966A-BED1-4D51-A31A-4F69ED8393B2}.Release|x64.ActiveCfg = Release|x64
+		{A066966A-BED1-4D51-A31A-4F69ED8393B2}.Release|x64.Build.0 = Release|x64
+		{A066966A-BED1-4D51-A31A-4F69ED8393B2}.Release|x86.ActiveCfg = Release|Win32
+		{A066966A-BED1-4D51-A31A-4F69ED8393B2}.Release|x86.Build.0 = Release|Win32
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
