@@ -19,4 +19,14 @@
       <Filter>src</Filter>
     </ClCompile>
   </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="header\MiscDef.h">
+      <Filter>header</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <MASM Include="asm\sseStringCalcLength.asm">
+      <Filter>asm</Filter>
+    </MASM>
+  </ItemGroup>
 </Project>
