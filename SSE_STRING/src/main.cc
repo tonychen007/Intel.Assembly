@@ -2,7 +2,8 @@
 
 int main() {
 
-	sseStringCalcLengthTest();
+	// sseStringCalcLengthTest();
+	sseStringReplaceTest();
 
 	return 0;
 }

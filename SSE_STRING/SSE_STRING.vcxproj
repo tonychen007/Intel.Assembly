@@ -93,6 +93,7 @@
     <Link>
       <SubSystem>Console</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
+      <StackReserveSize>4096000</StackReserveSize>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
@@ -146,6 +147,7 @@
     </MASM>
     <ClCompile Include="src\funcs.cc" />
     <ClCompile Include="src\main.cc" />
+    <MASM Include="asm\sseStringReplace.asm" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="header\MiscDef.h" />

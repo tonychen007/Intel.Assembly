@@ -28,5 +28,8 @@
     <MASM Include="asm\sseStringCalcLength.asm">
       <Filter>asm</Filter>
     </MASM>
+    <MASM Include="asm\sseStringReplace.asm">
+      <Filter>asm</Filter>
+    </MASM>
   </ItemGroup>
 </Project>
