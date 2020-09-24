@@ -30,4 +30,9 @@
       <Filter>header</Filter>
     </ClInclude>
   </ItemGroup>
+  <ItemGroup>
+    <MASM Include="asm\avxScalarFloatPoint.asm">
+      <Filter>asm</Filter>
+    </MASM>
+  </ItemGroup>
 </Project>
