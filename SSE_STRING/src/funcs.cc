@@ -75,7 +75,6 @@ void sseStringCalcLengthTest() {
 }
 
 int sseStringReplaceCpp(char* s, char olds, char news) {
-	char c;
 	int n = 0;
 
 	while (*s != '\0') {

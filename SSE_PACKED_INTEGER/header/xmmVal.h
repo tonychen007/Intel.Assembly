@@ -14,7 +14,7 @@ typedef unsigned __int64 Uint64;
 
 // 128 bit
 union XmmVal {
-	Int8	i8[16];
+	Int8		i8[16];
 	Int16	i16[8];
 	Int32	i32[4];
 	Int64	i64[2];
@@ -51,7 +51,7 @@ union XmmVal {
 	arr[0] = v1;   arr[1] = v2;   arr[2] = v3;   arr[3] = v4; \
 	arr[4] = v5;   arr[5] = v6;   arr[6] = v7;   arr[7] = v8; \
 	arr[8] = v9;   arr[9] = v10;  arr[10] = v11; arr[11] = v12; \
-	arr[12] = v13; arr[13] = v14; arr[14] = v15; arr[16] = v16; \
+	arr[12] = v13; arr[13] = v14; arr[14] = v15; arr[15] = v16; \
 }
 
 #define FILL_XMMVAL_16(arr,v1,v2,v3,v4,v5,v6,v7,v8) { \
