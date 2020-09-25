@@ -3,7 +3,8 @@
 
 int main() {
 	
-	avxFloatPointArithemticTest();
+	// avxFloatPointArithemticTest();
+	avxFloatPointCompareTest();
 
 	return 0;
 }
