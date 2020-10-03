@@ -37,5 +37,8 @@
     <MASM Include="asm\avxFloatPointCompare.asm">
       <Filter>asm</Filter>
     </MASM>
+    <MASM Include="asm\avxPackedFloatPoint.asm">
+      <Filter>asm</Filter>
+    </MASM>
   </ItemGroup>
 </Project>

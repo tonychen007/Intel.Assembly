@@ -14,7 +14,7 @@ typedef unsigned __int64 Uint64;
 
 // 256 bit
 union YmmVal {
-	Int8		i8[32];
+	Int8	i8[32];
 	Int16	i16[16];
 	Int32	i32[8];
 	Int64	i64[4];

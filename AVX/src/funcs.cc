@@ -71,5 +71,72 @@ void avxFloatPointCompareTest() {
 		}
 		printf("\n");
 	}
+}
+
+void avxPackedFloatPointFloat() {
+	__declspec(align(32)) YmmVal a;
+	__declspec(align(32)) YmmVal b;
+	__declspec(align(32)) YmmVal c[6];
+	memset(&c, 0, sizeof(c));
+
+	FILL_YmmVal_32(a.r32, 2.0f, 3.5f, -10.75f, 15.0, -12.125f, 3.875f, 2.0f, -6.35f);
+	FILL_YmmVal_32(b.r32, 12.5f, 52.125f, 17.5f, 13.982f, -4.75, 3.0625f, 7.875f, -48.1875f);
+
+	avxPackedFloatPointFloat(&a, &b, c);
+	printf("Result for avxPackedFloatPointFloat()\n");
+	printf("i\ta\tb\tAdd\tSub\t  Mul\t      Div\tAbs\tNeg\n");
+	printf("---------------------------------------------------------------------------\n");
+
+	const char* fs = "%9.3f";
+	for (int i = 0; i < 8; i++) {
+		printf("%2d ", i);
+		printf(fs, a.r32[i]);
+		printf(fs, b.r32[i]);
+		printf(fs, c[0].r32[i]);
+		printf(fs, c[1].r32[i]);
+		printf(fs, c[2].r32[i]);
+		printf(fs, c[3].r32[i]);
+		printf(fs, c[4].r32[i]);
+		printf(fs, c[5].r32[i]);
+		printf("\n");
+	}
+}
+
+void avxPackedFloatPointDouble() {
+	__declspec(align(32)) YmmVal a;
+	__declspec(align(32)) YmmVal b;
+	__declspec(align(32)) YmmVal c[5];
+	memset(&c, 0, sizeof(c));
+
+	FILL_YmmVal_64(a.r64, 12.0, 13.5, 18.75, 5.0);
+	FILL_YmmVal_64(b.r64, 0.8751223, -125.25, 75.59384394, -98.129813923);
+
+	avxPackedFloatPointDouble(&a, &b, c);
+	printf("Result for avxPackedFloatPointDouble()\n");
+	printf("i\ta\t\tb\t\tMin\t\tMax\t\tSqrt a\t\tHorizonAdd\tHorizonSub\n");
+	printf("--------------------------------------------------------------------");
+	printf("----------------------------------------------\n");
+
+	const char* fs = "%17.6lf";
+	for (int i = 0; i < 4; i++) {
+		printf("%2d ", i);
+		printf("%10.6lf", a.r64[i]);
+		printf(fs, b.r64[i]);
+		printf(fs, c[0].r64[i]);
+		printf(fs, c[1].r64[i]);
+		printf(fs, c[2].r64[i]);
+		printf(fs, c[3].r64[i]);
+		printf(fs, c[4].r64[i]);		
+		printf("\n");
+	}
+}
+
+void avxPackedFloatPointArithemticTest() {
+	avxPackedFloatPointFloat();
+	printf("\n");
+	avxPackedFloatPointDouble();
+}
+
+void avxPackedFloatPointCompareTest() {
 
 }

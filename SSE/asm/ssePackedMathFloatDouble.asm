@@ -2,7 +2,7 @@
 
 .const
 align 16
-AbsMaskFloat	    dword 7fffffffh, 7fffffffh, 7fffffffh, 7fffffffh
+AbsMaskFloat	dword 7fffffffh, 7fffffffh, 7fffffffh, 7fffffffh
 AbsMaskDouble	qword 7fffffffffffffffh, 7fffffffffffffffh
 
 ; extern "C" void ssePackedMathFloat32(const XmmVal * a, const XmmVal * b, XmmVal c[8]);
