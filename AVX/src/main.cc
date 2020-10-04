@@ -5,7 +5,8 @@ int main() {
 	
 	// avxFloatPointArithemticTest();
 	// avxFloatPointCompareTest();
-	avxPackedFloatPointArithemticTest();
+	// avxPackedFloatPointArithemticTest();
+	avxPackedFloatPointCompareTest();
 
 	return 0;
 }

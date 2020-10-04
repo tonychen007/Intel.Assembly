@@ -85,7 +85,7 @@ char* MmxVal::IMPLE_CHAR_FUN(oString_x32) {
 }
 
 char* MmxVal::IMPLE_CHAR_FUN(oString_x64) {
-	snprintf(buf, sz, "%16llx", u64);
+	snprintf(buf, sz, "%016llx", u64);
 	buf[strlen(buf)] = '\0';
 
 	return buf;

@@ -150,6 +150,7 @@
     <ClInclude Include="header\ymmVal.h" />
   </ItemGroup>
   <ItemGroup>
+    <MASM Include="asm\avcPackedFloatPointCompare.asm" />
     <MASM Include="asm\avxFloatPointCompare.asm" />
     <MASM Include="asm\avxPackedFloatPoint.asm" />
     <MASM Include="asm\avxScalarFloatPoint.asm" />

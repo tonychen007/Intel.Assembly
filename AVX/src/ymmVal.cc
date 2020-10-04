@@ -109,7 +109,7 @@ char* YmmVal::IMPLE_CHAR_FUN(oString_x32) {
 }
 
 char* YmmVal::IMPLE_CHAR_FUN(oString_x64) {
-	snprintf(buf, sz, "%16llx %16llx %16llx %16llx", u64[0], u64[1], u64[2], u64[3]);
+	snprintf(buf, sz, "%016llx %016llx %016llx %016llx", u64[0], u64[1], u64[2], u64[3]);
 	buf[strlen(buf)] = '\0';
 
 	return buf;

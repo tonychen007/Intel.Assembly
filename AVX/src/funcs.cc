@@ -138,5 +138,35 @@ void avxPackedFloatPointArithemticTest() {
 }
 
 void avxPackedFloatPointCompareTest() {
+	__declspec(align(32)) YmmVal a;
+	__declspec(align(32)) YmmVal b;
+	__declspec(align(32)) YmmVal c[8];
+	char buf[256] = { '\0' };
+	memset(&c, 0, sizeof(c));
 
+	const char* ops[] = {
+		"VCMPEQPD",
+		"VCMPNEQPD",
+		"VCMPLTPD",
+		"VCMPLEPD",
+		"VCMPGTPD",
+		"VCMPGEPD",
+		"VCMPORDPD",
+		"VCMPUNORDPD"
+	};
+	const int num_ops = sizeof(ops) / sizeof(char*);
+
+	FILL_YmmVal_64(a.r64, 42.125, -36.875, 22.95, 3.75);
+	FILL_YmmVal_64(b.r64, -0.0625, -67.375, 22.95, numeric_limits < double>::quiet_NaN());
+	avcPackedFloatPointCompare(&a, &b, c);
+
+	printf("Result for avxPackedFloatPointCompareTest\n");
+	printf("a: %s\n", a.ToString_r64(buf, sizeof(buf)));
+	printf("b: %s\n", b.ToString_r64(buf, sizeof(buf)));
+	printf("\n");
+
+	for (int i = 0; i < num_ops; i++) {
+		printf("%s result\n", ops[i]);
+		printf("   %s\n", c[i].ToString_x64(buf, sizeof(buf)));
+	}
 }

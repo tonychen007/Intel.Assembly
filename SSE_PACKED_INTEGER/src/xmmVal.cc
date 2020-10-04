@@ -94,7 +94,7 @@ char* XmmVal::IMPLE_CHAR_FUN(oString_x32) {
 }
 
 char* XmmVal::IMPLE_CHAR_FUN(oString_x64) {
-	snprintf(buf, sz, "%16llx %16llx", u64[0], u64[1]);
+	snprintf(buf, sz, "%016llx %016llx", u64[0], u64[1]);
 	buf[strlen(buf)] = '\0';
 
 	return buf;
