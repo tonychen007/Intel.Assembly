@@ -31,16 +31,19 @@
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
-    <MASM Include="asm\avxScalarFloatPoint.asm">
-      <Filter>asm</Filter>
-    </MASM>
     <MASM Include="asm\avxFloatPointCompare.asm">
       <Filter>asm</Filter>
     </MASM>
-    <MASM Include="asm\avxPackedFloatPoint.asm">
+    <MASM Include="asm\avcPackedFloatPointCompare.asm">
       <Filter>asm</Filter>
     </MASM>
-    <MASM Include="asm\avcPackedFloatPointCompare.asm">
+    <MASM Include="asm\avxScalarFloatPointArithmetic.asm">
+      <Filter>asm</Filter>
+    </MASM>
+    <MASM Include="asm\avxPackedFloatPointArithmetic.asm">
+      <Filter>asm</Filter>
+    </MASM>
+    <MASM Include="asm\avxPackedIntegerArithmetic.asm">
       <Filter>asm</Filter>
     </MASM>
   </ItemGroup>

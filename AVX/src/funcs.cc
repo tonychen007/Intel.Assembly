@@ -52,11 +52,11 @@ void avxFloatPointCompareTest() {
 	};
 	const int num_ops = sizeof(ops) / sizeof(char*);
 	const int dz = 4;
-	
+
 	YmmVal a;
 	YmmVal b;
 	bool res[dz][num_ops];
-	
+
 	FILL_YmmVal_64(a.r64, 30.0, 50.4959271, 75.121289438943, 40.454857865);
 	FILL_YmmVal_64(b.r64, 30.0, 40.0, 75.0, 0.0);
 	b.r64[3] = numeric_limits<double>::quiet_NaN();
@@ -126,7 +126,7 @@ void avxPackedFloatPointDouble() {
 		printf(fs, c[1].r64[i]);
 		printf(fs, c[2].r64[i]);
 		printf(fs, c[3].r64[i]);
-		printf(fs, c[4].r64[i]);		
+		printf(fs, c[4].r64[i]);
 		printf("\n");
 	}
 }
@@ -169,4 +169,78 @@ void avxPackedFloatPointCompareTest() {
 		printf("%s result\n", ops[i]);
 		printf("   %s\n", c[i].ToString_x64(buf, sizeof(buf)));
 	}
+}
+
+void avxPackedIntegerArithmeticTest16() {
+	__declspec(align(32)) YmmVal a;
+	__declspec(align(32)) YmmVal b;
+	__declspec(align(32)) YmmVal c[6];
+	memset(&c, 0, sizeof(c));
+
+	FILL_YmmVal_16(a.i16,
+		10, 20, 3000, 4000, 30000, 6000, 2000, 4000, 4000, -3600, 6000, -20000, -25000, 8000, 3, -15000);
+
+	FILL_YmmVal_16(b.i16,
+		1000, 2000, 30, 40, 3000, 32000, -31000, -30000, -2500, -1200, 9000, -20000, -27000, 28700, -32766, 24000);
+
+	avxPackedInteger16(&a, &b, c);
+	printf("Result for avxPackedIntegerArithmeticTest16\n");
+	printf("[4][5][12][13]- add overflow\n");
+	printf("[6][7][14][15]- sub underflow\n");
+	printf("\n");
+	printf("i\ta\tb\tvpaddw\t\tvpaddsw\t\tvpsubw\t\tvpsubsw\t\tvpminsw\t\tvpmaxsw\n");
+
+	for (int i = 0; i < 16; i++) {
+		const char* fs = "%8d";
+		const char* fs1 = "%12d\t";
+
+		printf("%2d", i);
+		printf(fs, a.i16[i]);
+		printf(fs, b.i16[i]);
+		printf(fs1, c[0].i16[i]);
+		printf(fs1, c[1].i16[i]);
+		printf(fs1, c[2].i16[i]);
+		printf(fs1, c[3].i16[i]);
+		printf(fs1, c[4].i16[i]);
+		printf(fs1, c[5].i16[i]);
+		printf("\n");
+	}
+}
+
+void avxPackedIntegerArithmeticTest32() {
+	__declspec(align(32)) YmmVal a;
+	__declspec(align(32)) YmmVal b;
+	__declspec(align(32)) YmmVal c[5];
+	memset(&c, 0, sizeof(c));
+
+	FILL_YmmVal_32(a.i32, 64, 1024, -2048, 8192, -256, 4096, 16, 512);
+	FILL_YmmVal_32(b.i32, 4, 5, 2, 5, 8, 7, 3, 6);
+
+	avxPackedInteger32(&a, &b, c);
+	printf("Result for avxPackedIntegerArithmeticTest32\n");
+	printf("vphaddd - horizon add, vphsubd - horizon sub\n");
+	printf("vpsllvd - left shift logical, vpsravd - right shift arithmetic\n");
+	printf("\n");
+	printf("i\ta\tb\tvphaddd\t\tvphsubd\t\tvpmulld\t\tvpsllvd\t\tvpsravd\n");
+
+	for (int i = 0; i < 8; i++) {
+		const char* fs = "%8d";
+		const char* fs1 = "%12d\t";
+
+		printf("%2d", i);
+		printf(fs, a.i32[i]);
+		printf(fs, b.i32[i]);
+		printf(fs1, c[0].i32[i]);
+		printf(fs1, c[1].i32[i]);
+		printf(fs1, c[2].i32[i]);
+		printf(fs1, c[3].i32[i]);
+		printf(fs1, c[4].i32[i]);
+		printf("\n");
+	}
+}
+
+void avxPackedIntegerArithmeticTest() {
+	avxPackedIntegerArithmeticTest16();
+	printf("\n");
+	avxPackedIntegerArithmeticTest32();
 }

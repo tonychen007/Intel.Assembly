@@ -152,8 +152,9 @@
   <ItemGroup>
     <MASM Include="asm\avcPackedFloatPointCompare.asm" />
     <MASM Include="asm\avxFloatPointCompare.asm" />
-    <MASM Include="asm\avxPackedFloatPoint.asm" />
-    <MASM Include="asm\avxScalarFloatPoint.asm" />
+    <MASM Include="asm\avxPackedFloatPointArithmetic.asm" />
+    <MASM Include="asm\avxPackedIntegerArithmetic.asm" />
+    <MASM Include="asm\avxScalarFloatPointArithmetic.asm" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
