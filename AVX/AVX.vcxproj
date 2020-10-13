@@ -154,6 +154,7 @@
     <MASM Include="asm\avxFloatPointCompare.asm" />
     <MASM Include="asm\avxPackedFloatPointArithmetic.asm" />
     <MASM Include="asm\avxPackedIntegerArithmetic.asm" />
+    <MASM Include="asm\avxPackedIntegerPackUnpack.asm" />
     <MASM Include="asm\avxScalarFloatPointArithmetic.asm" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

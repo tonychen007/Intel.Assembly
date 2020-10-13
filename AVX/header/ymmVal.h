@@ -1,6 +1,6 @@
 #pragma once
 
-#define CHAR_FUN(x) char*##x (char* buf, size_t sz)
+#define CHAR_FUN(x) char*##x (char* buf, size_t sz, bool isHighPart)
 
 typedef __int8  Int8;
 typedef __int16 Int16;

@@ -161,13 +161,16 @@ void avxPackedFloatPointCompareTest() {
 	avcPackedFloatPointCompare(&a, &b, c);
 
 	printf("Result for avxPackedFloatPointCompareTest\n");
-	printf("a: %s\n", a.ToString_r64(buf, sizeof(buf)));
-	printf("b: %s\n", b.ToString_r64(buf, sizeof(buf)));
+	printf("a lo: %s\n", a.ToString_r64(buf, sizeof(buf), false));
+	printf("a hi: %s\n", a.ToString_r64(buf, sizeof(buf), true));
+	printf("b lo: %s\n", b.ToString_r64(buf, sizeof(buf), false));
+	printf("b hi: %s\n", b.ToString_r64(buf, sizeof(buf), true));
 	printf("\n");
 
 	for (int i = 0; i < num_ops; i++) {
 		printf("%s result\n", ops[i]);
-		printf("   %s\n", c[i].ToString_x64(buf, sizeof(buf)));
+		printf("lo:  %s\n", c[i].ToString_x64(buf, sizeof(buf), false));
+		printf("hi:  %s\n", c[i].ToString_x64(buf, sizeof(buf), true));
 	}
 }
 
@@ -243,4 +246,56 @@ void avxPackedIntegerArithmeticTest() {
 	avxPackedIntegerArithmeticTest16();
 	printf("\n");
 	avxPackedIntegerArithmeticTest32();
+}
+
+void avxPiUnpackTest() {
+	__declspec(align(32)) YmmVal a;
+	__declspec(align(32)) YmmVal b;
+	__declspec(align(32)) YmmVal c[2];
+	memset(&c, 0, sizeof(c));
+
+	FILL_YmmVal_32(a.i32, 0x00000000, 0x11111111, 0x22222222, 0x33333333, 0x44444444, 0x55555555, 0x66666666, 0x77777777);
+	FILL_YmmVal_32(b.i32, 0x88888888, 0x99999999, 0xaaaaaaaa, 0xbbbbbbbb, 0xcccccccc, 0xdddddddd, 0xeeeeeeee, 0xffffffff);
+
+	avxPiUnpackDWord2QuadWord(&a, &b, c);
+
+	printf("Result for avxPiUnpackDWord2QuadWord\n");
+	printf("Unpack dword to quad word\n\n");
+	printf("i\ta\t\tb\t\t\tvpunpckldq\t\tvpunpckhdq\n");
+
+	for (int i = 0; i < 8; i++) {
+		const char* fs = "0x%08X\t\t";
+		printf("%-2d  ", i);
+		printf(fs, a.u32[i]);
+		printf(fs, b.u32[i]);
+		printf(fs, c[0].u32[i]);
+		printf(fs, c[1].u32[i]);
+		printf("\n");
+	}
+}
+
+void avxPiPackTest() {
+	char buf[256] = { '\0' };
+	__declspec(align(32)) YmmVal a;
+	__declspec(align(32)) YmmVal b;
+	__declspec(align(32)) YmmVal c;
+	memset(&c, 0, sizeof(c));
+
+	FILL_YmmVal_32(a.i32, 10, -200000, 300000, -4000, 9000, 800000, 200, -32769);
+	FILL_YmmVal_32(b.i32, 32768, 5000, 42000, -68000, 25000, 500000, -7000, 12500);
+
+	avxPiPackDWord2Word(&a, &b, &c);
+
+	printf("a lo: %s\n", a.ToString_i32(buf, sizeof(buf), false));
+	printf("a hi: %s\n", a.ToString_i32(buf, sizeof(buf), true));
+	printf("b lo: %s\n", b.ToString_i32(buf, sizeof(buf), false));
+	printf("b hi: %s\n", b.ToString_i32(buf, sizeof(buf), true));
+	printf("c lo: %s\n", c.ToString_i16(buf, sizeof(buf), false));
+	printf("c hi: %s\n", c.ToString_i16(buf, sizeof(buf), true));
+}
+
+void avcPackedIntegerPackUnpackTest() {
+	avxPiUnpackTest();
+	printf("\n");
+	avxPiPackTest();
 }
