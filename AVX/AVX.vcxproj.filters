@@ -29,6 +29,9 @@
     <ClInclude Include="header\ymmVal.h">
       <Filter>header</Filter>
     </ClInclude>
+    <ClInclude Include="header\cpuid.h">
+      <Filter>header</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <MASM Include="asm\avxFloatPointCompare.asm">
@@ -47,6 +50,9 @@
       <Filter>asm</Filter>
     </MASM>
     <MASM Include="asm\avxPackedIntegerPackUnpack.asm">
+      <Filter>asm</Filter>
+    </MASM>
+    <MASM Include="asm\cpuid.asm">
       <Filter>asm</Filter>
     </MASM>
   </ItemGroup>

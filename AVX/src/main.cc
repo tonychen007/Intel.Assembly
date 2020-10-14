@@ -8,8 +8,8 @@ int main() {
 	// avxPackedFloatPointArithemticTest();
 	// avxPackedFloatPointCompareTest();
 	// avxPackedIntegerArithmeticTest();
-	avcPackedIntegerPackUnpackTest();
-
+	// avxPackedIntegerPackUnpackTest();
+	avxCpuIdTest();
 
 	return 0;
 }

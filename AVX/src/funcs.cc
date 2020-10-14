@@ -7,6 +7,7 @@
 
 #include "../header/MiscDef.h"
 #include "../header/ymmVal.h"
+#include "../header/cpuid.h"
 using namespace std;
 
 void avxFloatPointArithemticTest() {
@@ -294,8 +295,122 @@ void avxPiPackTest() {
 	printf("c hi: %s\n", c.ToString_i16(buf, sizeof(buf), true));
 }
 
-void avcPackedIntegerPackUnpackTest() {
+void avxPackedIntegerPackUnpackTest() {
 	avxPiUnpackTest();
 	printf("\n");
 	avxPiPackTest();
+}
+
+void avxCpuIdTest() {
+	CpuidFeatures cf;
+	char buf[256] = { '\0' };
+	memset(&cf, 0, sizeof(cf));
+
+	// EAX 00H
+	CpuidRegs cregs;
+	
+	avxCpuId(0, 0, &cregs);
+	*(Uint32*)(cf.VendorId) = cregs.EBX;
+	*(Uint32*)(cf.VendorId + 4) = cregs.EDX;
+	*(Uint32*)(cf.VendorId + 8) = cregs.ECX;
+	printf("CPU Vendor: %s\n", cf.VendorId);
+
+	// 0x80000002 - 0x80000004 fetch CPU info
+	avxCpuId(0x80000002, 0, &cregs);
+	*(Uint32*)(cf.VendorId) = cregs.EAX;
+	*(Uint32*)(cf.VendorId + 4) = cregs.EBX;
+	*(Uint32*)(cf.VendorId + 8) = cregs.ECX;
+	*(Uint32*)(cf.VendorId + 12) = cregs.EDX;
+	strcat_s(buf, cf.VendorId);
+
+	avxCpuId(0x80000003, 0, &cregs);
+	*(Uint32*)(cf.VendorId) = cregs.EAX;
+	*(Uint32*)(cf.VendorId + 4) = cregs.EBX;
+	*(Uint32*)(cf.VendorId + 8) = cregs.ECX;
+	*(Uint32*)(cf.VendorId + 12) = cregs.EDX;
+	strcat_s(buf, cf.VendorId);
+
+	avxCpuId(0x80000004, 0, &cregs);
+	*(Uint32*)(cf.VendorId) = cregs.EAX;
+	*(Uint32*)(cf.VendorId + 4) = cregs.EBX;
+	*(Uint32*)(cf.VendorId + 8) = cregs.ECX;
+	*(Uint32*)(cf.VendorId + 12) = cregs.EDX;
+	strcat_s(buf, cf.VendorId);
+
+	printf("CPU Brand: %s\n", buf);
+
+	// EAX 01H Family
+	// EAX: 
+	// 27 - 20  : Extended Family
+	// 19 - 16  : Extended Model
+	// 11 -  8  : Family ID 
+	// 7  -  4  : Model ID
+	// 3  -  0  : Stepping ID
+	avxCpuId(1, 0, &cregs);
+	Uint32 cpu01_edx = cregs.EDX;
+	Uint32 cpu01_ecx = cregs.ECX;
+
+	int steppingID = fetch_bit(cregs.EAX, 0, 3);
+	int modeID = fetch_bit(cregs.EAX, 4, 7);
+	int familyID = fetch_bit(cregs.EAX, 8, 11);
+	int extModeID = fetch_bit(cregs.EAX, 16, 19);
+	int extFamilyID = fetch_bit(cregs.EAX, 20, 27);
+	printf("steppiong: %d, mode: %d, family %d, extMode: %d, extFamily: %d\n\n", steppingID, modeID, familyID, extModeID, extFamilyID);
+
+	// EAX 07H SSE MMX AVX support check
+	avxCpuId(7, 0, &cregs);
+	int cpu07_ebx = cregs.EBX;
+	cf.SSE = fetch_bit(cpu01_edx, 25, 25) ? true : false;
+	cf.SSE2 = fetch_bit(cpu01_edx, 26, 26) ? true : false;
+	cf.SSE3 = fetch_bit(cpu01_ecx, 0, 0) ? true : false;
+	cf.SSSE3 = fetch_bit(cpu01_ecx, 9, 9) ? true : false;
+	cf.SSE4_1 = fetch_bit(cpu01_ecx, 19, 19) ? true : false;
+	cf.SSE4_2 = fetch_bit(cpu01_ecx, 20, 20) ? true : false;
+	cf.POPCNT = fetch_bit(cpu01_ecx, 23, 23) ? true : false;
+	cf.OSXSAVE = fetch_bit(cpu01_ecx, 27, 27) ? true : false;
+
+	if (cf.OSXSAVE) {
+		// see xgetbv_result.jpg
+		// XCR0[1] SSE state
+		// XCR0[2] AVX state
+
+		Uint32 xgetbv_eax, xgetbv_edx;
+		avxXgetbv(0, &xgetbv_eax, &xgetbv_edx);
+		cf.SSE_STATE = fetch_bit(xgetbv_eax, 1, 1);
+		cf.AVX_STATE = fetch_bit(xgetbv_eax, 2, 2);
+
+		// if SSE and AVX supported by OS		
+		if (cf.SSE_STATE && cf.AVX_STATE) {
+			cf.AVX = fetch_bit(cpu01_ecx, 28, 28) ? true : false;
+			cf.F16C = fetch_bit(cpu01_ecx, 29, 29) ? true : false;
+			cf.FMA = fetch_bit(cpu01_ecx, 12, 12) ? true : false;
+			cf.AVX2 = fetch_bit(cpu07_ebx, 5, 5) ? true : false;
+			cf.MOVBE = fetch_bit(cpu01_ecx, 22, 22) ? true : false;
+			cf.BMI1 = fetch_bit(cpu07_ebx, 3, 3) ? true : false;
+			cf.BMI2 = fetch_bit(cpu07_ebx, 8, 8) ? true : false;
+
+			avxCpuId(0x80000001, 0, &cregs);
+			cf.LZCNT = fetch_bit(cregs.ECX, 5, 5) ? true : false;
+		}
+	}
+
+	printf("SSE:    %d\n", cf.SSE);
+	printf("SSE2:   %d\n", cf.SSE2);
+	printf("SSE3:   %d\n", cf.SSE3);
+	printf("SSSE3:  %d\n", cf.SSSE3);
+	printf("SSE4_1: %d\n", cf.SSE4_1);
+	printf("SSE4_2: %d\n", cf.SSE4_2);
+	printf("POPCNT: %d\n", cf.POPCNT);
+	printf("MOVBE:  %d\n", cf.MOVBE);
+	printf("AVX:    %d\n", cf.AVX);
+	printf("AVX2:   %d\n", cf.AVX2);
+	printf("F16C:   %d\n", cf.F16C);
+	printf("FMA:    %d\n", cf.FMA);
+	printf("BMI1:   %d\n", cf.BMI1);
+	printf("BMI2:   %d\n", cf.BMI2);
+	printf("LZCNT:  %d\n", cf.LZCNT);
+	printf("\n");
+	printf("AVX_STATE:   %d\n", cf.AVX_STATE);
+	printf("SSE_STATE:   %d\n", cf.SSE_STATE);
+	printf("OSXSAVE:     %d\n", cf.OSXSAVE);
 }
