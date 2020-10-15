@@ -355,7 +355,7 @@ void avxCpuIdTest() {
 	int familyID = fetch_bit(cregs.EAX, 8, 11);
 	int extModeID = fetch_bit(cregs.EAX, 16, 19);
 	int extFamilyID = fetch_bit(cregs.EAX, 20, 27);
-	printf("steppiong: %d, mode: %d, family %d, extMode: %d, extFamily: %d\n\n", steppingID, modeID, familyID, extModeID, extFamilyID);
+	printf("stepping: %d, mode: %d, family %d, extMode: %d, extFamily: %d\n\n", steppingID, modeID, familyID, extModeID, extFamilyID);
 
 	// EAX 07H SSE MMX AVX support check
 	avxCpuId(7, 0, &cregs);
