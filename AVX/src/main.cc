@@ -9,7 +9,8 @@ int main() {
 	// avxPackedFloatPointCompareTest();
 	// avxPackedIntegerArithmeticTest();
 	// avxPackedIntegerPackUnpackTest();
-	avxCpuIdTest();
+	// avxCpuIdTest();
+	avxDataManipulateTest();
 
 	return 0;
 }

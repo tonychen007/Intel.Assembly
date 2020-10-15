@@ -47,7 +47,7 @@ union YmmVal {
 };
 
 
-#define FILL_YmmVal_8(arr,v1,v2,v3,v4,v5,v6,v7,v8,v9,v10,v11,v12,v13,v14,v15,v16,v17,v18,v19,v20,v21,v22,v23,v24,v25,v26,v27,v28,v29,v30,v31,v32) { \
+#define FILL_YMMVAL_8(arr,v1,v2,v3,v4,v5,v6,v7,v8,v9,v10,v11,v12,v13,v14,v15,v16,v17,v18,v19,v20,v21,v22,v23,v24,v25,v26,v27,v28,v29,v30,v31,v32) { \
 	arr[0] = v1;   arr[1] = v2;   arr[2] = v3;   arr[3] = v4; \
 	arr[4] = v5;   arr[5] = v6;   arr[6] = v7;   arr[7] = v8; \
 	arr[8] = v9;   arr[9] = v10;  arr[10] = v11; arr[11] = v12; \
@@ -58,16 +58,16 @@ union YmmVal {
 	arr[28] = v29; arr[29] = v30; arr[30] = v31; arr[31] = v32; \
 }
 
-#define FILL_YmmVal_16(arr,v1,v2,v3,v4,v5,v6,v7,v8,v9,v10,v11,v12,v13,v14,v15,v16) { \
+#define FILL_YMMVAL_16(arr,v1,v2,v3,v4,v5,v6,v7,v8,v9,v10,v11,v12,v13,v14,v15,v16) { \
 	arr[0] = v1;   arr[1] = v2;   arr[2] = v3;   arr[3] = v4; \
 	arr[4] = v5;   arr[5] = v6;   arr[6] = v7;   arr[7] = v8; \
 	arr[8] = v9;   arr[9] = v10;  arr[10] = v11; arr[11] = v12; \
 	arr[12] = v13; arr[13] = v14; arr[14] = v15; arr[15] = v16; \
 }
 
-#define FILL_YmmVal_32(arr,v1,v2,v3,v4,v5,v6,v7,v8) { \
+#define FILL_YMMVAL_32(arr,v1,v2,v3,v4,v5,v6,v7,v8) { \
 	arr[0] = v1; arr[1] = v2; arr[2] = v3; arr[3] = v4; \
 	arr[4] = v5; arr[5] = v6; arr[6] = v7; arr[7] = v8; \
 }
 
-#define FILL_YmmVal_64(arr,v1,v2,v3,v4) { arr[0] = v1; arr[1] = v2; arr[2] = v3; arr[3] = v4;}
+#define FILL_YMMVAL_64(arr,v1,v2,v3,v4) { arr[0] = v1; arr[1] = v2; arr[2] = v3; arr[3] = v4;}

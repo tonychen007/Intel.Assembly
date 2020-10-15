@@ -58,8 +58,8 @@ void avxFloatPointCompareTest() {
 	YmmVal b;
 	bool res[dz][num_ops];
 
-	FILL_YmmVal_64(a.r64, 30.0, 50.4959271, 75.121289438943, 40.454857865);
-	FILL_YmmVal_64(b.r64, 30.0, 40.0, 75.0, 0.0);
+	FILL_YMMVAL_64(a.r64, 30.0, 50.4959271, 75.121289438943, 40.454857865);
+	FILL_YMMVAL_64(b.r64, 30.0, 40.0, 75.0, 0.0);
 	b.r64[3] = numeric_limits<double>::quiet_NaN();
 	memset(res, 0, sizeof(res));
 
@@ -80,8 +80,8 @@ void avxPackedFloatPointFloat() {
 	__declspec(align(32)) YmmVal c[6];
 	memset(&c, 0, sizeof(c));
 
-	FILL_YmmVal_32(a.r32, 2.0f, 3.5f, -10.75f, 15.0, -12.125f, 3.875f, 2.0f, -6.35f);
-	FILL_YmmVal_32(b.r32, 12.5f, 52.125f, 17.5f, 13.982f, -4.75, 3.0625f, 7.875f, -48.1875f);
+	FILL_YMMVAL_32(a.r32, 2.0f, 3.5f, -10.75f, 15.0, -12.125f, 3.875f, 2.0f, -6.35f);
+	FILL_YMMVAL_32(b.r32, 12.5f, 52.125f, 17.5f, 13.982f, -4.75, 3.0625f, 7.875f, -48.1875f);
 
 	avxPackedFloatPointFloat(&a, &b, c);
 	printf("Result for avxPackedFloatPointFloat()\n");
@@ -109,8 +109,8 @@ void avxPackedFloatPointDouble() {
 	__declspec(align(32)) YmmVal c[5];
 	memset(&c, 0, sizeof(c));
 
-	FILL_YmmVal_64(a.r64, 12.0, 13.5, 18.75, 5.0);
-	FILL_YmmVal_64(b.r64, 0.8751223, -125.25, 75.59384394, -98.129813923);
+	FILL_YMMVAL_64(a.r64, 12.0, 13.5, 18.75, 5.0);
+	FILL_YMMVAL_64(b.r64, 0.8751223, -125.25, 75.59384394, -98.129813923);
 
 	avxPackedFloatPointDouble(&a, &b, c);
 	printf("Result for avxPackedFloatPointDouble()\n");
@@ -157,8 +157,8 @@ void avxPackedFloatPointCompareTest() {
 	};
 	const int num_ops = sizeof(ops) / sizeof(char*);
 
-	FILL_YmmVal_64(a.r64, 42.125, -36.875, 22.95, 3.75);
-	FILL_YmmVal_64(b.r64, -0.0625, -67.375, 22.95, numeric_limits < double>::quiet_NaN());
+	FILL_YMMVAL_64(a.r64, 42.125, -36.875, 22.95, 3.75);
+	FILL_YMMVAL_64(b.r64, -0.0625, -67.375, 22.95, numeric_limits < double>::quiet_NaN());
 	avcPackedFloatPointCompare(&a, &b, c);
 
 	printf("Result for avxPackedFloatPointCompareTest\n");
@@ -181,10 +181,10 @@ void avxPackedIntegerArithmeticTest16() {
 	__declspec(align(32)) YmmVal c[6];
 	memset(&c, 0, sizeof(c));
 
-	FILL_YmmVal_16(a.i16,
+	FILL_YMMVAL_16(a.i16,
 		10, 20, 3000, 4000, 30000, 6000, 2000, 4000, 4000, -3600, 6000, -20000, -25000, 8000, 3, -15000);
 
-	FILL_YmmVal_16(b.i16,
+	FILL_YMMVAL_16(b.i16,
 		1000, 2000, 30, 40, 3000, 32000, -31000, -30000, -2500, -1200, 9000, -20000, -27000, 28700, -32766, 24000);
 
 	avxPackedInteger16(&a, &b, c);
@@ -217,8 +217,8 @@ void avxPackedIntegerArithmeticTest32() {
 	__declspec(align(32)) YmmVal c[5];
 	memset(&c, 0, sizeof(c));
 
-	FILL_YmmVal_32(a.i32, 64, 1024, -2048, 8192, -256, 4096, 16, 512);
-	FILL_YmmVal_32(b.i32, 4, 5, 2, 5, 8, 7, 3, 6);
+	FILL_YMMVAL_32(a.i32, 64, 1024, -2048, 8192, -256, 4096, 16, 512);
+	FILL_YMMVAL_32(b.i32, 4, 5, 2, 5, 8, 7, 3, 6);
 
 	avxPackedInteger32(&a, &b, c);
 	printf("Result for avxPackedIntegerArithmeticTest32\n");
@@ -255,8 +255,8 @@ void avxPiUnpackTest() {
 	__declspec(align(32)) YmmVal c[2];
 	memset(&c, 0, sizeof(c));
 
-	FILL_YmmVal_32(a.i32, 0x00000000, 0x11111111, 0x22222222, 0x33333333, 0x44444444, 0x55555555, 0x66666666, 0x77777777);
-	FILL_YmmVal_32(b.i32, 0x88888888, 0x99999999, 0xaaaaaaaa, 0xbbbbbbbb, 0xcccccccc, 0xdddddddd, 0xeeeeeeee, 0xffffffff);
+	FILL_YMMVAL_32(a.i32, 0x00000000, 0x11111111, 0x22222222, 0x33333333, 0x44444444, 0x55555555, 0x66666666, 0x77777777);
+	FILL_YMMVAL_32(b.i32, 0x88888888, 0x99999999, 0xaaaaaaaa, 0xbbbbbbbb, 0xcccccccc, 0xdddddddd, 0xeeeeeeee, 0xffffffff);
 
 	avxPiUnpackDWord2QuadWord(&a, &b, c);
 
@@ -282,8 +282,8 @@ void avxPiPackTest() {
 	__declspec(align(32)) YmmVal c;
 	memset(&c, 0, sizeof(c));
 
-	FILL_YmmVal_32(a.i32, 10, -200000, 300000, -4000, 9000, 800000, 200, -32769);
-	FILL_YmmVal_32(b.i32, 32768, 5000, 42000, -68000, 25000, 500000, -7000, 12500);
+	FILL_YMMVAL_32(a.i32, 10, -200000, 300000, -4000, 9000, 800000, 200, -32769);
+	FILL_YMMVAL_32(b.i32, 32768, 5000, 42000, -68000, 25000, 500000, -7000, 12500);
 
 	avxPiPackDWord2Word(&a, &b, &c);
 
@@ -308,7 +308,7 @@ void avxCpuIdTest() {
 
 	// EAX 00H
 	CpuidRegs cregs;
-	
+
 	avxCpuId(0, 0, &cregs);
 	*(Uint32*)(cf.VendorId) = cregs.EBX;
 	*(Uint32*)(cf.VendorId + 4) = cregs.EDX;
@@ -413,4 +413,53 @@ void avxCpuIdTest() {
 	printf("AVX_STATE:   %d\n", cf.AVX_STATE);
 	printf("SSE_STATE:   %d\n", cf.SSE_STATE);
 	printf("OSXSAVE:     %d\n", cf.OSXSAVE);
+}
+
+void avxDataBroadcastTest() {
+	__declspec(align(16)) XmmVal src;
+	__declspec(align(32)) YmmVal dst;
+	char buf[512] = { '\0' };
+
+	memset(&src, 0, sizeof(src));
+	memset(&dst, 0, sizeof(dst));
+
+	// Broadcast byte
+	src.i8[0] = 55;
+	avxDataBroadcastInt(&dst, &src, Brop::EOP_BYTE);
+	printf("Result for avxDataBroadcastInt byte\n");
+	printf("src    : %s\n", src.ToString_i8(buf, sizeof(buf)));
+	printf("dst lo : %s\n", dst.ToString_i8(buf, sizeof(buf), false));
+	printf("dst hi : %s\n", dst.ToString_i8(buf, sizeof(buf), true));
+	printf("\n");
+
+	// Broadcast word
+	src.i16[0] = 30000;
+	avxDataBroadcastInt(&dst, &src, Brop::EOP_WORD);
+	printf("Result for avxDataBroadcastInt word\n");
+	printf("src    : %s\n", src.ToString_i16(buf, sizeof(buf)));
+	printf("dst lo : %s\n", dst.ToString_i16(buf, sizeof(buf), false));
+	printf("dst hi : %s\n", dst.ToString_i16(buf, sizeof(buf), true));
+	printf("\n");
+
+	// Broadcast dword
+	src.i32[0] = -2000000;
+	avxDataBroadcastInt(&dst, &src, Brop::EOP_DWORD);
+	printf("Result for avxDataBroadcastInt dword\n");
+	printf("src    : %s\n", src.ToString_i32(buf, sizeof(buf)));
+	printf("dst lo : %s\n", dst.ToString_i32(buf, sizeof(buf), false));
+	printf("dst hi : %s\n", dst.ToString_i32(buf, sizeof(buf), true));
+	printf("\n");
+
+	// Broadcast qword
+	src.i64[0] = 1234567890123456789L;
+	avxDataBroadcastInt(&dst, &src, Brop::EOP_QWORD);
+	printf("Result for avxDataBroadcastInt qword\n");
+	printf("src    : %s\n", src.ToString_i64(buf, sizeof(buf)));
+	printf("dst lo : %s\n", dst.ToString_i64(buf, sizeof(buf), false));
+	printf("dst hi : %s\n", dst.ToString_i64(buf, sizeof(buf), true));
+}
+
+void avxDataManipulateTest() {
+	avxDataBroadcastTest();
+	printf("\n");
 }
