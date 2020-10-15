@@ -415,7 +415,7 @@ void avxCpuIdTest() {
 	printf("OSXSAVE:     %d\n", cf.OSXSAVE);
 }
 
-void avxDataBroadcastTest() {
+void avxDataBroadcastIntegerTest() {
 	__declspec(align(16)) XmmVal src;
 	__declspec(align(32)) YmmVal dst;
 	char buf[512] = { '\0' };
@@ -459,7 +459,29 @@ void avxDataBroadcastTest() {
 	printf("dst hi : %s\n", dst.ToString_i64(buf, sizeof(buf), true));
 }
 
-void avxDataManipulateTest() {
-	avxDataBroadcastTest();
+void avxDataBroadcastFloatDoubleTest() {
+	__declspec(align(32)) YmmVal dst;
+	char buf[512] = { '\0' };
+	memset(&dst, 0, sizeof(dst));
+
+	float f = (float)M_SQRT2;
+	avxDataBroadcastFloat(&dst, f);
+	printf("Result for avxDataBroadcastFloat\n");
+	printf("src    : %f\n", f);
+	printf("dst lo : %s\n", dst.ToString_r32(buf, sizeof(buf), false));
+	printf("dst hi : %s\n", dst.ToString_r32(buf, sizeof(buf), true));
 	printf("\n");
+
+	double d = M_PI;
+	avxDataBroadcastDouble(&dst, d);
+	printf("Result for avxDataBroadcastDouble\n");
+	printf("src    : %.12lf\n", d);
+	printf("dst lo : %s\n", dst.ToString_r64(buf, sizeof(buf), false));
+	printf("dst hi : %s\n", dst.ToString_r64(buf, sizeof(buf), true));
+}
+
+void avxDataManipulateTest() {
+	avxDataBroadcastIntegerTest();
+	printf("\n");
+	avxDataBroadcastFloatDoubleTest();
 }

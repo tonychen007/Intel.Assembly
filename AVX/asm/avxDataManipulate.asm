@@ -56,6 +56,11 @@ avxDataBroadcastFloat proc
   push ebp
   mov ebp, esp
 
+  mov eax, [ebp + 8]
+  vbroadcastss ymm0, real4 ptr [ebp + 12]
+  vmovaps ymmword ptr [eax], ymm0
+
+  vzeroupper
   pop ebp
   ret
 avxDataBroadcastFloat endp
@@ -65,6 +70,11 @@ avxDataBroadcastDouble proc
   push ebp
   mov ebp, esp
 
+  mov eax, [ebp + 8]
+  vbroadcastsd ymm0, real8 ptr [ebp + 12]
+  vmovaps ymmword ptr [eax], ymm0
+
+  vzeroupper
   pop ebp
   ret
 avxDataBroadcastDouble endp
