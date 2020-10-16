@@ -1,5 +1,6 @@
 .model flat, c
 
+; copy from ymm to ymm
 ; extern "C" void avxDataBroadcastInt(YmmVal * dst, const XmmVal * src, Brop op);
 .code
 avxDataBroadcastInt proc

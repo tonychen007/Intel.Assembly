@@ -12,7 +12,8 @@ int main() {
 	// avxCpuIdTest();
 	// avxDataBroadcastTest();
 	// avxDataBlendTest();
-	avxDataPermuteTest();
+	// avxDataPermuteTest();
+	avxDataGatherTest();
 
 	return 0;
 }

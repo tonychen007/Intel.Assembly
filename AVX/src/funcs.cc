@@ -634,10 +634,94 @@ void avxDataPermuteFloatInLaneTest() {
 	}
 }
 
+// permute Ymm using Ymm mask
 void avxDataPermuteTest() {
 	avxDataPermuteIntTest();
 	printf("\n");
 	avxDataPermuteFloatTest();
 	printf("\n");
 	avxDataPermuteFloatInLaneTest();
+}
+
+void avxDataGatherFloatTest() {
+	const int m_yes = 0x80000000;
+	const int m_no = 0x00000000;
+	const int n = 15;
+	float f[n];
+	__declspec(align(32)) YmmVal dst, index, mask;
+	memset(&dst, 0, sizeof(dst));
+
+	srand(NULL);
+	for (int i = 0; i < n; i++) {
+		f[i] = (float)(rand() % 1000);
+	}
+
+	FILL_YMMVAL_32(index.i32, 2, 1, 6, 5, 4, 13, 11, 9);
+	FILL_YMMVAL_32(mask.i32, m_yes, m_yes, m_no, m_yes, m_yes, m_no, m_yes, m_yes);
+
+	printf("Result for avxDataGatherFloat\n");
+	printf("Test array:\n");
+	for (int i = 0; i < n; i++) {
+		printf("x[%2d]: %6.1f\n", i, f[i]);
+	}
+	printf("\n");
+	printf("Before:\n");
+	for (int i = 0; i < 8; i++) {
+		printf("dst : %8.1f\t\t", dst.r32[i]);
+		printf("idx : %4d\t", index.i32[i]);
+		printf("msk : 0x%08X\n", mask.i32[i]);
+	}
+	avxDataGatherFloat(&dst, &index, &mask, f);
+	printf("\n");
+	printf("After:\n");
+	for (int i = 0; i < 8; i++) {
+		printf("dst : %8.1f\t\t", dst.r32[i]);
+		printf("idx : %4d\t", index.i32[i]);
+		printf("msk : 0x%08X\n", mask.i32[i]);
+	}
+}
+
+void avxDataGatherInt64Test() {
+	const Int64 m_yes = 0x8000000000000000LL;
+	const Int64 m_no = 0x00000000;
+	const int n = 15;
+	Int64 x[n];
+	__declspec(align(32)) YmmVal dst, index, mask;
+	memset(&dst, 0, sizeof(dst));
+
+	srand(NULL);
+	for (int i = 0; i < n; i++) {
+		x[i] = ((Int64)(rand() % 1000)) << 20;
+	}
+
+	FILL_YMMVAL_32(index.i32, 2, 7, 9, 12, 0, 0, 0, 0);
+	FILL_YMMVAL_64(mask.i64, m_yes, m_yes, m_no, m_yes);
+
+	printf("Result for avxDataGatherInt64\n");
+	printf("Test array:\n");
+	for (int i = 0; i < n; i++) {
+		printf("x[%02d]: %8lld\n", i, x[i]);
+	}
+	printf("\n");
+	printf("Before:\n");
+	for (int i = 0; i < 4; i++) {
+		printf("dst : %8lld\t\t", dst.i64[i]);
+		printf("idx : %4d\t", index.i32[i]);
+		printf("msk : 0x%016llX\n", mask.i64[i]);
+	}
+	avxDataGatherInt64(&dst, &index, &mask, x);
+	printf("\n");
+	printf("After:\n");
+	for (int i = 0; i < 4; i++) {
+		printf("dst : %8lld\t\t", dst.i64[i]);
+		printf("idx : %4d\t", index.i32[i]);
+		printf("msk : 0x%016llX\n", mask.i64[i]);
+	}
+}
+
+// copy array in mem to Ymm
+void avxDataGatherTest() {
+	avxDataGatherFloatTest();
+	printf("\n");
+	avxDataGatherInt64Test();
 }
