@@ -480,8 +480,106 @@ void avxDataBroadcastFloatDoubleTest() {
 	printf("dst hi : %s\n", dst.ToString_r64(buf, sizeof(buf), true));
 }
 
-void avxDataManipulateTest() {
+// copy one ele to many eles
+void avxDataBroadcastTest() {
 	avxDataBroadcastIntegerTest();
 	printf("\n");
 	avxDataBroadcastFloatDoubleTest();
+}
+
+void avxDataBlendFloatTest() {
+	char buf[256] = { '\0' };
+	const Uint32 mask1 = 0x00000000;  // mask[31] = 0 , copy src 1
+	const Uint32 mask2 = 0x80000000;  // mask[31] = 1 , copy src 2
+	__declspec(align(32)) YmmVal dst, src1, src2, src3;
+
+	memset(&dst, 0, sizeof(dst));
+	memset(&src1, 0, sizeof(src1));
+	memset(&src2, 0, sizeof(src2));
+	memset(&src3, 0, sizeof(src3));
+
+	FILL_YMMVAL_32(src1.r32, 100.0f, 200.0f, 300.0f, 400.0f, 500.0f, 600.0f, 700.0f, 800.0f);
+	FILL_YMMVAL_32(src2.r32,
+		-1000.0f, -2000.0f, -3000.0f, -4000.0f,
+		-5000.0f, -6000.0f, -7000.0f, -8000.0f);
+
+	// copy 2,2,1,2,1,1,2,2
+	// -1000,-2000,300,-4000,500,600,-7000,-8000
+	FILL_YMMVAL_32(src3.u32, mask2, mask2, mask1, mask2, mask1, mask1, mask2, mask2);
+	avxDataBlendFloat(&dst, &src1, &src2, &src3);
+
+	printf("Result for avxDataBlendFloat\n");
+	printf("mask: ");
+	for (int i = 0; i < 8; i++) {
+		int bit = fetch_bit(src3.u32[i], 31, 31);
+		if (i < 7) {
+			printf("%d,", bit);
+		}
+		else {
+			printf("%d", bit);
+		}
+	}
+	printf("\n\n");
+	printf("src1 lo : %s\n", src1.ToString_r32(buf, sizeof(buf), false));
+	printf("src1 hi : %s\n", src1.ToString_r32(buf, sizeof(buf), true));
+	printf("\n");
+	printf("src2 lo : %s\n", src2.ToString_r32(buf, sizeof(buf), false));
+	printf("src2 hi : %s\n", src2.ToString_r32(buf, sizeof(buf), true));
+	printf("\n");
+	printf("src3 lo : %s\n", src3.ToString_x32(buf, sizeof(buf), false));
+	printf("src3 hi : %s\n", src3.ToString_x32(buf, sizeof(buf), true));
+	printf("\n");
+	printf("dst lo  : %s\n", dst.ToString_r32(buf, sizeof(buf), false));
+	printf("dst hi  : %s\n", dst.ToString_r32(buf, sizeof(buf), true));
+}
+
+void avxDataBlendByteTest() {
+	char buf[256] = { '\0' };
+	const Uint32 mask1 = 0x00000000;  // mask[31] = 0 , copy src 1
+	const Uint32 mask2 = 0x80808080;  // mask[31] = 1 , copy src 2
+	__declspec(align(32)) YmmVal dst, src1, src2, src3;
+
+	memset(&dst, 0, sizeof(dst));
+	memset(&src1, 0, sizeof(src1));
+	memset(&src2, 0, sizeof(src2));
+	memset(&src3, 0, sizeof(src3));
+
+	FILL_YMMVAL_32(src1.i32, 100, 200, 300, 400, 500, 600, 700, 800);
+	FILL_YMMVAL_32(src2.i32, -1000, -2000, -3000, -4000, -5000, -6000, -7000, -8000);
+
+	// copy 2,2,1,2,1,1,2,2
+	// -1000,-2000,300,-4000,500,600,-7000,-8000
+	FILL_YMMVAL_32(src3.u32, mask2, mask2, mask1, mask2, mask1, mask1, mask2, mask2);
+	avxDataBlendByte(&dst, &src1, &src2, &src3);
+
+	printf("Result for avxDataBlendByte - dword\n");
+	printf("mask: ");
+	for (int i = 0; i < 8; i++) {
+		int bit = fetch_bit(src3.u32[i], 31, 31);
+		if (i < 7) {
+			printf("%d,", bit);
+		}
+		else {
+			printf("%d", bit);
+		}
+	}
+	printf("\n\n");
+	printf("src1 lo : %s\n", src1.ToString_i32(buf, sizeof(buf), false));
+	printf("src1 hi : %s\n", src1.ToString_i32(buf, sizeof(buf), true));
+	printf("\n");
+	printf("src2 lo : %s\n", src2.ToString_i32(buf, sizeof(buf), false));
+	printf("src2 hi : %s\n", src2.ToString_i32(buf, sizeof(buf), true));
+	printf("\n");
+	printf("src3 lo : %s\n", src3.ToString_x32(buf, sizeof(buf), false));
+	printf("src3 hi : %s\n", src3.ToString_x32(buf, sizeof(buf), true));
+	printf("\n");
+	printf("dst lo  : %s\n", dst.ToString_i32(buf, sizeof(buf), false));
+	printf("dst hi  : %s\n", dst.ToString_i32(buf, sizeof(buf), true));
+}
+
+// copy two packed eles to one packed ele
+void avxDataBlendTest() {
+	avxDataBlendFloatTest();
+	printf("\n");
+	avxDataBlendByteTest();
 }

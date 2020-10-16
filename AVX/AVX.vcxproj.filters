@@ -61,7 +61,10 @@
     <MASM Include="asm\cpuid.asm">
       <Filter>asm</Filter>
     </MASM>
-    <MASM Include="asm\avxDataManipulate.asm">
+    <MASM Include="asm\avxDataBroadcast.asm">
+      <Filter>asm</Filter>
+    </MASM>
+    <MASM Include="asm\avxDataBlend.asm">
       <Filter>asm</Filter>
     </MASM>
   </ItemGroup>

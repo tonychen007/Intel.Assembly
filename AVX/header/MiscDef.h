@@ -22,8 +22,10 @@ extern void avxPackedFloatPointCompareTest();
 extern void avxPackedFloatPointCompareTest();
 extern void avxPackedIntegerArithmeticTest();
 extern void avxPackedIntegerPackUnpackTest();
+
 extern void avxCpuIdTest();
-extern void avxDataManipulateTest();
+extern void avxDataBroadcastTest();
+extern void avxDataBlendTest();
 
 // defined in asm
 extern "C" void avxScalarFloatPoint(double a, double b, double c[8]);
@@ -43,3 +45,5 @@ extern "C" void avxXgetbv(Uint32 ecx, Uint32* eax, Uint32* edx);
 extern "C" void avxDataBroadcastInt(YmmVal * dst, const XmmVal * src, Brop op);
 extern "C" void avxDataBroadcastFloat(YmmVal * dst, float val);
 extern "C" void avxDataBroadcastDouble(YmmVal * dst, double val);
+extern "C" void avxDataBlendFloat(YmmVal * dst, YmmVal * src1, YmmVal * src2, YmmVal * src3);
+extern "C" void avxDataBlendByte(YmmVal * dst, YmmVal * src1, YmmVal * src2, YmmVal * src3);

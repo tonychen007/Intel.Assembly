@@ -10,7 +10,8 @@ int main() {
 	// avxPackedIntegerArithmeticTest();
 	// avxPackedIntegerPackUnpackTest();
 	// avxCpuIdTest();
-	avxDataManipulateTest();
+	// avxDataBroadcastTest();
+	avxDataBlendTest();
 
 	return 0;
 }
