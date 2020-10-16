@@ -583,3 +583,61 @@ void avxDataBlendTest() {
 	printf("\n");
 	avxDataBlendByteTest();
 }
+
+void avxDataPermuteIntTest() {
+	__declspec(align(32)) YmmVal dst, src, ind;
+	char buf[256] = { '\0' };
+
+	FILL_YMMVAL_32(src.i32, 10, 20, 30, 40, 50, 60, 70, 80);
+	FILL_YMMVAL_32(ind.i32, 3, 7, 0, 4, 5, 1, 6, 2);
+
+	avxDataPermuteInt(&dst, &src, &ind);
+	printf("Result for avxDataPermuteInt\n");
+	for (int i = 0; i < 8; i++) {
+		printf("dst[%d]: %5d\t", i, dst.i32[i]);
+		printf("src[%d]: %5d\t", i, src.i32[i]);
+		printf("ind[%d]: %5d\t", i, ind.i32[i]);
+		printf("\n");
+	}
+}
+
+void avxDataPermuteFloatTest() {
+	__declspec(align(32)) YmmVal dst, src, ind;
+
+	FILL_YMMVAL_32(src.r32, 100.0f, 200.f, 300.0f, 400.0f, 500.0f, 600.0f, 700.0f, 800.0f);
+	FILL_YMMVAL_32(ind.i32, 3, 7, 0, 4, 5, 1, 6, 2);
+
+	avxDataPermuteFloat(&dst, &src, &ind);
+	printf("Result for avxDataPermuteFloat\n");
+	for (int i = 0; i < 8; i++) {
+		printf("dst[%d]: %5f\t", i, dst.r32[i]);
+		printf("src[%d]: %5f\t", i, src.r32[i]);
+		printf("ind[%d]: %5d\t", i, ind.i32[i]);
+		printf("\n");
+	}
+}
+
+void avxDataPermuteFloatInLaneTest() {
+	__declspec(align(32)) YmmVal dst, src, ind;
+
+	// Low Lane and High Lane will be treated respectively
+	FILL_YMMVAL_32(src.r32, 100.0f, 200.f, 300.0f, 400.0f, 500.0f, 600.0f, 700.0f, 800.0f);
+	FILL_YMMVAL_32(ind.i32, 3, 2, 2, 0, 1, 3, 3, 2);
+
+	avxDataPermuteFloatInLane(&dst, &src, &ind);
+	printf("Result for avxDataPermuteFloatInLane\n");
+	for (int i = 0; i < 8; i++) {
+		printf("dst[%d]: %5f\t", i, dst.r32[i]);
+		printf("src[%d]: %5f\t", i, src.r32[i]);
+		printf("ind[%d]: %5d\t", i, ind.i32[i]);
+		printf("\n");
+	}
+}
+
+void avxDataPermuteTest() {
+	avxDataPermuteIntTest();
+	printf("\n");
+	avxDataPermuteFloatTest();
+	printf("\n");
+	avxDataPermuteFloatInLaneTest();
+}

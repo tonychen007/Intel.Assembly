@@ -67,5 +67,8 @@
     <MASM Include="asm\avxDataBlend.asm">
       <Filter>asm</Filter>
     </MASM>
+    <MASM Include="asm\avxDataPermute.asm">
+      <Filter>asm</Filter>
+    </MASM>
   </ItemGroup>
 </Project>

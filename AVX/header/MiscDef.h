@@ -26,6 +26,7 @@ extern void avxPackedIntegerPackUnpackTest();
 extern void avxCpuIdTest();
 extern void avxDataBroadcastTest();
 extern void avxDataBlendTest();
+extern void avxDataPermuteTest();
 
 // defined in asm
 extern "C" void avxScalarFloatPoint(double a, double b, double c[8]);
@@ -47,3 +48,6 @@ extern "C" void avxDataBroadcastFloat(YmmVal * dst, float val);
 extern "C" void avxDataBroadcastDouble(YmmVal * dst, double val);
 extern "C" void avxDataBlendFloat(YmmVal * dst, YmmVal * src1, YmmVal * src2, YmmVal * src3);
 extern "C" void avxDataBlendByte(YmmVal * dst, YmmVal * src1, YmmVal * src2, YmmVal * src3);
+extern "C" void avxDataPermuteInt(YmmVal * dst, YmmVal * src, YmmVal * ind);
+extern "C" void avxDataPermuteFloat(YmmVal * dst, YmmVal * src, YmmVal * ind);
+extern "C" void avxDataPermuteFloatInLane(YmmVal * dst, YmmVal * src, YmmVal * ind);

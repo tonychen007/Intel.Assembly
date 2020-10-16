@@ -11,7 +11,8 @@ int main() {
 	// avxPackedIntegerPackUnpackTest();
 	// avxCpuIdTest();
 	// avxDataBroadcastTest();
-	avxDataBlendTest();
+	// avxDataBlendTest();
+	avxDataPermuteTest();
 
 	return 0;
 }

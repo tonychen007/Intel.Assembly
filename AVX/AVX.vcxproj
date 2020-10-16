@@ -156,6 +156,7 @@
     <MASM Include="asm\avcPackedFloatPointCompare.asm" />
     <MASM Include="asm\avxDataBlend.asm" />
     <MASM Include="asm\avxDataBroadcast.asm" />
+    <MASM Include="asm\avxDataPermute.asm" />
     <MASM Include="asm\avxFloatPointCompare.asm" />
     <MASM Include="asm\avxPackedFloatPointArithmetic.asm" />
     <MASM Include="asm\avxPackedIntegerArithmetic.asm" />
