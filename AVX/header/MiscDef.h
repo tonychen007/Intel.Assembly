@@ -30,6 +30,7 @@ extern void avxDataPermuteTest();
 extern void avxDataGatherTest();
 
 extern void avxFMATest();
+extern void avxFlagLessTest();
 
 // defined in asm
 extern "C" void avxScalarFloatPoint(double a, double b, double c[8]);
@@ -64,3 +65,6 @@ extern "C" void avxFMA132SS(float * dst, float * src1, float * src2);
 extern "C" void avxFMA132PS(XmmVal * dst, XmmVal * src1, XmmVal * src2);
 extern "C" void avxFMA231SS(float* dst, float* src1, float* src2);
 extern "C" void avxFMA231PS(XmmVal * dst, XmmVal * src1, XmmVal * src2);
+
+extern "C" Uint64 avxFlagLessMul(Uint32 a, Uint32 b, Uint8 flag[2]);
+extern "C" void avxFlagLessShift(Int32 x, Uint32 count, Int32 ret[3]);

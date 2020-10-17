@@ -76,5 +76,8 @@
     <MASM Include="asm\avxFMA.asm">
       <Filter>asm</Filter>
     </MASM>
+    <MASM Include="asm\avxFlagLess.asm">
+      <Filter>asm</Filter>
+    </MASM>
   </ItemGroup>
 </Project>

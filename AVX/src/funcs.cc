@@ -790,3 +790,46 @@ void avxFMATest() {
 	printf("\n");
 	avxFMAPackedTest();
 }
+
+void avxFlagLessMulTest() {
+	const int n = 3;
+	Uint32 a[n] = { 64,3200,10000000 };
+	Uint32 b[n] = { 1001,12,25000000 };
+
+	printf("Result for avxFlagLessMul\n");
+	for (int i = 0; i < n; i++) {
+		Uint8 fl[2];
+		Uint64 c = avxFlagLessMul(a[i], b[i], fl);
+
+		printf("Test case : %d\n", i);
+		printf("   a: %u, b: %u, c: %llu\n", a[i], b[i], c);
+		printf("   status flag before: 0x%02X\n", fl[0]);
+		printf("   status flag before: 0x%02X\n", fl[1]);
+		printf("\n");
+	}
+}
+
+void avxFlagLessShiftTest() {
+	const int n = 4;
+	Int32 x[n] = { 0x00000008,0x80000080, 0x00000040, 0xfffffc10 };
+	Uint32 cnt[n] = { 2,5,3,4 };
+
+	printf("Result for avxFlagLessShift\n");
+	for (int i = 0; i < n; i++) {
+		Int32 fl[3];
+		avxFlagLessShift(x[i], cnt[i], fl);
+
+		printf("Test case : %d\n", i);
+		printf("   x			:	0x%08X (%11d) count: %u\n", x[i], x[i], cnt[i]);
+		printf("   sarx (arith right)	:	0x%08X (%11d)\n", fl[0], fl[0]);
+		printf("   shlx (logical left)  :	0x%08X (%11d)\n", fl[1], fl[1]);
+		printf("   shrx (logical right) :	0x%08X (%11d)\n", fl[2], fl[2]);
+		printf("\n");
+	}
+}
+
+void avxFlagLessTest() {
+	avxFlagLessMulTest();
+	printf("\n");
+	avxFlagLessShiftTest();
+}
