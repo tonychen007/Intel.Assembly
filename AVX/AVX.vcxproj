@@ -161,6 +161,7 @@
     <MASM Include="asm\avxFlagLess.asm" />
     <MASM Include="asm\avxFloatPointCompare.asm" />
     <MASM Include="asm\avxFMA.asm" />
+    <MASM Include="asm\avxGPRegBitManip.asm" />
     <MASM Include="asm\avxPackedFloatPointArithmetic.asm" />
     <MASM Include="asm\avxPackedIntegerArithmetic.asm" />
     <MASM Include="asm\avxPackedIntegerPackUnpack.asm" />

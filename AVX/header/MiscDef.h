@@ -28,9 +28,9 @@ extern void avxDataBroadcastTest();
 extern void avxDataBlendTest();
 extern void avxDataPermuteTest();
 extern void avxDataGatherTest();
-
 extern void avxFMATest();
-extern void avxFlagLessTest();
+extern void avxGPRegFlagLessTest();
+extern void avxGPRegBitManipTest();
 
 // defined in asm
 extern "C" void avxScalarFloatPoint(double a, double b, double c[8]);
@@ -46,18 +46,14 @@ extern "C" void avxPiPackDWord2Word(const YmmVal * a, const YmmVal * b, YmmVal *
 
 extern "C" void avxCpuId(Uint32 eax, Uint32 ecx, CpuidRegs * out);
 extern "C" void avxXgetbv(Uint32 ecx, Uint32* eax, Uint32* edx);
-
 extern "C" void avxDataBroadcastInt(YmmVal * dst, const XmmVal * src, Brop op);
 extern "C" void avxDataBroadcastFloat(YmmVal * dst, float val);
 extern "C" void avxDataBroadcastDouble(YmmVal * dst, double val);
-
 extern "C" void avxDataBlendFloat(YmmVal * dst, YmmVal * src1, YmmVal * src2, YmmVal * src3);
 extern "C" void avxDataBlendByte(YmmVal * dst, YmmVal * src1, YmmVal * src2, YmmVal * src3);
-
 extern "C" void avxDataPermuteInt(YmmVal * dst, YmmVal * src, YmmVal * ind);
 extern "C" void avxDataPermuteFloat(YmmVal * dst, YmmVal * src, YmmVal * ind);
 extern "C" void avxDataPermuteFloatInLane(YmmVal * dst, YmmVal * src, YmmVal * ind);
-
 extern "C" void avxDataGatherFloat(YmmVal * dst, YmmVal * index, YmmVal * mask, float* f);
 extern "C" void avxDataGatherInt64(YmmVal * dst, YmmVal * index, YmmVal * mask, Int64* f);
 
@@ -68,3 +64,6 @@ extern "C" void avxFMA231PS(XmmVal * dst, XmmVal * src1, XmmVal * src2);
 
 extern "C" Uint64 avxFlagLessMul(Uint32 a, Uint32 b, Uint8 flag[2]);
 extern "C" void avxFlagLessShift(Int32 x, Uint32 count, Int32 ret[3]);
+extern "C" void avxGprCountZeroBits(Uint32 x, Uint32 * lzcnt, Uint32 * tzcnt);
+extern "C" Uint32 avxGprBextr(Uint32 x, Uint8 st, Uint8 len);
+extern "C" Uint32 avxGprAndNot(Uint32 x, Uint32 y);

@@ -15,7 +15,8 @@ int main() {
 	// avxDataPermuteTest();
 	// avxDataGatherTest();
 	// avxFMATest();
-	avxFlagLessTest();
+	// avxGPRegFlagLessTest();
+	avxGPRegBitManipTest();
 
 	return 0;
 }

@@ -828,8 +828,60 @@ void avxFlagLessShiftTest() {
 	}
 }
 
-void avxFlagLessTest() {
+void avxGPRegFlagLessTest() {
 	avxFlagLessMulTest();
 	printf("\n");
 	avxFlagLessShiftTest();
+}
+
+void avxGPRegBitManipCountZeroBitTest() {
+	const int n = 5;
+	Uint32 x[n] = { 0x00100000,0x00000800,0x80000000,0x00000001,0 };
+	
+	printf("Result for avxGPRegBitManipCountZeroBit\n");
+	for (int i = 0; i < n; i++) {
+		// lzcnt : leading zero
+		// tzcnt : trailing zero
+		Uint32 lzcnt, tzcnt;
+		avxGprCountZeroBits(x[i], &lzcnt, &tzcnt);
+		printf("x : 0x%08X  ", x[i]);
+		printf("lzcnt(leading zero)  : %2u  ", lzcnt);
+		printf("tzcnt(trailing zero) : %2u\n", tzcnt);
+	}
+}
+
+// bit field extract
+void avxGPRegBitManipBextrTest() {
+	Uint32 x = 0x12345678;
+	Uint8 st = 3;
+	Uint8 len = 16;
+
+	printf("Result for avxGPRegBitManipBextr\n");
+	Uint32 ret1 = avxGprBextr(x, st, len);
+	Uint32 ret2 = fetch_bit(x, st, st + len);
+	printf("x: 0x%08X  ", x);
+	printf("start: %2u  ", st);
+	printf("len: %2u  ", len);
+	printf("bextr    : 0x%08X  ", ret1);
+	printf("fetch_bit: 0x%08X\n", ret2);
+}
+
+void avxGPRegBitManipTestAndNotTest() {
+	Uint32 x = 0xff00ff00;
+	Uint32 y = 0x12345678;
+
+	printf("Result for avxGPRegBitManipTestAndNot, And of(~y) with x and save in x\n");
+	Uint32 ret1 = avxGprAndNot(x, y);
+	Uint32 ret2 = x & ~y;
+	printf("x: 0x%08X, y: 0x%08X\n\n", x, y);
+	printf("z     : 0x% 08X  ", ret1);
+	printf("x & ~y: 0x%08X\n", ret2);
+}
+
+void avxGPRegBitManipTest() {
+	avxGPRegBitManipCountZeroBitTest();
+	printf("\n");
+	avxGPRegBitManipBextrTest();
+	printf("\n");
+	avxGPRegBitManipTestAndNotTest();
 }

@@ -79,5 +79,8 @@
     <MASM Include="asm\avxFlagLess.asm">
       <Filter>asm</Filter>
     </MASM>
+    <MASM Include="asm\avxGPRegBitManip.asm">
+      <Filter>asm</Filter>
+    </MASM>
   </ItemGroup>
 </Project>
