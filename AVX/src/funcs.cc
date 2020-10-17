@@ -725,3 +725,68 @@ void avxDataGatherTest() {
 	printf("\n");
 	avxDataGatherInt64Test();
 }
+
+void avxFMAScalarTest() {
+	float dst = 3.0f;
+	float src1 = 2.0f;
+	float src2 = (float)M_PI;
+
+	printf("Result for avxFMA132SS: src1 * src3 + src2, save to src1\n");
+	printf("Before:\n");
+	printf("src1: %f, src2: %f, src3: %f\n", dst, src1, src2);
+	avxFMA132SS(&dst, &src1, &src2);
+	printf("After:\n");
+	printf("src1: %f, src2: %f, src3: %f\n", dst, src1, src2);
+	printf("\n");
+
+	dst = 3.0f;
+	src1 = 2.0f;
+	src2 = (float)M_PI;
+	printf("Result for avxFMA231SS: src2 * src3 + src1, save to src1\n");
+	printf("Before:\n");
+	printf("src1: %f, src2: %f, src3: %f\n", dst, src1, src2);
+	avxFMA231SS(&dst, &src1, &src2);
+	printf("After:\n");
+	printf("src1: %f, src2: %f, src3: %f\n", dst, src1, src2);
+}
+
+void avxFMAPackedTest() {
+	char buf[256] = { '\0' };
+	__declspec(align(16)) XmmVal dst, src1, src2;
+	FILL_XMMVAL_32(dst.r32, 1.0f, 2.0f, 3.0f, 4.0f);
+	FILL_XMMVAL_32(src1.r32, 2.0f, 3.0f, 4.0f, 1.0f);
+	FILL_XMMVAL_32(src2.r32, 3.0f, 4.0f, 6.0f, 2.0f);
+
+	printf("Result for avxFMA132PS: src1 * src3 + src2, save to src1\n");
+	printf("Before:\n");
+	printf("dst  :%s\n", dst.ToString_r32(buf, sizeof(buf)));
+	printf("src1 :%s\n", src1.ToString_r32(buf, sizeof(buf)));
+	printf("src2 :%s\n", src2.ToString_r32(buf, sizeof(buf)));
+	avxFMA132PS(&dst, &src1, &src2);
+	printf("After:\n");
+	printf("dst  :%s\n", dst.ToString_r32(buf, sizeof(buf)));
+	printf("src1 :%s\n", src1.ToString_r32(buf, sizeof(buf)));
+	printf("src2 :%s\n", src2.ToString_r32(buf, sizeof(buf)));
+	printf("\n");
+
+	FILL_XMMVAL_32(dst.r32, 1.0f, 2.0f, 3.0f, 4.0f);
+	FILL_XMMVAL_32(src1.r32, 2.0f, 3.0f, 4.0f, 1.0f);
+	FILL_XMMVAL_32(src2.r32, 3.0f, 4.0f, 6.0f, 2.0f);
+
+	printf("Result for avxFMA231PS: src2 * src3 + src1, save to src1\n");
+	printf("Before:\n");
+	printf("dst  :%s\n", dst.ToString_r32(buf, sizeof(buf)));
+	printf("src1 :%s\n", src1.ToString_r32(buf, sizeof(buf)));
+	printf("src2 :%s\n", src2.ToString_r32(buf, sizeof(buf)));
+	avxFMA231PS(&dst, &src1, &src2);
+	printf("After:\n");
+	printf("dst  :%s\n", dst.ToString_r32(buf, sizeof(buf)));
+	printf("src1 :%s\n", src1.ToString_r32(buf, sizeof(buf)));
+	printf("src2 :%s\n", src2.ToString_r32(buf, sizeof(buf)));
+}
+
+void avxFMATest() {
+	avxFMAScalarTest();
+	printf("\n");
+	avxFMAPackedTest();
+}

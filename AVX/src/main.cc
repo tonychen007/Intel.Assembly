@@ -13,7 +13,8 @@ int main() {
 	// avxDataBroadcastTest();
 	// avxDataBlendTest();
 	// avxDataPermuteTest();
-	avxDataGatherTest();
-
+	// avxDataGatherTest();
+	avxFMATest();
+	
 	return 0;
 }

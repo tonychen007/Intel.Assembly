@@ -29,6 +29,8 @@ extern void avxDataBlendTest();
 extern void avxDataPermuteTest();
 extern void avxDataGatherTest();
 
+extern void avxFMATest();
+
 // defined in asm
 extern "C" void avxScalarFloatPoint(double a, double b, double c[8]);
 extern "C" void avxFloatPointCompare(double a, double b, bool r[8]);
@@ -57,3 +59,8 @@ extern "C" void avxDataPermuteFloatInLane(YmmVal * dst, YmmVal * src, YmmVal * i
 
 extern "C" void avxDataGatherFloat(YmmVal * dst, YmmVal * index, YmmVal * mask, float* f);
 extern "C" void avxDataGatherInt64(YmmVal * dst, YmmVal * index, YmmVal * mask, Int64* f);
+
+extern "C" void avxFMA132SS(float * dst, float * src1, float * src2);
+extern "C" void avxFMA132PS(XmmVal * dst, XmmVal * src1, XmmVal * src2);
+extern "C" void avxFMA231SS(float* dst, float* src1, float* src2);
+extern "C" void avxFMA231PS(XmmVal * dst, XmmVal * src1, XmmVal * src2);
