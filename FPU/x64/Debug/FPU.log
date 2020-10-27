@@ -1,5 +1,0 @@
-﻿  Assembling asm\CalcMeanStdev.asm...
-asm\CalcMeanStdev.asm(1): error A2008: syntax error : .
-asm\CalcMeanStdev.asm(5): error A2070: invalid instruction operands
-asm\CalcMeanStdev.asm(51): error A2070: invalid instruction operands
-C:\Program Files (x86)\Microsoft Visual Studio\2019\Community\MSBuild\Microsoft\VC\v160\BuildCustomizations\masm.targets(70,5): error MSB3721: 命令 "ml64.exe /c /nologo /Zi /Fo"x64\Debug\CalcMeanStdev.obj" /W3 /errorReport:prompt  /Taasm\CalcMeanStdev.asm" 已結束，代碼為 1。

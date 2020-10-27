@@ -1,5 +1,0 @@
-﻿  Assembling asm\MmxCalcMean.asm...
-asm\MmxCalcMean.asm(1): error A2008: syntax error : .
-asm\MmxCalcMean.asm(12): error A2070: invalid instruction operands
-asm\MmxCalcMean.asm(86): error A2070: invalid instruction operands
-C:\Program Files (x86)\Microsoft Visual Studio\2019\Community\MSBuild\Microsoft\VC\v160\BuildCustomizations\masm.targets(70,5): error MSB3721: 命令 "ml64.exe /c /nologo /Zi /Fo"x64\Debug\MmxCalcMean.obj" /W3 /errorReport:prompt  /Taasm\MmxCalcMean.asm" 已結束，代碼為 1。
