@@ -1,0 +1,16 @@
+e:\code\intel.assembly\avx\x64\debug\avcpackedfloatpointcompare.obj
+e:\code\intel.assembly\avx\x64\debug\avxdatablend.obj
+e:\code\intel.assembly\avx\x64\debug\avxdatabroadcast.obj
+e:\code\intel.assembly\avx\x64\debug\avxdatagather.obj
+e:\code\intel.assembly\avx\x64\debug\avxdatapermute.obj
+e:\code\intel.assembly\avx\x64\debug\avxflagless.obj
+e:\code\intel.assembly\avx\x64\debug\avxfloatpointcompare.obj
+e:\code\intel.assembly\avx\x64\debug\avxfma.obj
+e:\code\intel.assembly\avx\x64\debug\avxgpregbitmanip.obj
+e:\code\intel.assembly\avx\x64\debug\avxpackedfloatpointarithmetic.obj
+e:\code\intel.assembly\avx\x64\debug\avxpackedintegerarithmetic.obj
+e:\code\intel.assembly\avx\x64\debug\avxpackedintegerpackunpack.obj
+e:\code\intel.assembly\avx\x64\debug\avxscalarfloatpointarithmetic.obj
+e:\code\intel.assembly\avx\x64\debug\cpuid.obj
+e:\code\intel.assembly\avx\x64\debug\avx.tlog\masm.read.1u.tlog
+e:\code\intel.assembly\avx\x64\debug\avx.tlog\masm.write.1u.tlog

@@ -1,0 +1,6 @@
+﻿  Assembling asm\sseCalcSphereVolume.asm...
+asm\sseCalcSphereVolume.asm(1): error A2008: syntax error : .
+asm\sseCalcSphereVolume.asm(11): error A2070: invalid instruction operands
+asm\sseCalcSphereVolume.asm(53): error A2070: invalid instruction operands
+asm\sseCalcSphereVolume.asm(57): error A2070: invalid instruction operands
+C:\Program Files (x86)\Microsoft Visual Studio\2019\Community\MSBuild\Microsoft\VC\v160\BuildCustomizations\masm.targets(70,5): error MSB3721: 命令 "ml64.exe /c /nologo /Zi /Fo"x64\Debug\sseCalcSphereVolume.obj" /W3 /errorReport:prompt  /Taasm\sseCalcSphereVolume.asm" 已結束，代碼為 1。
