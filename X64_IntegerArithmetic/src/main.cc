@@ -2,7 +2,8 @@
 
 int main() {
 
-	IntegerArithmeticTest();
+	// IntegerArithmeticTest();
+	MemoryAddressTest();
 
 	return 0;
 }

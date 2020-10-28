@@ -59,3 +59,17 @@ void IntegerArithmeticTest() {
 	printf("\n");
 	IntegerDivTest();
 }
+
+void MemoryAddressTest() {
+	FibValsSum = 0;
+
+	for (int i = -1; i < FibValsNum + 1; i++) {
+		int v1 = -1, v2 = -1, v3 = -1, v4 = -1;
+		int rc = MemoryAddress(i, &v1, &v2, &v3, &v4);
+
+		printf("i: %2d\trc: %2d - ", i, rc);
+		printf("v1: %5d\tv2: %5d\tv3: %5d\tv4: %5d\n", v1, v2, v3, v4);
+	}
+	printf("\n");
+	printf("FibValsSum : %d\n", FibValsSum);
+}

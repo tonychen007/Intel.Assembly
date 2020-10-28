@@ -3,4 +3,5 @@ Intel.Asm/Debug
 Intel.Asm/Release
 */Debug
 */Release
+*/X64
 */.vs

@@ -31,5 +31,8 @@
     <MASM Include="asm\IntegerArithmetic.asm">
       <Filter>asm</Filter>
     </MASM>
+    <MASM Include="asm\MemoryAddress.asm">
+      <Filter>asm</Filter>
+    </MASM>
   </ItemGroup>
 </Project>
