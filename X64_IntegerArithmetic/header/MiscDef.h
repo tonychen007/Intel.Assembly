@@ -2,9 +2,23 @@
 
 #include "xmmVal.h"
 
+// the struct must match the structure of that
+// declared in IntegerOperand.asm
+typedef struct {
+	Uint8	a8;
+	Uint16	a16;
+	Uint32	a32;
+	Uint64	a64;
+	Uint8	b8;
+	Uint16	b16;
+	Uint32	b32;
+	Uint64	b64;
+} ClVal;
+
 // for main cc
 extern void IntegerArithmeticTest();
 extern void MemoryAddressTest();
+extern void IntegerOperandTest();
 
 // defined in asm
 extern "C" Int64 IntegerAdd(Int64 a, Int64 b, Int64 c, Int64 d, Int64 e, Int64 f);
@@ -13,3 +27,4 @@ extern "C" Int64 IntegerDiv(Int64 a, Int64 b, Int64 quo_rem_ab[2], Int64 c, Int6
 
 extern "C" int FibValsNum, FibValsSum;
 extern "C" int MemoryAddress(int i, int* v1, int* v2, int* v3, int* v4);
+extern "C" void CalcLogical(ClVal * cl, Uint8 c8[3], Uint16 c16[3], Uint32 c32[3], Uint64 c64[3]);

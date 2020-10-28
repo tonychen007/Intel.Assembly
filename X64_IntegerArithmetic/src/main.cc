@@ -3,7 +3,8 @@
 int main() {
 
 	// IntegerArithmeticTest();
-	MemoryAddressTest();
+	// MemoryAddressTest();
+	IntegerOperandTest();
 
 	return 0;
 }
