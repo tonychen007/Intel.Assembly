@@ -120,11 +120,36 @@ void IntegerOperandTest() {
 }
 
 void FloatPointArithmeticCalcSumTest() {
+	float a = 10.0f;
+	double b = 20.0;
+	float c = 0.5f;
+	double d = 0.0625;
+	float e = 15.0f;
+	double f = 0.125;
 
+	double sum = CalcSum(a, b, c, d, e, f);
+
+	printf("Result for FloatPointArithmeticCalcSum\n");
+	printf("a: %10.4f\tb: %10.4lf\tc: %10.4f\n", a, b, c);
+	printf("d: %10.4lf\te: %10.4f\tf: %10.4f\n", d, e, f);
+	printf("\nsum: %10.4lf\n", sum);
 }
 
 void FloatPointArithmeticCalcDistTest() {
+	int x1 = 5;
+	double x2 = 12.875;
+	long long y1 = 17;
+	double y2 = 23.1875;
+	float z1 = -2.0625;
+	short z2 = -6;
 
+	double dist = CalcDist(x1, x2, y1, y2, z1, z2);
+
+	printf("Result for FloatPointArithmeticCalcDist\n");
+	printf("x1: %10d\tx2: %10.4lf\n", x1, x2);
+	printf("y1: %10lld\ty2: %10.4lf\n", y1, y2);
+	printf("z1: %10.4f\tz2: %10d\n", z1, z2);
+	printf("\ndist: %10.8lf\n", dist);
 }
 
 void FloatPointArithmeticTest() {
