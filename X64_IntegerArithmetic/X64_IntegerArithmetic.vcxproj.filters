@@ -43,6 +43,9 @@
     <MASM Include="asm\CallConvention.asm">
       <Filter>asm</Filter>
     </MASM>
+    <MASM Include="asm\CallConventionNonVolatileXMM.asm">
+      <Filter>asm</Filter>
+    </MASM>
   </ItemGroup>
   <ItemGroup>
     <None Include="asm\CallConventionNonVolatile.asm">

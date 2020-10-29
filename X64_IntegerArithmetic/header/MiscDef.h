@@ -22,6 +22,7 @@ extern void IntegerOperandTest();
 extern void FloatPointArithmeticTest();
 extern void CallConventionTest();
 extern void CallConventionNonVolatileTest();
+extern void CallConventionNonVolatileXMMTest();
 
 // defined in asm
 extern "C" Int64 IntegerAdd(Int64 a, Int64 b, Int64 c, Int64 d, Int64 e, Int64 f);
@@ -35,3 +36,4 @@ extern "C" double CalcSum(float a, double b, float c, double d, float e, double 
 extern "C" double CalcDist(int x1, double x2, long long y1, double y2, float z1, short z2);
 extern "C" Int64 CallConvention(Int8 a, Int16 b, Int32 c, Int64 d, Int8 e, Int16 f, Int32 g, Int64 h);
 extern "C" bool CallConventionNonVolatile(const Int64 * a, const Int64 * b, Int32 n, Int64 * sum_a, Int64 * sum_b, Int64 * prod_a, Int64 * prod_b);
+extern "C" void CallConventionNonVolatileXMM(double* a, double* b, double* sum, double* prod);

@@ -28,6 +28,7 @@
   </ItemGroup>
   <ItemGroup>
     <MASM Include="asm\CallConvention.asm" />
+    <MASM Include="asm\CallConventionNonVolatileXMM.asm" />
     <MASM Include="asm\FloatPointArithmetic.asm" />
     <MASM Include="asm\IntegerArithmetic.asm" />
     <MASM Include="asm\IntegerOperand.asm" />

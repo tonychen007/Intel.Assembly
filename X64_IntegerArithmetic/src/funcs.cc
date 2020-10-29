@@ -1,5 +1,7 @@
 #include <stdio.h>
 #include <string.h>
+#define _USE_MATH_DEFINES
+#include <math.h>
 
 #include "../header/MiscDef.h"
 using namespace std;
@@ -194,4 +196,16 @@ void CallConventionNonVolatileTest() {
 		printf("sum_a: %7lld sum_b: %7lld\n", sum_a, sum_b);
 		printf("prod_a: %7lld prod_b: %7lld\n", prod_a, prod_b);
 	}
+}
+
+void CallConventionNonVolatileXMMTest() {
+	double a = M_PI;
+	double b = 2.0;
+	double sum = 0, prod = 0;
+
+	CallConventionNonVolatileXMM(&a, &b, &sum, &prod);
+
+	printf("Result for CallConventionNonVolatileXMM\n");
+	printf("a: %.8lf, b: %.8lf\n", a, b);
+	printf("sum: %.8lf, prod: %.8lf\n", sum, prod);
 }

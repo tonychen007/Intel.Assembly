@@ -7,7 +7,8 @@ int main() {
 	// IntegerOperandTest();
 	// FloatPointArithmeticTest();
 	// CallConventionTest();
-	CallConventionNonVolatileTest();
+	// CallConventionNonVolatileTest();
+	CallConventionNonVolatileXMMTest();
 
 	return 0;
 }
