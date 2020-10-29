@@ -40,5 +40,8 @@
     <MASM Include="asm\FloatPointArithmetic.asm">
       <Filter>asm</Filter>
     </MASM>
+    <MASM Include="asm\CallConvention.asm">
+      <Filter>asm</Filter>
+    </MASM>
   </ItemGroup>
 </Project>

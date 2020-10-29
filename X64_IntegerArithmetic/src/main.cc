@@ -5,7 +5,8 @@ int main() {
 	// IntegerArithmeticTest();
 	// MemoryAddressTest();
 	// IntegerOperandTest();
-	FloatPointArithmeticTest();
+	// FloatPointArithmeticTest();
+	CallConventionTest();
 
 	return 0;
 }

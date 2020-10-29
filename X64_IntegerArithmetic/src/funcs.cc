@@ -157,3 +157,16 @@ void FloatPointArithmeticTest() {
 	printf("\n");
 	FloatPointArithmeticCalcDistTest();
 }
+
+void CallConventionTest() {
+	Int8 a = 10, e = -20;
+	Int16 b = -200, f = 400;
+	Int32 c = 300, g = -600;
+	Int64 d = 4000, h = -8000;
+	Int64 sum = CallConvention(a, b, c, d, e, f, g, h);
+
+	printf("Result for CallConventionTest (Stack Frame)\n");
+	printf("a,b,c,d: %8d %8d %8d %8lld\n", a, b, c, d);
+	printf("e,f,g,h: %8d %8d %8d %8lld\n", e, f, g, h);
+	printf("sum: %8lld\n", sum);
+}
