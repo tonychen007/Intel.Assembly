@@ -6,7 +6,8 @@ int main() {
 	// MemoryAddressTest();
 	// IntegerOperandTest();
 	// FloatPointArithmeticTest();
-	CallConventionTest();
+	// CallConventionTest();
+	CallConventionNonVolatileTest();
 
 	return 0;
 }

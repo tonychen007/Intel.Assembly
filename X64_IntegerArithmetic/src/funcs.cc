@@ -165,8 +165,33 @@ void CallConventionTest() {
 	Int64 d = 4000, h = -8000;
 	Int64 sum = CallConvention(a, b, c, d, e, f, g, h);
 
-	printf("Result for CallConventionTest (Stack Frame)\n");
+	printf("Result for CallConvention (Stack Frame)\n");
 	printf("a,b,c,d: %8d %8d %8d %8lld\n", a, b, c, d);
 	printf("e,f,g,h: %8d %8d %8d %8lld\n", e, f, g, h);
 	printf("sum: %8lld\n", sum);
+}
+
+void CallConventionNonVolatileTest() {
+	const int n = 6;
+	const Int64 a[n] = { 2,-2,-6,7,12,5 };
+	const Int64 b[n] = { 3,5,-7,8,4,9 };
+	Int64 sum_a, sum_b, prod_a, prod_b;
+	memset(&sum_a, 0, sizeof(sum_a));
+	memset(&sum_b, 0, sizeof(sum_b));
+	memset(&prod_a, 0, sizeof(prod_a));
+	memset(&prod_b, 0, sizeof(prod_b));
+
+	printf("Result for CallConvention (Non-volatile register)\n");
+	bool rc = CallConventionNonVolatile(a, b, n, &sum_a, &sum_b, &prod_a, &prod_b);
+
+	if (!rc) {
+		printf("Invalid code returned from CallConventionNonVolatile\n");
+	}
+	else {
+		for (int i = 0; i < n; i++) {
+			printf("%7lld %7lld\n", a[i], b[i]);
+		}
+		printf("sum_a: %7lld sum_b: %7lld\n", sum_a, sum_b);
+		printf("prod_a: %7lld prod_b: %7lld\n", prod_a, prod_b);
+	}
 }

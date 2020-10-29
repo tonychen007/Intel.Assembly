@@ -44,4 +44,9 @@
       <Filter>asm</Filter>
     </MASM>
   </ItemGroup>
+  <ItemGroup>
+    <None Include="asm\CallConventionNonVolatile.asm">
+      <Filter>asm</Filter>
+    </None>
+  </ItemGroup>
 </Project>

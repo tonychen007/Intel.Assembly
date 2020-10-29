@@ -33,6 +33,11 @@
     <MASM Include="asm\IntegerOperand.asm" />
     <MASM Include="asm\MemoryAddress.asm" />
   </ItemGroup>
+  <ItemGroup>
+    <MASM Include="asm\CallConventionNonVolatile.asm">
+      <FileType>Document</FileType>
+    </MASM>
+  </ItemGroup>
   <PropertyGroup Label="Globals">
     <VCProjectVersion>16.0</VCProjectVersion>
     <Keyword>Win32Proj</Keyword>
