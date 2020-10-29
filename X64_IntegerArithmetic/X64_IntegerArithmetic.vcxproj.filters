@@ -37,5 +37,8 @@
     <MASM Include="asm\IntegerOperand.asm">
       <Filter>asm</Filter>
     </MASM>
+    <MASM Include="asm\FloatPointArithmetic.asm">
+      <Filter>asm</Filter>
+    </MASM>
   </ItemGroup>
 </Project>

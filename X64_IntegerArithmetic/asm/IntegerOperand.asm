@@ -17,7 +17,7 @@ CalcLogical proc
   ; 8 bit
   mov r10b, [rcx + ClVal.a8]
   mov r11b, [rcx + ClVal.b8]
-  
+
   mov al, r10b
   and al, r11b
   mov [rdx], al

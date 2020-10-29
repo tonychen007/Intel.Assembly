@@ -118,3 +118,17 @@ void IntegerOperandTest() {
 	printf("0x%016llX | 0x%016llX = 0x%016llX\n", x.a64, x.b64, c64[1]);
 	printf("0x%016llX ^ 0x%016llX = 0x%016llX\n", x.a64, x.b64, c64[2]);
 }
+
+void FloatPointArithmeticCalcSumTest() {
+
+}
+
+void FloatPointArithmeticCalcDistTest() {
+
+}
+
+void FloatPointArithmeticTest() {
+	FloatPointArithmeticCalcSumTest();
+	printf("\n");
+	FloatPointArithmeticCalcDistTest();
+}

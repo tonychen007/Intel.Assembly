@@ -4,7 +4,8 @@ int main() {
 
 	// IntegerArithmeticTest();
 	// MemoryAddressTest();
-	IntegerOperandTest();
+	// IntegerOperandTest();
+	FloatPointArithmeticTest();
 
 	return 0;
 }

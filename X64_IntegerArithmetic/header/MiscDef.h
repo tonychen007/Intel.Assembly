@@ -19,6 +19,7 @@ typedef struct {
 extern void IntegerArithmeticTest();
 extern void MemoryAddressTest();
 extern void IntegerOperandTest();
+extern void FloatPointArithmeticTest();
 
 // defined in asm
 extern "C" Int64 IntegerAdd(Int64 a, Int64 b, Int64 c, Int64 d, Int64 e, Int64 f);
@@ -28,3 +29,5 @@ extern "C" Int64 IntegerDiv(Int64 a, Int64 b, Int64 quo_rem_ab[2], Int64 c, Int6
 extern "C" int FibValsNum, FibValsSum;
 extern "C" int MemoryAddress(int i, int* v1, int* v2, int* v3, int* v4);
 extern "C" void CalcLogical(ClVal * cl, Uint8 c8[3], Uint16 c16[3], Uint32 c32[3], Uint64 c64[3]);
+extern "C" double CalcSum(float a, double b, float c, double d, float e, double f);
+extern "C" double CalcDist(int x1, double x2, long long y1, double y2, float z1, short z2);
