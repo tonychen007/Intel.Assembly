@@ -8,7 +8,8 @@ int main() {
 	// FloatPointArithmeticTest();
 	// CallConventionTest();
 	// CallConventionNonVolatileTest();
-	CallConventionNonVolatileXMMTest();
+	// CallConventionNonVolatileXMMTest();
+	CallConventionAutomateTest();
 
 	return 0;
 }

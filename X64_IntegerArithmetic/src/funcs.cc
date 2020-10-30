@@ -209,3 +209,15 @@ void CallConventionNonVolatileXMMTest() {
 	printf("a: %.8lf, b: %.8lf\n", a, b);
 	printf("sum: %.8lf, prod: %.8lf\n", sum, prod);
 }
+
+void CallConventionAutomateTest() {
+	float a = 5.0f;
+	float b = 2.0f;
+	float sum;
+	float prod;
+	CallConventionAutomate(&a, &b, &sum, &prod);
+
+	printf("Result for CallConventionAutomate\n");
+	printf("a = %lf\tb = %lf\n", a, b);
+	printf("sum = %lf, prod = %lf\n", sum, prod);
+}

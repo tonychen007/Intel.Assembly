@@ -28,6 +28,7 @@
   </ItemGroup>
   <ItemGroup>
     <MASM Include="asm\CallConvention.asm" />
+    <MASM Include="asm\CallConventionAutomate.asm" />
     <MASM Include="asm\CallConventionNonVolatileXMM.asm" />
     <MASM Include="asm\FloatPointArithmetic.asm" />
     <MASM Include="asm\IntegerArithmetic.asm" />
@@ -38,6 +39,9 @@
     <MASM Include="asm\CallConventionNonVolatile.asm">
       <FileType>Document</FileType>
     </MASM>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="asm\autoMacro.inc" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <VCProjectVersion>16.0</VCProjectVersion>
@@ -138,6 +142,7 @@
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
+      <AssemblerOutput>AssemblyCode</AssemblerOutput>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
