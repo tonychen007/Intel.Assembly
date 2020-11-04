@@ -27,4 +27,12 @@
       <Filter>src</Filter>
     </ClCompile>
   </ItemGroup>
+  <ItemGroup>
+    <MASM Include="asm\NonTemporal32.asm">
+      <Filter>asm</Filter>
+    </MASM>
+    <MASM Include="asm\NonTemporal64.asm">
+      <Filter>asm</Filter>
+    </MASM>
+  </ItemGroup>
 </Project>

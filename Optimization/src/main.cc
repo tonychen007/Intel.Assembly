@@ -1,7 +1,8 @@
 #include "../header/MiscDef.h"
 
 int main() {
-	BasicOptimizationTest();
+	// BasicOptimizationTest();
+	NonTemporalTest();
 
 	return 0;
 }
