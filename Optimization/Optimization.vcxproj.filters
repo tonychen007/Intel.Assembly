@@ -34,5 +34,16 @@
     <MASM Include="asm\NonTemporal64.asm">
       <Filter>asm</Filter>
     </MASM>
+    <MASM Include="asm\LinkedListPrefetch32.asm">
+      <Filter>asm</Filter>
+    </MASM>
+    <MASM Include="asm\LinkedListPrefetch64.asm">
+      <Filter>asm</Filter>
+    </MASM>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="asm\LinkedListPrefetch.inc">
+      <Filter>asm</Filter>
+    </None>
   </ItemGroup>
 </Project>

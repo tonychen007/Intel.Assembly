@@ -2,7 +2,8 @@
 
 int main() {
 	// BasicOptimizationTest();
-	NonTemporalTest();
+	// NonTemporalTest();
+	PrefetchTest();
 
 	return 0;
 }
